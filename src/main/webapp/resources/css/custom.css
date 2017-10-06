@@ -1,0 +1,44 @@
+/* here you can put your own css to customize and override the theme */
+.grid {
+  border: 1px solid #333;
+}
+
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.grid-item > * {
+  margin: 0;
+  padding: 0;
+}
+.grid-item .number {
+  position: absolute;
+  right: 8px;
+  top: 5px;
+}
+.grid-item .symbol {
+  position: absolute;
+  left: 10px;
+  top: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+.grid-item .name {
+  position: absolute;
+
+  left: 10px;
+  top: 60px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: normal;
+}
+.grid-item .weight {
+  position: absolute;
+  left: 10px;
+  top: 76px;
+  font-size: 12px;
+}

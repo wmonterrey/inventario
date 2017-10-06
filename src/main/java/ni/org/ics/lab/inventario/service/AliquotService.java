@@ -1,0 +1,85 @@
+package ni.org.ics.lab.inventario.service;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import ni.org.ics.lab.inventario.domain.Aliquot;
+import ni.org.ics.lab.inventario.domain.relationships.UserCenter;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * Servicio para el objeto Aliquot
+ * 
+ * @author William Aviles
+ * 
+ **/
+
+@Service("aliquotService")
+@Transactional
+public class AliquotService {
+	
+	@Resource(name="sessionFactory")
+	private SessionFactory sessionFactory;
+	
+	@SuppressWarnings("unchecked")
+	public List<Aliquot> getAliquots(String boxCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Aliquot a where a.aliBox.boxCode =:boxCode order by a.aliPosition");
+		query.setParameter("boxCode",boxCode);
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Aliquot> getActiveAliquots(String boxCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Aliquot a where a.aliBox.boxCode =:boxCode and a.pasive ='0' order by a.aliPosition");
+		query.setParameter("boxCode",boxCode);
+		return query.list();
+	}
+	
+	/**
+	 * Regresa un Aliquot
+	 * 
+	 * @return un <code>Aliquot</code>
+	 */
+
+	public Aliquot getAliquot(String aliCode,String username) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Aliquot a where " +
+				"a.aliCode =:aliCode");
+		query.setParameter("aliCode",aliCode);
+		Aliquot alic = (Aliquot) query.uniqueResult();
+		if (alic!=null){
+			String centerCode = alic.getAliBox().getBoxRack().getRackEquip().getEquipRoom().getRoomCenter().getCenterCode();
+			query = session.createQuery("FROM UserCenter uc where " +
+					"uc.userCenterId.center =:centerCode and uc.userCenterId.username =:username and uc.pasive ='0'");
+			query.setParameter("centerCode",centerCode);
+			query.setParameter("username",username);
+			UserCenter usercentro = (UserCenter) query.uniqueResult();
+			if (usercentro!=null){
+				return alic;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Guarda un Aliquot
+	 * 
+	 * 
+	 */
+	public void saveAliquot(Aliquot alic) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(alic);
+	}
+	
+}
