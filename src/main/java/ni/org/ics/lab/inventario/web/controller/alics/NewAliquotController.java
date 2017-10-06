@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.List;
 import javax.annotation.Resource;
 
-import ni.org.ics.lab.inventario.domain.Aliquot;
 import ni.org.ics.lab.inventario.domain.Box;
 import ni.org.ics.lab.inventario.domain.complex.BoxAliquots;
 import ni.org.ics.lab.inventario.domain.relationships.AlicTypeStudy;
@@ -101,7 +100,7 @@ public class NewAliquotController {
     public @ResponseBody BoxAliquots fetchPosJson(@RequestParam(value = "boxStudy", required = true) String boxStudy) throws ParseException {
     	logger.info("Obteniendo la posicion en JSON");
     	Box box = null;
-        List<Aliquot> alics = null; 
+        //List<Aliquot> alics = null; 
         BoxAliquots results = new BoxAliquots();
         UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         box = this.boxService.getBoxSugerida(boxStudy, usuario.getUserCenter().getCenterCode());
