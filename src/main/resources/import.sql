@@ -22,13 +22,13 @@ INSERT INTO `inv_usuarios_roles` (`ROL`, `NOMBRE_USUARIO`, `PASIVO`, `FECHA_REGI
 INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`) VALUES ('00000000-0586-034f-0000-00001a5dae20', '0', '2017-03-29 07:59:59', 'admin', '1b', '', 'SUERO', -80, 'PCR', 140);
 INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`) VALUES ('00000000-0586-034f-0000-00001a5e318d', '0', '2017-03-29 08:00:32', 'admin', '1c', '', 'SUERO', -80, 'PCR', 140);
 INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`) VALUES ('00000000-0586-034f-0000-00001a5e6239', '0', '2017-03-29 08:00:45', 'admin', '1d', '', 'SUERO', -80, 'PCR', 140);
-INSERT INTO `inv_estudios` (`CODIGO_ESTUDIO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_ESTUDIO`, `OBS_ESTUDIO`, `PATRON_ESTUDIO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '0', '2017-03-29 08:01:24', 'admin', 'Estudio Cl√≠nico', '', '^\\d{1,5}\\.[1|2|3|4|9]{1}[a|b|c|d|e|f|g|h|t|j|k|i|s|u|r]{1}$|^\\d{1,5}\\.[1|2|3|4|9]{1}[xx]{2}|\\d{1,5}\\.[1|9]{1}[rv1|rv2|rv3]{3}$|^\\d{1,5}\\.[1|2|3|9]{1}[q1|q2]{2}$');
+INSERT INTO `inv_estudios` (`CODIGO_ESTUDIO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_ESTUDIO`, `OBS_ESTUDIO`, `PATRON_ESTUDIO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '0', '2017-03-29 08:01:24', 'admin', 'Estudio ClÌnico', '', '^\\d{1,5}\\.[1|2|3|4|9]{1}[a|b|c|d|e|f|g|h|t|j|k|i|s|u|r]{1}$|^\\d{1,5}\\.[1|2|3|4|9]{1}[xx]{2}|\\d{1,5}\\.[1|9]{1}[rv1|rv2|rv3]{3}$|^\\d{1,5}\\.[1|2|3|9]{1}[q1|q2]{2}$');
 INSERT INTO `inv_tipos_alicuotas_estudios` (`ESTUDIO`, `TIPO_ALICUOTA`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '00000000-0586-034f-0000-00001a5dae20', '0', '2017-03-29 08:01:24', 'admin');
 INSERT INTO `inv_tipos_alicuotas_estudios` (`ESTUDIO`, `TIPO_ALICUOTA`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '00000000-0586-034f-0000-00001a5e318d', '0', '2017-03-29 08:01:24', 'admin');
 INSERT INTO `inv_tipos_alicuotas_estudios` (`ESTUDIO`, `TIPO_ALICUOTA`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '00000000-0586-034f-0000-00001a5e6239', '0', '2017-03-29 08:01:24', 'admin');
 
-INSERT INTO `inv_centros` (`CODIGO_CENTRO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `DIRECCION_CENTRO`, `CONTACTO_CENTRO`, `EMAIL_CENTRO`, `NOMBRE_CENTRO`, `OBS_CENTRO`, `TELEFONO_CENTRO`) VALUES ('00000000-0586-034f-0000-00001a5fe4e5', '0', '2017-03-29 08:02:24', 'admin', 'Managu', 'Dr. Angel Balmaseda', 'abalmaseda@minsa.gob.ni', 'Centro Nacional de Diagn√≥stico y Referencia', '', '50522897227');
-INSERT INTO `inv_cuartos` (`CODIGO_CUARTO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_CUARTO`, `OBS_CUARTO`, `CODIGO_CENTRO`) VALUES ('00000000-0586-034f-0000-00001a60b025', '0', '2017-03-29 08:03:16', 'admin', 'Cuarto fr√≠o 1', '', '00000000-0586-034f-0000-00001a5fe4e5');
+INSERT INTO `inv_centros` (`CODIGO_CENTRO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `DIRECCION_CENTRO`, `CONTACTO_CENTRO`, `EMAIL_CENTRO`, `NOMBRE_CENTRO`, `OBS_CENTRO`, `TELEFONO_CENTRO`) VALUES ('00000000-0586-034f-0000-00001a5fe4e5', '0', '2017-03-29 08:02:24', 'admin', 'Managu', 'Dr. Angel Balmaseda', 'abalmaseda@minsa.gob.ni', 'Centro Nacional de DiagnÛstico y Referencia', '', '50522897227');
+INSERT INTO `inv_cuartos` (`CODIGO_CUARTO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_CUARTO`, `OBS_CUARTO`, `CODIGO_CENTRO`) VALUES ('00000000-0586-034f-0000-00001a60b025', '0', '2017-03-29 08:03:16', 'admin', 'Cuarto frÌo 1', '', '00000000-0586-034f-0000-00001a5fe4e5');
 
 INSERT INTO `inv_usuarios_centros` (`CENTRO`, `NOMBRE_USUARIO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5fe4e5', 'admin', '0', '2017-03-29 09:03:19', 'admin');
 INSERT INTO `inv_usuarios_centros` (`CENTRO`, `NOMBRE_USUARIO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5fe4e5', 'william', '0', '2017-03-29 09:03:19', 'admin');
@@ -61,35 +61,35 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'end', 'Finalizar','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'select', 'Seleccionar','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'change', 'Cambiar','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'parameter', 'par√°metro','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'parameter', 'par·metro','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateRange', 'Rango de fechas','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'noResults', 'No hay registros!','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'position', 'Ubicaci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'position', 'UbicaciÛn','0','0',0);
 /*Menu*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'home', 'Inicio','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'addalic', 'Ingresar muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'newalicsug', 'Usar sugerencia','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'newalicman', 'Elegir ubicaci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'newalicman', 'Elegir ubicaciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alics', 'Muestras','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'searchalic', 'Buscar muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'usealic', 'Usar muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'sendalic', 'Enviar muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'translation', 'Mensajes','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'temprecord', 'Temperaturas','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'catalog', 'Cat√°logos','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'catalog', 'Cat·logos','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'catalogalic', 'Tipos Alicuota','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'catalogall', 'Cat√°logos Generales','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'admin', 'Administraci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'catalogall', 'Cat·logos Generales','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'admin', 'AdministraciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'adminusers', 'Usuarios','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'adminequips', 'Equipos','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'adminracks', 'Racks','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'adminboxes', 'Cajas','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'super', 'Configuraci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'super', 'ConfiguraciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'supercenters', 'Centros','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'superstudies', 'Estudios','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'superrooms', 'Cuartos','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'profile', 'Perfil','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'changepass', 'Cambiar contrase√±a..','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'changepass', 'Cambiar contraseÒa..','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'logout', 'Salir','0','0',0);
 /*Mensajes generales, todas las paginas*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'enabled', 'Habilitado','0','0',0);
@@ -98,23 +98,23 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process.errors', 'Han ocurrido errores en el proceso!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process.success', 'El proceso se ha completado exitosamente!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'date', 'Fecha','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'not', 'Notificaci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'not', 'NotificaciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'notenabled', 'Deshabilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'notlocked', 'Desbloqueado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'seconds', 'segundos','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.expiring', 'Su sesi√≥n est√° a punto de expirar!','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.expiring.confirm', 'Quiere continuar con su sesi√≥n?','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.expiring.time', 'Su sesi√≥n se cerrar√° en','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.keep', 'Mantener sesi√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.expiring', 'Su sesiÛn est· a punto de expirar!','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.expiring.confirm', 'Quiere continuar con su sesiÛn?','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.expiring.time', 'Su sesiÛn se cerrar· en','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session.keep', 'Mantener sesiÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'datavalidationerror', 'Error al actualizar los datos!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'total', 'Total','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dx', 'Mapa','0','0',0);
 
 /*Metadata*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'createdBy', 'Creado por','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateCreated', 'Fecha creaci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateCreated', 'Fecha creaciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'modifiedBy', 'Modificado por','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateModified', 'Fecha de modificaci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateModified', 'Fecha de modificaciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'active', 'Activo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'addedBy', 'Agregado por','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateAdded', 'Fecha','0','0',0);
@@ -122,24 +122,24 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 /*login*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login', 'Ingresar','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.accountExpired', 'Cuenta de usuario ha expirado!','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.accountLocked', 'Cuenta de usuario est√° bloqueada!','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.accountNotLocked', 'Cuenta de usuario est√° desbloqueada!','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.badCredentials', 'Nombre de usuario o contrase√±a incorrectos!','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.accountLocked', 'Cuenta de usuario est· bloqueada!','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.accountNotLocked', 'Cuenta de usuario est· desbloqueada!','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.badCredentials', 'Nombre de usuario o contraseÒa incorrectos!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.credentialsExpired', 'Credenciales de usuario han expirado!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.footer', 'Instituto de Ciencias Sostenibles','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.maxSessionsOut', 'Tiene una sesi√≥n activa! No puede crear otra!','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.msg', 'Por favor ingresar su nombre de usuario y contrase√±a','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.page', 'P√°gina de ingreso','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.password', 'Contrase√±a','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.maxSessionsOut', 'Tiene una sesiÛn activa! No puede crear otra!','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.msg', 'Por favor ingresar su nombre de usuario y contraseÒa','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.page', 'P·gina de ingreso','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.password', 'ContraseÒa','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.userEnabled', 'Usuario esta activo!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.userDisabled', 'Usuario esta inactivo!','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'login.username', 'Nombre de usuario','0','0',0);
 
-/*forzar cambio contrase√±a*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'credentials.expired', 'Su contrase√±a ha caducado','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'pass.updated', 'Su contrase√±a ha sido actualizada','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'password.repeat', 'Repita la contrase√±a','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'Pattern.password.format', 'Al menos 8 caracteres combinando may√∫sculas, min√∫sculas, n√∫meros y caracteres especiales','0','0',0);
+/*forzar cambio contraseÒa*/
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'credentials.expired', 'Su contraseÒa ha caducado','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'pass.updated', 'Su contraseÒa ha sido actualizada','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'password.repeat', 'Repita la contraseÒa','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'Pattern.password.format', 'Al menos 8 caracteres combinando may˙sculas, min˙sculas, n˙meros y caracteres especiales','0','0',0);
 
 /*Plantilla*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'heading', 'Control de muestras','0','0',0);
@@ -151,44 +151,44 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 
 /*Usuarios*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'username', 'Usuario','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'userdesc', 'Descripci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'userdesc', 'DescripciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'useremail', 'Correo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'userlock', 'Bloqueado','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'usercred', 'Contrase√±a vencida','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'usercred', 'ContraseÒa vencida','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'userexp', 'Cuenta vencida','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'userroles', 'Roles','0','0',0);
 
 /*Centros*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerCode', 'C√≥digo centro','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerCode', 'CÛdigo centro','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerName', 'Nombre centro','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerContact', 'Nombre contacto','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerAddress', 'Ubicaci√≥n centro','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerPhoneNumber', 'N√∫mero de tel√©fono','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerEmail', 'Correo electr√≥nico','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerAddress', 'UbicaciÛn centro','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerPhoneNumber', 'N˙mero de telÈfono','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerEmail', 'Correo electrÛnico','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'center.disabled', 'Centro deshabilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'center.enabled', 'Centro habilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerObs', 'Observaciones','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'selectcenter', 'Favor seleccionar centro de trabajo para continuar ...','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerNotEmpty', 'Centro no esta vac√≠o','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'centerNotEmpty', 'Centro no esta vacÌo','0','0',0);
 
 /*Estudios*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'studyCode', 'C√≥digo estudio','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'studyCode', 'CÛdigo estudio','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'studyName', 'Nombre estudio','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'studyPattern', 'Patr√≥n estudio','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'studyPattern', 'PatrÛn estudio','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'study.disabled', 'Estudio deshabilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'study.enabled', 'Estudio habilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'studyObs', 'Observaciones','0','0',0);
 
 /*Cuartos*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'roomCode', 'C√≥digo cuarto','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'roomCode', 'CÛdigo cuarto','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'roomName', 'Nombre cuarto','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'room.disabled', 'Cuarto deshabilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'room.enabled', 'Cuarto habilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'roomObs', 'Observaciones','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'roomNotEmpty', 'Cuarto no esta vac√≠o','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'roomNotEmpty', 'Cuarto no esta vacÌo','0','0',0);
 
 /*Equipos*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipCode', 'C√≥digo equipo','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipCode', 'CÛdigo equipo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipName', 'Nombre equipo','0','0',0);
 
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equip.disabled', 'Equipo deshabilitado','0','0',0);
@@ -196,39 +196,39 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipObs', 'Observaciones','0','0',0);
 
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipRoom', 'Cuarto','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipTempMin', 'Temperatura m√≠nima','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipTempMax', 'Temperatura m√°xima','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipTempMin', 'Temperatura mÌnima','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipTempMax', 'Temperatura m·xima','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipUse', 'Uso del equipo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipType', 'Tipo de equipo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipCapacity', 'Capacidad','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipRows', 'N√∫mero filas','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipColumns', 'N√∫mero columnas','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipRows', 'N˙mero filas','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipColumns', 'N˙mero columnas','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipSerie', 'Serie','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipBrand', 'Marca','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipModel', 'Modelo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipResp', 'Responsable','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipPriority', 'Prioridad','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipNotEmpty', 'Equipo no esta vac√≠o','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipNotEmpty', 'Equipo no esta vacÌo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipDuplicated', 'Nombre de equipo ya esta en uso en este centro','0','0',0);
 
 /*Racks*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackCode', 'C√≥digo rack','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackCode', 'CÛdigo rack','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackName', 'Nombre rack','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rack.disabled', 'Rack deshabilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rack.enabled', 'Rack habilitado','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackObs', 'Observaciones','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackEquip', 'Equipo','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackPosition', 'Posici√≥n en el equipo','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackPosition', 'PosiciÛn en el equipo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackCapacity', 'Capacidad','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackRows', 'Filas','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackColumns', 'Columnas','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackPriority', 'Prioridad','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackNotEmpty', 'Rack no esta vac√≠o','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackNotEmpty', 'Rack no esta vacÌo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'rackDuplicated', 'Nombre de rack ya esta en uso en este centro','0','0',0);
 
 
 /*Boxes*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxCode', 'C√≥digo caja','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxCode', 'CÛdigo caja','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxName', 'Nombre caja','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'box.disabled', 'Caja deshabilitada','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'box.enabled', 'Caja habilitada','0','0',0);
@@ -241,33 +241,33 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxTemp', 'Temperatura','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxType', 'Tipo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxResultType', 'Tipo de resultado','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxPosition', 'Posici√≥n en el rack','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxRows', 'N√∫mero filas','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxColumns', 'N√∫mero columnas','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxPosition', 'PosiciÛn en el rack','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxRows', 'N˙mero filas','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxColumns', 'N˙mero columnas','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxCapacity', 'Capacidad','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxPriority', 'Prioridad','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxNotEmpty', 'Caja no esta vac√≠a','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxNotEmpty', 'Caja no esta vacÌa','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxDuplicated', 'Nombre de caja ya esta en uso en este centro','0','0',0);
 
 /*Alicuotas*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliCode', 'C√≥digo alicuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliCode', 'CÛdigo alicuota','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliBox', 'Caja','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliPosition', 'Posici√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliPosition', 'PosiciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliVol', 'Volumen','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliRes', 'Resultado','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliCond', 'Condici√≥n','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliSep', 'Separaci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliCond', 'CondiciÛn','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliSep', 'SeparaciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliObs', 'Observaciones','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliDuplicated', 'Esta alicuota ya est√° en el inventario','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliDuplicated', 'Esta alicuota ya est· en el inventario','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ali.disabled', 'Alicuota anulada','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ali.enabled', 'Alicuota activa','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliNotPattern', 'Formato de alicuota no v√°lido','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliNotPattern', 'Formato de alicuota no v·lido','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliNotInList', 'Alicuota no existe en este estudio','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'regExpInv', 'Expresi√≥n de validaci√≥n incorrecta de este estudio','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'regExpInv', 'ExpresiÛn de validaciÛn incorrecta de este estudio','0','0',0);
 
 
 /*Tipos de Alicuotas*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alicTypeCode', 'C√≥digo tipo alicuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alicTypeCode', 'CÛdigo tipo alicuota','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alicTypeName', 'Tipo de alicuota','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alicTypeUse', 'Uso tipo alicuota','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alicTypeTemp', 'Temperatura','0','0',0);
@@ -278,12 +278,12 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alictype.enabled', 'Tipo de alicuota activa','0','0',0);
 
 /*Mensajes*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'messageKey', 'C√≥digo mensaje','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'spanish', 'Espa√±ol','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'english', 'Ingl√©s','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'messageKey', 'CÛdigo mensaje','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'spanish', 'EspaÒol','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'english', 'InglÈs','0','0',0);
 
 /*Registro de temperatura*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tempCode', 'C√≥digo registro','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tempCode', 'CÛdigo registro','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tempDate', 'Fecha de registro','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tempObs', 'Observaciones','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tempTemp', 'Temperatura','0','0',0);
@@ -296,14 +296,14 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 /*Accesos*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'access', 'Accesos de usuario','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'lastAccess', 'Ultimo acceso','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateCredentials', 'Ultimo cambio de contrase√±a','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session', 'Id de sesi√≥n','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ipaddress', 'Direcci√≥n IP','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'dateCredentials', 'Ultimo cambio de contraseÒa','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'session', 'Id de sesiÛn','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ipaddress', 'DirecciÛn IP','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'logindate', 'Fecha ingreso','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'logoutdate', 'Fecha salida','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'logouturl', 'URL salida','0','0',0);
 /*Audit trail*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'audittrail', 'Bit√°cora de cambios','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'audittrail', 'Bit·cora de cambios','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'entityClass', 'Clase','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'entityName', 'Nombre','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'entityProperty', 'Propiedad','0','0',0);
@@ -327,10 +327,10 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 
 
 /*Roles*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_SUPER', 'Configuraci√≥n','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_SUPER', 'ConfiguraciÛn','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_ADMIN', 'Administrador','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_TRANS', 'Mensajes','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_CATALOG', 'Cat√°logos','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_CATALOG', 'Cat·logos','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_ADD_ALIC', 'Ingresar muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_EDIT_ALIC', 'Editar muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'ROLE_DEL_ALIC', 'Anular muestra','0','0',0);
@@ -349,41 +349,41 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.footer', 'Pie de pagina','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.grey', 'Gris','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.header', 'Encabezado','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.layout', 'Dise√±o','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.layout', 'DiseÒo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.left', 'Izquierda','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.light', 'Claro','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.red', 'Rojo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.right', 'Derecha','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.sbposition', 'Posici√≥n Barra lateral','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.sbposition', 'PosiciÛn Barra lateral','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'theme.sidebar', 'Barra lateral','0','0',0);
 
 /*Catalogos*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'snd', 'Cat√°logo Si, No, Desconocido','0','1',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'snd', 'Cat·logo Si, No, Desconocido','0','1',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'no', 'N','0','0','snd','0',2);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'yes', 'S','1','0','snd','0',1);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'unk', 'D','9','0','snd','0',3);
 
 
 /*Tipo Equipo*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipTypeCat', 'Cat√°logo Tipo de Equipo','0','1',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipTypeCat', 'Cat·logo Tipo de Equipo','0','1',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'FREE_HOR', 'Freezer Horizontal','FREE_HOR','0','equipTypeCat','0',1);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'FREE_VERT', 'Freezer Vertical','FREE_VERT','0','equipTypeCat','0',2);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'TAN', 'Tanque','TAN','0','equipTypeCat','0',3);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'CON', 'Congelador','CON','0','equipTypeCat','0',4);
 /*Uso Equipo*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipUseCat', 'Cat√°logo Uso de Equipo','0','1',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'equipUseCat', 'Cat·logo Uso de Equipo','0','1',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'ARCHIVO', 'Archivo','ARCHIVO','0','equipUseCat','0',1);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'PCR', 'PCR','PCR','0','equipUseCat','0',2);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'AV', 'Aislamiento Viral','AV','0','equipUseCat','0',3);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'SERO', 'Serolog√≠a','SERO','0','equipUseCat','0',4);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'SERO', 'SerologÌa','SERO','0','equipUseCat','0',4);
 
 /*Tipo de muestra*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tipoMuestraCat', 'Cat√°logo Tipo de Muestra','0','1',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tipoMuestraCat', 'Cat·logo Tipo de Muestra','0','1',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'SUERO', 'Suero','SUERO','0','tipoMuestraCat','0',1);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'PLASMA', 'Plasma','PLASMA','0','tipoMuestraCat','0',2);
 
 /*Tipo de resultado*/
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tipoResultadoCat', 'Cat√°logo Tipo de Resultado','0','1',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'tipoResultadoCat', 'Cat·logo Tipo de Resultado','0','1',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'POS', 'Positivo','POS','0','tipoResultadoCat','0',1);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'NEG', 'Negativo','NEG','0','tipoResultadoCat','0',2);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'SR', 'Sin Resultado','SR','0','tipoResultadoCat','0',3);

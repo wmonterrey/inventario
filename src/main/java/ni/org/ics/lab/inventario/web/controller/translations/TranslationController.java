@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import ni.org.ics.lab.inventario.language.DatabaseDrivenMessageSource;
 import ni.org.ics.lab.inventario.language.MessageResource;
 import ni.org.ics.lab.inventario.service.AuditTrailService;
 import ni.org.ics.lab.inventario.service.MessageResourceService;
 import ni.org.ics.lab.inventario.service.UsuarioService;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,8 @@ public class TranslationController {
 	private MessageResourceService messageResourceService;
 	@Resource(name="auditTrailService")
 	private AuditTrailService auditTrailService;
+	@Resource(name="messageSource")
+	private DatabaseDrivenMessageSource messageSource;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public String obtenerMensajes(Model model) throws ParseException { 	
@@ -92,6 +96,7 @@ public class TranslationController {
 			message.setSpanish(spanish);
 			message.setEnglish(english);
 			this.messageResourceService.saveMensaje(message);
+			messageSource.reload();
 			return createJsonResponse(message);
     	}
     	catch (DataIntegrityViolationException e){
