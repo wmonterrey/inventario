@@ -160,5 +160,22 @@ public class BoxService {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(box);
 	}
+
+	/**
+	 * Regresa un Box
+	 *
+	 * @return un <code>Box</code>
+	 */
+
+	public Box getBox1(String boxCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Box b where " +
+				"b.boxCode =:boxCode");
+		query.setParameter("boxCode",boxCode);
+		Box box = (Box) query.uniqueResult();
+
+		return box;
+	}
 	
 }
