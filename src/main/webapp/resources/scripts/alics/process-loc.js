@@ -26,13 +26,12 @@ var CreateLocation = function () {
                 "closeButton": true,
                 "onclick": null,
                 "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": 0,
+                "hideDuration": "400",
                 "extendedTimeOut": 0,
                 "tapToDismiss": false
             };
 
-         /*   form1.validate({
+            form1.validate({
                 errorElement: 'span', //default input error message container
                 errorClass: 'help-block', // default input error message class
                 focusInvalid: true, // do not focus the last invalid input
@@ -43,7 +42,11 @@ var CreateLocation = function () {
                     },
                     rackEquip: {
                         required: true
-                    }
+                    },
+
+                    boxName: {
+                        required: true
+                    },
 
                 },
 
@@ -71,9 +74,11 @@ var CreateLocation = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
+                    showBox();
+                    $("#legend").show();
 
                 }
-            });*/
+            });
 
             form2.validate({
                 errorElement: 'span', //default input error message container
@@ -176,69 +181,36 @@ var CreateLocation = function () {
                 function() {
                     App.blockUI();
                     $('#boxId').val('');
-                    activeAliquots = [];
+                    $('#boxId2').val('');
 
                     var boxId = $('#boxName').val();
+
                     $('#boxId').val(boxId);
+                    $('#boxId2').val(boxId);
 
-                    $.getJSON(parametros.getActiveAliquotsUrl, {
-                        boxCode : boxId,
-                        ajax : 'true'
-                    }, function(data) {
+                    loadArray();
 
-                        for (var i = 0; i < data.length; i++) {
-                                activeAliquots.push(data[i].aliPosition) ;
-                        }
-                    });
-
-
-                    $.getJSON(parametros.boxLocUrl, {
-                        boxCode : boxId,
-                        ajax : 'true'
-                    }, function(data) {
-                        var capac = data.boxCapacity;
-                        $(".grid").empty();
-                        for (var i = 1; i <= capac; i++) {
-
-                            if(activeAliquots.indexOf(i) >= 0 ){
-                                $(".grid").append("<div class='grid-item'><p class='number'></p> <button value='"+i+"' type='button' id='bttn" +i+"' class='btn btn-danger btn-lg butt'>" +i+"</button>   </div>");
-                            }else{
-                                $(".grid").append("<div class='grid-item'><p class='number'></p> <button value='"+i+"' type='button' id='bttn" +i+"' onclick='$(\"#pos\").val("+i+")' data-toggle=\"modal\" data-target=\"#alicModal\" class='btn btn-primary btn-lg butt'>" +i+"</button>   </div>");
-
-                            }
-
-
-                        }
-
-                        var ancho = 100 /data.boxColumns + '%';
-                        $('.grid-item').css({"width": ancho});
-                        $('.butt').css({"width":"100%"});
-                        $('.butt').css({"height": "100px"});
-                        $('.grid-item').css({"position": "relative"});
-                        $('.grid-item').css({"float": "left"});
-                        $('.grid-item').css({"height": "100px"});
-                        $('.grid-item').css({"border": "1px solid #333"});
-                        $('.grid-item').css({"border-color": "hsla(0, 0%, 0%, 0.2)"});
-                        $('.grid').isotope({
-                            // options
-                            itemSelector: '.grid-item',
-                            layoutMode: 'fitRows'
-                        });
-                    });
                     App.unblockUI();
                 });
 
             $('#boxStudy').change(
                 function() {
-                    App.blockUI();
-                    $.getJSON(parametros.getAlicUrl, {
-                        boxStudy : $('#boxStudy').val(),
-                        ajax : 'true'
-                    }, function(data) {
-                        alicPerm = data;
-                        patron = alicPerm[0].estudio.studyPattern;
-                    });
-                    App.unblockUI();
+                    var boxStudy = $('#boxStudy').val();
+                    if (boxStudy != '' ){
+                        App.blockUI();
+
+                        $.getJSON(parametros.getAlicUrl, {
+                            boxStudy : boxStudy,
+                            ajax : 'true'
+                        }, function(data) {
+                            alicPerm = data;
+                            patron = alicPerm[0].estudio.studyPattern;
+
+
+                        });
+                        App.unblockUI();
+                    }
+
                 });
 
             $('#aliCode').change(
@@ -285,7 +257,6 @@ var CreateLocation = function () {
                             "onclick": null,
                             "showDuration": "300",
                             "hideDuration": "1000",
-                            "timeOut": 0,
                             "extendedTimeOut": 0,
                             "tapToDismiss": false
                         };
@@ -304,6 +275,7 @@ var CreateLocation = function () {
                     , form2.serialize()
                     , function( data )
                     {
+
                         alic = JSON.parse(data);
                         if (alic.aliCode === undefined) {
                             toastr.options = {
@@ -311,7 +283,6 @@ var CreateLocation = function () {
                                 "onclick": null,
                                 "showDuration": "300",
                                 "hideDuration": "1000",
-                                "timeOut": 0,
                                 "extendedTimeOut": 0,
                                 "tapToDismiss": false
                             };
@@ -329,10 +300,15 @@ var CreateLocation = function () {
                             $('#pos').val('');
                             $('#boxId').val('');
                             $("#boxStudy").val('').change();
+                            loadArray();
+                            $("#btnLoad").click();
+                            $("#btnClose").click();
 
                             toastr.success(parametros.successmessage,alic.aliCode);
+
                         }
                         App.unblockUI();
+
                     }
                     , 'text' )
                     .fail(function(XMLHttpRequest, textStatus, errorThrown) {
@@ -340,6 +316,93 @@ var CreateLocation = function () {
                         App.unblockUI();
                     });
             }
+
+            function showBox() {
+                App.blockUI();
+                $('#boxId').val('');
+
+                var boxId = $('#boxName').val();
+                $('#boxId').val(boxId);
+
+                $.getJSON(parametros.boxLocUrl, {
+                    boxCode: boxId,
+                    ajax: 'true'
+                }, function (data) {
+                    var capac = data.boxCapacity;
+                    $(".grid").empty();
+                    for (var i = 1; i <= capac; i++) {
+                            if (activeAliquots.indexOf(i.valueOf()) >= 0) {
+                                $(".grid").append("<div class='grid-item'><p class='number'></p> <button value='" + i + "' type='button' id='bttn" + i + "' onclick='$(\"#pos2\").val(" + i + ").change()' data-toggle=\"modal\" data-target=\"#alicModal2\" class='btn btn-danger btn-lg butt'>" + i + "</button>   </div>");
+                            } else {
+                                $(".grid").append("<div class='grid-item'><p class='number'></p> <button value='" + i + "' type='button' id='bttn" + i + "' onclick='$(\"#pos\").val(" + i + ")' data-toggle=\"modal\" data-target=\"#alicModal\" class='btn btn-primary btn-lg butt'>" + i + "</button>   </div>");
+
+                            }
+
+                    }
+
+                    var ancho = 100 / data.boxColumns + '%';
+                    $('.grid-item').css({"width": ancho});
+                    $('.butt').css({"width": "100%"});
+                    $('.butt').css({"height": "100px"});
+                    $('.grid-item').css({"position": "relative"});
+                    $('.grid-item').css({"float": "left"});
+                    $('.grid-item').css({"height": "100px"});
+                    $('.grid-item').css({"border": "1px solid #333"});
+                    $('.grid-item').css({"border-color": "hsla(0, 0%, 0%, 0.2)"});
+                    $('.grid').isotope({
+                        // options
+                        itemSelector: '.grid-item',
+                        layoutMode: 'fitRows'
+                    });
+
+                    App.unblockUI();
+                });
+
+
+            }
+
+            $('#pos2').change(
+                function() {
+                    App.blockUI();
+                    $('#aliCode2').val('');
+                    $('#vol2').val('');
+                    $('#condition2').val('');
+                    $('#obs2').val('');
+
+                    $.getJSON(parametros.getAliquotUrl, {
+                        pos : $('#pos2').val(),
+                        boxCode : $('#boxId2').val(),
+                        ajax : 'true'
+                    }, function(data) {
+                        if (data != null){
+                            $('#aliCode2').val(data.aliCode);
+                            $('#vol2').val(data.aliVol);
+                            $('#condition2').val(data.aliCond);
+                            $('#obs2').val(data.aliObs);
+                        }
+                    });
+                    App.unblockUI();
+                });
+
+            function loadArray(){
+                App.blockUI();
+                activeAliquots = [];
+
+                var boxId = $('#boxName').val();
+
+                $.getJSON(parametros.getActiveAliquotsUrl, {
+                    boxCode : boxId,
+                    ajax : 'true'
+                }, function(data) {
+
+                    for (var i = 0; i < data.length; i++) {
+                        activeAliquots.push(data[i].aliPosition) ;
+                    }
+                });
+
+                App.unblockUI();
+            }
+
 
 
 

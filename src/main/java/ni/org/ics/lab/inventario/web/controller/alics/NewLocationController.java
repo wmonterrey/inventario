@@ -53,6 +53,8 @@ public class NewLocationController {
     private EquipoService equipoService;
     @Resource(name="aliquotService")
     private AliquotService aliquotService;
+    @Resource(name="messageResourceService")
+    private MessageResourceService messageResourceService;
 
     @RequestMapping(value = "location", method = RequestMethod.GET)
     public String initCreation(Model model) {
@@ -96,18 +98,29 @@ public class NewLocationController {
             Box box = boxService.getBox1(boxId);
 
             if (box != null){
-                alic.setAliCode(aliCode);
-                alic.setRecordUser(usuario.getUsername());
-                alic.setAliCond(condition);
-                alic.setAliObs(obs);
-                alic.setAliPosition(pos);
-                alic.setAliVol(vol);
-                alic.setAlicTypeName(type);
-                alic.setAliBox(box);
+                Aliquot ali = aliquotService.getAliquotByCode(boxId, usuario.getUsername(),aliCode);
 
-                //Save aliquot
-                this.aliquotService.saveAliquot(alic);
-                return createJsonResponse(alic);
+                if (ali != null){
+                    MessageResource msj = messageResourceService.getMensaje("alicDuplicated");
+                    Gson gson = new Gson();
+                    String json = gson.toJson( aliCode + msj.getSpanish());
+                    return new ResponseEntity<String>( json, HttpStatus.CREATED);
+                }else{
+                    alic.setAliCode(aliCode);
+                    alic.setRecordUser(usuario.getUsername());
+                    alic.setAliCond(condition);
+                    alic.setAliObs(obs);
+                    alic.setAliPosition(pos);
+                    alic.setAliVol(vol);
+                    alic.setAlicTypeName(type);
+                    alic.setAliBox(box);
+
+                    //Save aliquot
+                    this.aliquotService.saveAliquot(alic);
+                    return createJsonResponse(alic);
+                }
+
+
             }else{
                 Gson gson = new Gson();
                 String json = gson.toJson("403 Forbidden");
@@ -127,6 +140,17 @@ public class NewLocationController {
         logger.info("Obteniendo informacion de stock no disponible");
         List<Aliquot> alic = null;
         alic = aliquotService.getActiveAliquots(boxCode);
+        return alic;
+    }
+
+    @RequestMapping(value = "getAliquot", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody Aliquot fetchAliquotJson(@RequestParam(value = "boxCode", required = false) String boxCode
+          , @RequestParam( value="pos", required=true )Integer pos)
+    {
+        UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        logger.info("Obteniendo informacion de alicuota guardada");
+        Aliquot alic = null;
+        alic = aliquotService.getAliquotByPos(boxCode, usuario.getUsername(), pos );
         return alic;
     }
 

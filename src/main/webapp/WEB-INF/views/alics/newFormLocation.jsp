@@ -125,6 +125,14 @@
 
                                     </div>
 
+                                    <div class="form-actions fluid">
+                                        <div class="col-md-offset-5 col-md-6">
+                                            <button id="btnLoad" name="btnLoad" class="btn btn-primary"><spring:message code="ok" /></button>
+
+                                        </div>
+                                    </div>
+
+
                                 </form>
                             </div>
                         </div>
@@ -143,6 +151,21 @@
                             <div class="portlet-body form">
                                 <div class="grid" id="caja" >
 
+                                </div>
+                            </div>
+                            <div class="display-hide form-actions fluid" id="legend" >
+
+                                <div class="col-sm-3">
+                                    <input style="background-color: #428bca" class="form-control">
+                                    <label><spring:message code="available" />
+                                    </label>
+                                </div>
+
+                                <div class="col-sm-3">
+
+                                    <input style="background-color: #d9534f" class="form-control">
+                                    <label><spring:message code="notAvailable" />
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -227,20 +250,20 @@
                                             </div>
 
                                             <div class="form-group">
-                                            <label class="control-label col-md-4"><spring:message code="aliVol" />
-                                                <span class="required">
+                                                <label class="control-label col-md-4"><spring:message code="aliVol" />
+                                                    <span class="required">
 											 *
 										</span>
-                                            </label>
-                                            <div class="col-md-8">
-                                                <div class="input-group">
-                                                    <input id="vol" name="vol" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="aliVol" />" class="form-control"/>
-                                                    <span class="input-group-addon">
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <div class="input-group">
+                                                        <input id="vol" name="vol" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="aliVol" />" class="form-control"/>
+                                                        <span class="input-group-addon">
 													<i class="fa fa-keyboard-o"></i>
 												</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-4"><spring:message code="aliCond" />
@@ -255,7 +278,7 @@
                                                         <span class="input-group-addon">
 													<i class="fa fa-keyboard-o"></i>
 												</span>
-                                                </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -265,7 +288,91 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <textarea placeholder="<spring:message code="please.enter" /> <spring:message code="centerObs" />" class="form-control" id="obs" rows="3"></textarea>
+                                                    <textarea placeholder="<spring:message code="please.enter" /> <spring:message code="centerObs" />" class="form-control" id="obs" name="obs" rows="3"></textarea>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" id="btnClose" name="btnClose" class="btn btn-secondary" data-dismiss="modal"><spring:message code="cancel" /></button>
+                                            <button id="guardar" id="btnSave" class="btn btn-success"><spring:message code="save" /></button>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="alicModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title"> <spring:message code="aliquotData" /></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="#" autocomplete="off" id="alic-data" class="form-horizontal">
+                                        <input type="text" class="display-hide" name="boxId2" id="boxId2">
+
+                                        <div class="form-body">
+                                            <div class="alert alert-danger display-hide">
+                                                <button class="close" data-close="alert"></button>
+                                                <spring:message code="form.errors" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4"><spring:message code="aliPosition" />:
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text"  class="form-control" disabled name="pos2" id="pos2">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4"><spring:message code="aliCode" />
+
+                                                </label>
+                                                <div class="col-md-8">
+                                                        <input type="text" class="form-control" disabled  id="aliCode2" name="aliCode2"  />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4"><spring:message code="aliVol" />
+
+                                                </label>
+                                                <div class="col-md-8">
+                                                        <input disabled id="vol2" type="text" class="form-control" name="vol2" type="text"  />
+                                                    </div>
+                                                </div>
+
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4"><spring:message code="aliCond" />
+
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                        <input disabled type="text" class="form-control" id="condition2" name="condition2" >
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4"><spring:message code="centerObs" />
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <textarea  class="form-control" disabled id="obs2" name="obs2" rows="3"></textarea>
                                                 </div>
 
                                             </div>
@@ -275,7 +382,6 @@
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message code="cancel" /></button>
-                                            <button id="guardar" id="btnSave" class="btn btn-success"><spring:message code="save" /></button>
                                         </div>
 
 
@@ -343,6 +449,7 @@
 <spring:url value="/addloc/saveAliLoc" var="saveAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicUrl"/>
 <spring:url value="/addloc/getActiveAliquots" var="getActiveAliquotsUrl"/>
+<spring:url value="/addloc/getAliquot" var="getAliquotUrl"/>
 
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
@@ -370,6 +477,7 @@
             boxLocUrl: "${boxUrl}",
             saveAlicUrl: "${saveAlicUrl}",
             getActiveAliquotsUrl: "${getActiveAliquotsUrl}",
+            getAliquotUrl: "${getAliquotUrl}",
             errormessage: "${errormessage}"};
 
         CreateLocation.init(parametros);

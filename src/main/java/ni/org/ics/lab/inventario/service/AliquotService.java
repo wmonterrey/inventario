@@ -81,5 +81,61 @@ public class AliquotService {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(alic);
 	}
+
+	/**
+	 * Regresa un Aliquot
+	 *
+	 * @return un <code>Aliquot</code>
+	 */
+
+	public Aliquot getAliquotByPos(String boxCode,String username, Integer pos) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Aliquot a where " +
+				"a.aliBox.boxCode =:boxCode and a.aliPosition =:pos ");
+		query.setParameter("boxCode",boxCode);
+		query.setParameter("pos", pos);
+		Aliquot alic = (Aliquot) query.uniqueResult();
+		if (alic!=null){
+			String centerCode = alic.getAliBox().getBoxRack().getRackEquip().getEquipRoom().getRoomCenter().getCenterCode();
+			query = session.createQuery("FROM UserCenter uc where " +
+					"uc.userCenterId.center =:centerCode and uc.userCenterId.username =:username and uc.pasive ='0'");
+			query.setParameter("centerCode",centerCode);
+			query.setParameter("username",username);
+			UserCenter usercentro = (UserCenter) query.uniqueResult();
+			if (usercentro!=null){
+				return alic;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Regresa un Aliquot
+	 *
+	 * @return un <code>Aliquot</code>
+	 */
+
+	public Aliquot getAliquotByCode(String boxCode,String username, String alicode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Aliquot a where " +
+				"a.aliBox.boxCode =:boxCode and a.aliCode =:alicode ");
+		query.setParameter("boxCode",boxCode);
+		query.setParameter("alicode", alicode);
+		Aliquot alic = (Aliquot) query.uniqueResult();
+		if (alic!=null){
+			String centerCode = alic.getAliBox().getBoxRack().getRackEquip().getEquipRoom().getRoomCenter().getCenterCode();
+			query = session.createQuery("FROM UserCenter uc where " +
+					"uc.userCenterId.center =:centerCode and uc.userCenterId.username =:username and uc.pasive ='0'");
+			query.setParameter("centerCode",centerCode);
+			query.setParameter("username",username);
+			UserCenter usercentro = (UserCenter) query.uniqueResult();
+			if (usercentro!=null){
+				return alic;
+			}
+		}
+		return null;
+	}
 	
 }
