@@ -55,7 +55,7 @@ public class AliquotService {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM Aliquot a where " +
-				"a.aliCode =:aliCode");
+				"a.aliCode =:aliCode and a.pasive= '0'");
 		query.setParameter("aliCode",aliCode);
 		Aliquot alic = (Aliquot) query.uniqueResult();
 		if (alic!=null){

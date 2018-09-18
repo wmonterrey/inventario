@@ -391,3 +391,65 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'POS', 'Positivo','POS','0','tipoResultadoCat','0',1);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'NEG', 'Negativo','NEG','0','tipoResultadoCat','0',2);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'SR', 'Sin Resultado','SR','0','tipoResultadoCat','0',3);
+
+/* Condiciones de muestra */
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'c_list', 'Contaminada','CLIST','0','condicionCat','0',1);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'h_list', 'Hemolizada','HLIST','0','condicionCat','0',2);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'i_list', 'Icterico','ILIST','0','condicionCat','0',3);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'l_list', 'Lipemica','LLIST','0','condicionCat','0',4);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'lc_list', 'Lipemica y contaminada','LCLIST','0','condicionCat','0',5);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'lh_list', 'Lipemica y hemolizada','LHLIST','0','condicionCat','0',6);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'o_list', 'Optima','OLIST','0','condicionCat','0',7);
+
+
+/* Uso de alicuotas */
+
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alic_use_menu', 'Uso de alicuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'purpose', 'Propósito','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'used_volume', 'Volumen usado','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'all_alic_used', 'Se usó toda la alícuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'exceeded_volume', 'El volumen ingresado supera el volumen de la muestra seleccionada','0','0',0);
+
+
+/* Salida de alicuotas */
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alic_output', 'Salida de alicuotas','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'pos_neg', 'Positivo/Negativo','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'repeated_alic', 'Alicuota ya se encuentra agregada.','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'enic', 'ENIC','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'sendDate', 'Fecha de envío','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxNum', 'No. Caja','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'transportation', 'Medio','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'destination', 'Destino','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'requestBy', 'Solicitado por','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'containerNum', 'No. Contenedor','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'searchManager', 'Resp. Búsqueda','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'approveBy', 'Aprobado por','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'carrier', 'Transporta','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'packingManager', 'Resp. Embalaje','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process', 'Procesar','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'select_file', 'Seleccionar archivo','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process', 'Procesar','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'import_file', 'Importar Archivo','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'msg_yes', 'Si','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'msg_no', 'No','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'conf_msg', 'Mensaje de Confirmación','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'msg_content', 'No se han obtenido resultados de la búsqueda. ¿Desea agregar la muestra?','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alic_found', 'Alícuotas encontradas.','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'alic_not_found', 'Alícuotas no encontradas.','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'added_alic', 'Alicuotas agregadas.','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'repeated_alics', 'Registros encontrados en la tabla.','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'transfer_alic', 'Transferir Alicuota','0','0',0);
+
+
+
+
+
+
+/* Medio */
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'dry_ice', 'Termo con hielo seco','MVALUE1','0','medioCat','0',1);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'refrigerant', 'Termo con refrigerante','MVALUE2','0','medioCat','0',2);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`, `isCat`, `orden`) VALUES ( 'liquid_nitro', 'Tanque nitrógeno líquido','MVALUE3','0','medioCat','0',3);
+
+
+
+

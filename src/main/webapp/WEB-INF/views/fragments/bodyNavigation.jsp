@@ -45,6 +45,23 @@
 							<i class="fa fa-hand-o-up"></i>
 							<spring:message code="newalicman" /></a>
 						</li>
+						<li class="newalicuse">
+							<a href="<spring:url value="/alicUse/enterForm" htmlEscape="true "/>">
+								<i class="fa fa-edit"></i>
+								<spring:message code="alic_use_menu" /></a>
+						</li>
+						<li class="exitalic">
+							<a href="<spring:url value="/alicoutput/exitForm" htmlEscape="true "/>">
+								<i class="fa fa-sign-out"></i>
+								<spring:message code="alic_output" /></a>
+						</li>
+
+                        <li class="transferAlic">
+                            <a href="<spring:url value="/alictransfer/transferAlic" htmlEscape="true "/>">
+                                <i class="fa fa-plane"></i>
+                                <spring:message code="transfer_alic" /></a>
+                        </li>
+
 					</ul>
 				</li>
 				</sec:authorize>

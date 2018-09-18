@@ -40,6 +40,15 @@ public class CentroService {
 		Query query = session.createQuery("FROM Center c where c.pasive='0'");
 		return query.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Center> getCentrosActivos2(String centerCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Center c where c.pasive='0' and centerCode not like :centerCode");
+		query.setParameter("centerCode",centerCode);
+		return query.list();
+	}
 	
 
 	/**
