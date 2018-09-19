@@ -64,8 +64,11 @@ public class NewLocationController {
             model.addAttribute("usuario", usuario);
             List<StudyCenter> estudios = studyCenterService.getActiveStudyCenter(usuario.getUserCenter().getCenterCode());
             List<Equipment> equipos = equipoService.getEquipos(usuario.getUserCenter().getCenterCode());
+            List<MessageResource> msj = messageResourceService.getCatalogo("condicionCat");
             model.addAttribute("equipos", equipos);
             model.addAttribute("estudios", estudios);
+            model.addAttribute("msj", msj);
+
             return "alics/newFormLocation";
         }
         else{
@@ -78,7 +81,7 @@ public class NewLocationController {
         logger.info("Obteniendo informacion de caja en JSON");
         Box box = null;
         UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
-        box = boxService.getBox1(boxCode);
+        box = boxService.getBox(boxCode, usuario.getUsername());
         return box;
     }
 
@@ -86,7 +89,7 @@ public class NewLocationController {
     public ResponseEntity<String> processSaveForm(@RequestParam(value="pos", required=true) int pos
             , @RequestParam( value="type", required=true ) String type
             , @RequestParam( value="aliCode", required=true ) String aliCode
-            , @RequestParam( value="condition", required=true ) String condition
+            , @RequestParam( value="aliCond", required=true ) String condition
             , @RequestParam( value="obs", required=false ) String obs
             , @RequestParam( value="vol", required=true ) float vol
             , @RequestParam( value="boxId", required=true ) String boxId
@@ -95,7 +98,7 @@ public class NewLocationController {
         try{
             UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
             Aliquot alic = new Aliquot();
-            Box box = boxService.getBox1(boxId);
+            Box box = boxService.getBox(boxId, usuario.getUsername());
 
             if (box != null){
                 Aliquot ali = aliquotService.getAliquotByCode(boxId, usuario.getUsername(),aliCode);
@@ -114,6 +117,7 @@ public class NewLocationController {
                     alic.setAliVol(vol);
                     alic.setAlicTypeName(type);
                     alic.setAliBox(box);
+                    alic.setRecordDate(new Date());
 
                     //Save aliquot
                     this.aliquotService.saveAliquot(alic);
@@ -154,6 +158,20 @@ public class NewLocationController {
         return alic;
     }
 
+    /**
+     * Retorna una lista de tipos de alicuotas de estudio. Acepta una solicitud GET para JSON
+     * @return Un arreglo JSON de tipos de alicuotas de estudio
+     * @throws ParseException
+     */
+    @RequestMapping(value = "getAlicStudyByBox", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<AlicTypeStudy> fetchAlicsJson(@RequestParam(value = "boxCode", required = true) String boxCode) throws ParseException {
+        logger.info("Obteniendo los alicType en JSON");
+        UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        Box infoBox = boxService.getBox(boxCode, usuario.getUsername());
+        List<AlicTypeStudy> alics = null;
+        alics = aliquotTypeService.getActiveAliquotTypesxStudy(infoBox.getBoxStudy().getStudyCode());
+        return alics;
+    }
 
 
     private ResponseEntity<String> createJsonResponse( Object o )

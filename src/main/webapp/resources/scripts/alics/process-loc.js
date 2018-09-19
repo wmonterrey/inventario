@@ -1,11 +1,12 @@
 var CreateLocation = function () {
 
     var handleSelect2 = function () {
-        $("#boxStudy").select2({});
         $("#rackEquip").select2({});
         $("#rackCode").select2({});
         $("#boxName").select2({});
+        $('#aliCond').select2({});
     };
+
 
     var patron = "";
     var activeAliquots = [];
@@ -98,7 +99,7 @@ var CreateLocation = function () {
                     vol: {
                         required: true
                     },
-                    condition: {
+                    aliCond: {
                         required: true
                     }
 
@@ -168,7 +169,7 @@ var CreateLocation = function () {
                         var len = data.length;
                         for ( var i = 0; i < len; i++) {
                             html += '<option value="' + data[i].boxCode + '">'
-                                + data[i].boxName + '</option>';
+                                + data[i].boxName + " " + "-" + " " + data[i].boxStudy.studyName +  '</option>';
                         }
                         html += '</option>';
                         $('#boxName').html(html);
@@ -185,7 +186,7 @@ var CreateLocation = function () {
 
                     var boxId = $('#boxName').val();
 
-                    $('#boxId').val(boxId);
+                    $('#boxId').val(boxId).change();
                     $('#boxId2').val(boxId);
 
                     loadArray();
@@ -375,9 +376,10 @@ var CreateLocation = function () {
                         ajax : 'true'
                     }, function(data) {
                         if (data != null){
+                            console.log(data);
                             $('#aliCode2').val(data.aliCode);
                             $('#vol2').val(data.aliVol);
-                            $('#condition2').val(data.aliCond);
+                            $('#condition2').val(data.aliCond).change();
                             $('#obs2').val(data.aliObs);
                         }
                     });
@@ -403,6 +405,29 @@ var CreateLocation = function () {
                 App.unblockUI();
             }
 
+
+            $('#boxId').change(
+                function() {
+                    App.blockUI();
+
+                    var boxCode = $('#boxId').val();
+
+                    if (boxCode != '' ){
+                        App.blockUI();
+
+                        $.getJSON(parametros.getAlicUrl, {
+                            boxCode : boxCode,
+                            ajax : 'true'
+                        }, function(data) {
+                            alicPerm = data;
+                            patron = alicPerm[0].estudio.studyPattern;
+
+
+                        });
+                        App.unblockUI();
+                    }
+                    App.unblockUI();
+                });
 
 
 

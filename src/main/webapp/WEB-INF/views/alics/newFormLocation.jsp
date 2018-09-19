@@ -118,6 +118,7 @@
                                             <div class="col-md-8">
                                                 <select data-placeholder="<spring:message code="select" /> <spring:message code="boxName" />" name="boxName" id="boxName" class="form-control">
                                                     <option value=""></option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -128,7 +129,7 @@
                                     <div class="form-actions fluid">
                                         <div class="col-md-offset-5 col-md-6">
                                             <button id="btnLoad" name="btnLoad" class="btn btn-primary"><spring:message code="ok" /></button>
-
+                                            <a href="${fn:escapeXml(boxUrl)}" class="btn btn-danger"><spring:message code="end" /></a>
                                         </div>
                                     </div>
 
@@ -148,12 +149,7 @@
                                     <a href="javascript:;" class="remove"></a>
                                 </div>
                             </div>
-                            <div class="portlet-body form">
-                                <div class="grid" id="caja" >
-
-                                </div>
-                            </div>
-                            <div class="display-hide form-actions fluid" id="legend" >
+                            <div class="display-hide form-actions" id="legend" >
 
                                 <div class="col-sm-3">
                                     <input style="background-color: #428bca" class="form-control">
@@ -168,15 +164,23 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="portlet-body form">
+                                <div class="grid" id="caja" >
+
+                                </div>
+
+                            </div>
+
+
                         </div>
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="alicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="alicModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title"> <spring:message code="addalic" /></h5>
+                                <div class="modal-header" style="background-color: #428bca">
+                                    <h5 class="modal-title" style="font: bold"> <spring:message code="addalic" /></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -190,28 +194,6 @@
                                             <div class="alert alert-danger display-hide">
                                                 <button class="close" data-close="alert"></button>
                                                 <spring:message code="form.errors" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-md-4"><spring:message code="boxStudy" />:
-                                                    <span class="required">
-											 *
-										</span>
-                                                </label>
-                                                <div class="col-md-8">
-                                                    <select data-placeholder="<spring:message code="select" /> <spring:message code="boxStudy" />" name="boxStudy" id="boxStudy" class="form-control">
-                                                        <option value=""></option>
-                                                        <c:forEach items="${estudios}" var="estudio">
-                                                            <c:choose>
-                                                                <c:when test="${estudio.estudio.studyCode eq alic.aliBox.boxStudy.studyCode}">
-                                                                    <option selected value="${estudio.estudio.studyCode}"><spring:message code="${estudio.estudio.studyName}" /></option>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <option value="${estudio.estudio.studyCode}"><spring:message code="${estudio.estudio.studyName}" /></option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -271,16 +253,16 @@
 											 *
 										</span>
                                                 </label>
-
                                                 <div class="col-md-8">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="condition" name="condition" placeholder="<spring:message code="please.enter" /> <spring:message code="aliCond" />">
-                                                        <span class="input-group-addon">
-													<i class="fa fa-keyboard-o"></i>
-												</span>
-                                                    </div>
+                                                    <select data-placeholder="<spring:message code="select" /> <spring:message code="aliCond" />"
+                                                            class="form-control" id="aliCond" name="aliCond">
+                                                        <option value=""></option>
+                                                        <c:forEach items="${msj}" var="cond">
+                                                            <option value="${cond.messageKey}"><spring:message
+                                                                    code="${cond.spanish}"/></option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
-
                                             </div>
 
                                             <div class="form-group">
@@ -313,7 +295,7 @@
                     <div class="modal fade" id="alicModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header" style="background-color: #428bca">
                                     <h5 class="modal-title"> <spring:message code="aliquotData" /></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -361,11 +343,19 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                        <input disabled type="text" class="form-control" id="condition2" name="condition2" >
-
+                                                    <select  disabled data-placeholder="<spring:message code="select" /> <spring:message code="aliCond" />"
+                                                            class="form-control" id="condition2" name="condition2">
+                                                        <option value=""></option>
+                                                        <c:forEach items="${msj}" var="cond">
+                                                            <option value="${cond.messageKey}"><spring:message
+                                                                    code="${cond.spanish}"/></option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
 
                                             </div>
+
+
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-4"><spring:message code="centerObs" />
@@ -447,7 +437,7 @@
 <spring:url value="/addloc/getBox" var="boxUrl"/>
 
 <spring:url value="/addloc/saveAliLoc" var="saveAlicUrl"/>
-<spring:url value="/addalic/getAlicStudy" var="getAlicUrl"/>
+<spring:url value="/addloc/getAlicStudyByBox" var="getAlicUrl"/>
 <spring:url value="/addloc/getActiveAliquots" var="getActiveAliquotsUrl"/>
 <spring:url value="/addloc/getAliquot" var="getAliquotUrl"/>
 
@@ -465,6 +455,9 @@
 </script>
 <script>
     jQuery(document).ready(function() {
+        $('#aliCond').select2({
+            dropdownParent: $('#alicModal')
+        });
         App.init();
         var parametros = {saveAlicUrl: "${saveAlicUrl}",
             getAlicUrl: "${getAlicUrl}",

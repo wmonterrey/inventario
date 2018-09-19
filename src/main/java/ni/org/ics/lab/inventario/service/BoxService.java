@@ -167,7 +167,7 @@ public class BoxService {
 	 * @return un <code>Box</code>
 	 */
 
-	public Box getBox1(String boxCode) {
+	/*public Box getBox1(String boxCode) {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM Box b where " +
@@ -176,6 +176,6 @@ public class BoxService {
 		Box box = (Box) query.uniqueResult();
 
 		return box;
-	}
+	}*/
 	
 }
