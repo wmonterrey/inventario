@@ -2,10 +2,13 @@ var CreateAlic = function () {
 	
 	var handleSelect2 = function () {
     	$("#boxStudy").select2({});
+    	$("#boxResultType").select2({});
+    	$("#boxResults").select2({});
     };
     
     var alicPerm = [];
     var patron = "";
+    var formato = "";
  
     return {
         //main function to initiate the module
@@ -21,8 +24,8 @@ var CreateAlic = function () {
 					  "onclick": null,
 					  "showDuration": "300",
 					  "hideDuration": "1000",
-					  "timeOut": 0,
-					  "extendedTimeOut": 0,
+					  "timeOut": "6000",
+					  "extendedTimeOut": "0",
 					  "tapToDismiss": false
 					};
             
@@ -33,39 +36,86 @@ var CreateAlic = function () {
             				boxStudy : $('#boxStudy').val(),
             				ajax : 'true'
             			}, function(data) {
-            				alicPerm = data;
-            				patron = alicPerm[0].estudio.studyPattern;
+            				if(data.length<=0){
+            					toastr["error"]( $('#boxStudy').text() + ' ' + parametros.noAlicStudy, "Error!!");
+            					return;
+            				}else{
+            					alicPerm = data;
+            					patron = alicPerm[0].estudio.studyPattern;
+            					formato = alicPerm[0].estudio.studyFormat;
+            				}
             			});
             			App.unblockUI();
                     });
+            
+            function cleanForm()
+        	{
+            	$('#alicTypeName').val("");
+				$('#alicTypeUse').val("");
+				$('#alicTypeTemp').val("");
+				$('#rackEquip').val("");
+				$('#boxRack').val("");
+				$('#aliBox').val("");
+				$('#aliPosition').val("");
+				$('#aliVol').val("");
+        	}
             
             $('#aliCode').change(
             		function() {
             			App.blockUI();
             			var res = false;
+            			var resAlic = false;
+            			var alicuotaIngresada = null;
             			try{
-            				var patt = new RegExp(patron);
+            				var patt = new RegExp(patron,"i");
             				res = patt.test($('#aliCode').val());
             			}
 	            		catch(e){
 	            			toastr["error"]( $('#aliCode').val() + ' ' + parametros.regExpInv, "Error!!");
+	            			cleanForm();
 	            			$('#aliCode').focus();
 	            			return;
 	            		}
             			if(!Boolean(res)){
-      	    				toastr["error"](parametros.aliNotPattern, "Error!!");
+      	    				toastr["error"]($('#aliCode').val() + ' ' +parametros.aliNotPattern, "Error!!");
+      	    				cleanForm();
       	    				$('#aliCode').focus();
       	    				return;
             			}
-            			var alicuota = $('#aliCode').val().substring($('#aliCode').val().lastIndexOf(".")+1,$('#aliCode').val().length);
+            			
+            			try{
+            				var pattAlic = new RegExp(formato,"i");
+            				resAlic = pattAlic.test($('#aliCode').val());
+            				if(!Boolean(resAlic)){
+          	    				toastr["error"]($('#aliCode').val() + ' ' +parametros.aliNotPattern2, "Error!!");
+          	    				cleanForm();
+          	    				$('#aliCode').focus();
+          	    				return;
+                			}
+            				else{
+            					var alicuotaIngresada = $('#aliCode').val().match(pattAlic);
+            				}
+            				
+            			}
+	            		catch(e){
+	            			toastr["error"]( $('#aliCode').val() + ' ' + parametros.regExpInv2, "Error!!");
+	            			cleanForm();
+	            			$('#aliCode').focus();
+	            			return;
+	            		}
+            				
+            			
             			var len = alicPerm.length;
+            			
             			var alicEncontrada = false; var alicName = ""; var alicUse = ""; var alicTemp = 0;
+
         				for ( var i = 0; i < len; i++) {
-        					if(alicuota.localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
+        					if(alicuotaIngresada[0].localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
         						alicEncontrada = true; alicName = alicPerm[i].tipoAlicuota.alicTypeName; alicUse = alicPerm[i].tipoAlicuota.alicTypeUse; alicTemp=alicPerm[i].tipoAlicuota.alicTypeTemp;
         						break;
         					}        					
         				}
+            			
         				if(Boolean(alicEncontrada)){
         					$('#alicTypeName').val(alicName);
         					$('#alicTypeUse').val(alicUse);
@@ -76,53 +126,65 @@ var CreateAlic = function () {
                 				alicTypeName: $('#alicTypeName').val(),
                 				alicTypeUse: $('#alicTypeUse').val(),
                 				alicTypeTemp: $('#alicTypeTemp').val(),
+                				boxResultType : $('#boxResultType').val(),
                 				ajax : 'true'
                 			}, function(data) {
-                				alicPerm = data;
-                				patron = alicPerm[0].estudio.studyPattern;
+                				
+                				if (data.box === null) {
+            	    				toastr.options = {
+            	    						  "closeButton": true,
+            	    						  "onclick": null,
+            	    						  "showDuration": "300",
+            	    						  "hideDuration": "1000",
+            	    						  "timeOut": "6000",
+            	    						  "extendedTimeOut": "0",
+            	    						  "tapToDismiss": false
+            	    						};
+              	    				toastr["error"](data.mensaje, "Error!!");   
+              	    				cleanForm();
+            					}
+            					else{
+            						$('#aliBox').val(data.box.boxName);
+            						$('#boxRack').val(data.box.boxRack.rackName);
+            						$('#rackEquip').val(data.box.boxRack.rackEquip.equipName);
+            						$(".grid" ).empty();
+                    				$( ".grid" ).append( "<div class='grid-item'><p class='number'>1</p></div>" );
+                    				$( ".grid" ).append( "<div class='grid-item'><p class='number'>2</p></div>" );
+                    				$( ".grid" ).append( "<div class='grid-item'><p class='number'>3</p></div>" );
+                    				$( ".grid" ).append( "<div class='grid-item'><p class='number'>4</p></div>" );
+                    				$( ".grid" ).append( "<div class='grid-item'><p class='number'>5</p></div>" );
+                    				var ancho = "50%";
+                    		        $('.grid-item').css({"width":ancho});
+                    		        $('.grid-item').css({"position":"relative"});
+                    		        $('.grid-item').css({"float":"left"});
+                    		        $('.grid-item').css({"height":"100px"});
+                    		        $('.grid-item').css({"background":"#FFFFFF"});
+                    		        $('.grid-item').css({"border":"1px solid #333"});
+                    		        $('.grid-item').css({"border-color":"hsla(0, 0%, 0%, 0.2)"});
+                    		        $('.grid').isotope({
+                    		        	  // options
+                    		        	  itemSelector: '.grid-item',
+                    		        	  layoutMode: 'fitRows'
+                    		        	});
+            						toastr.success(parametros.successmessage,data.box.boxName);
+            						$('#aliVol').focus();
+            					}
                 			});
-                			App.unblockUI();
         				}
         				else{
-        					$('#alicTypeName').val("");
-        					$('#alicTypeUse').val("");
-        					$('#alicTypeTemp').val("");
-        					$('#rackEquip').val("");
-        					$('#boxRack').val("");
-        					$('#aliBox').val("");
-        					$('#aliPosition').val("");
-        					$('#aliVol').val("");
+        					cleanForm();
         					toastr.options = {
   	    						  "closeButton": true,
   	    						  "onclick": null,
   	    						  "showDuration": "300",
   	    						  "hideDuration": "1000",
-  	    						  "timeOut": 0,
-  	    						  "extendedTimeOut": 0,
+  	    						"timeOut": "6000",
+  	    					  "extendedTimeOut": "0",
   	    						  "tapToDismiss": false
   	    						};
     	    				toastr["error"](parametros.aliNotInList, "Error!!");
     	    				$('#aliCode').focus();
         				}
-        				$(".grid" ).empty();
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>1</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>2</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>3</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>4</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>5</p></div>" );
-        				var ancho = "50%";
-        		        $('.grid-item').css({"width":ancho});
-        		        $('.grid-item').css({"position":"relative"});
-        		        $('.grid-item').css({"float":"left"});
-        		        $('.grid-item').css({"height":"100px"});
-        		        $('.grid-item').css({"background":"#FFFFFF"});
-        		        $('.grid-item').css({"border":"1px solid #333"});
-        		        $('.grid-item').css({"border-color":"hsla(0, 0%, 0%, 0.2)"});
-        		        $('.grid').isotope({
-        		        	  // options
-        		        	  itemSelector: '.grid-item',
-        		        	  layoutMode: 'fitRows'
-        		        	});
         				App.unblockUI();
                     });
             
@@ -195,8 +257,8 @@ var CreateAlic = function () {
         	    						  "onclick": null,
         	    						  "showDuration": "300",
         	    						  "hideDuration": "1000",
-        	    						  "timeOut": 0,
-        	    						  "extendedTimeOut": 0,
+        	    						  "timeOut": "6000",
+        	    						  "extendedTimeOut": "0",
         	    						  "tapToDismiss": false
         	    						};
           	    				toastr["error"](data, "Error!!");        						

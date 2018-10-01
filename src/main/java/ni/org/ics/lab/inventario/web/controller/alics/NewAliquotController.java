@@ -4,12 +4,12 @@ import java.text.ParseException;
 import java.util.List;
 import javax.annotation.Resource;
 
-import ni.org.ics.lab.inventario.domain.Box;
-import ni.org.ics.lab.inventario.domain.complex.BoxAliquots;
 import ni.org.ics.lab.inventario.domain.relationships.AlicTypeStudy;
 import ni.org.ics.lab.inventario.domain.relationships.StudyCenter;
+import ni.org.ics.lab.inventario.language.MessageResource;
 import ni.org.ics.lab.inventario.service.AliquotTypeService;
 import ni.org.ics.lab.inventario.service.BoxService;
+import ni.org.ics.lab.inventario.service.MessageResourceService;
 import ni.org.ics.lab.inventario.service.StudyCenterService;
 import ni.org.ics.lab.inventario.service.UsuarioService;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
@@ -46,6 +46,8 @@ public class NewAliquotController {
 	private AliquotTypeService aliquotTypeService;
 	@Resource(name="boxService")
 	private BoxService boxService;
+	@Resource(name="messageResourceService")
+	private MessageResourceService messageResourceService;
 
     @RequestMapping(value = "newAlicSug", method = RequestMethod.GET)
 	public String initCreation(Model model) {
@@ -55,6 +57,8 @@ public class NewAliquotController {
 	    	model.addAttribute("usuario", usuario);
 	    	List<StudyCenter> estudios = studyCenterService.getActiveStudyCenter(usuario.getUserCenter().getCenterCode());
 	    	model.addAttribute("estudios", estudios);
+	    	List<MessageResource> tipoResultadoCat = this.messageResourceService.getCatalogo("tipoResultadoCat"); 
+	    	model.addAttribute("resultados", tipoResultadoCat);
 			return "alics/newFormSug";
     	}
     	else{
@@ -97,15 +101,16 @@ public class NewAliquotController {
 	 * @throws ParseException 
      */
     @RequestMapping(value = "getPosAlic", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody BoxAliquots fetchPosJson(@RequestParam(value = "boxStudy", required = true) String boxStudy) throws ParseException {
+    public @ResponseBody List<Object[]> fetchPosJson(@RequestParam(value = "boxStudy", required = true) String boxStudy,
+    		@RequestParam(value = "alicTypeName", required = true) String alicTypeName,
+    		@RequestParam(value = "alicTypeUse", required = true) String alicTypeUse,
+    		@RequestParam(value = "alicTypeTemp", required = true) String alicTypeTemp,
+    		@RequestParam(value = "boxResultType", required = true) String boxResultType) throws ParseException {
     	logger.info("Obteniendo la posicion en JSON");
-    	Box box = null;
-        //List<Aliquot> alics = null; 
-        BoxAliquots results = new BoxAliquots();
+    	List<Object[]> cajas = null;
         UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
-        box = this.boxService.getBoxSugerida(boxStudy, usuario.getUserCenter().getCenterCode());
-        results.setBox(box);
-        return results;	
+        cajas = this.boxService.getBoxSugerida(boxStudy, usuario.getUserCenter().getCenterCode(),alicTypeName,alicTypeUse,alicTypeTemp,boxResultType);
+        return cajas;	
     }
     
     

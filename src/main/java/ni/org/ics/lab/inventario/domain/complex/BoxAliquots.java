@@ -9,6 +9,8 @@ public class BoxAliquots {
 	
 	private Box box;
 	private List<Aliquot> aliquots;
+	private String mensaje;
+	
 	public Box getBox() {
 		return box;
 	}
@@ -21,5 +23,13 @@ public class BoxAliquots {
 	public void setAliquots(List<Aliquot> aliquots) {
 		this.aliquots = aliquots;
 	}
+	public String getMensaje() {
+		return mensaje;
+	}
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+	
+	
 
 }

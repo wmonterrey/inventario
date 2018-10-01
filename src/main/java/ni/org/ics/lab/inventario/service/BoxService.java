@@ -135,20 +135,24 @@ public class BoxService {
 	 * @return un <code>Box</code>
 	 */
 
-	public Box getBoxSugerida(String boxStudy, String centerCode) {
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getBoxSugerida(String boxStudy, String centerCode, String alicTypeName, String alicTypeUse, String alicTypeTemp, String alicTypeResult) {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Box b where " +
-				"b.boxStudy.studyCode =:boxStudy and b.boxRack.rackEquip.equipRoom.roomCenter.centerCode =:centerCode and b.pasive = '0' " +
-				"and b.boxAlicType like '%1b%' and b.boxAlicUse = 'PCR' and b.boxTemp = -80 and b.boxResult = 'NR' " +
-				"and b.boxCode in (Select box.boxCode from Box box)");
-		query.setParameter("boxStudy",boxStudy);
-		query.setParameter("centerCode",centerCode);
-		query.setMaxResults(1);
-		Box box = (Box) query.uniqueResult();
-		return box;
+		Query query = session.createSQLQuery("select inv_cajas.NOMBRE_CAJA, inv_cajas.POSICION, inv_cajas.capacidad - count(t.codigo_caja) AS disponibles, inv_racks.NOMBRE_RACK, "
+				+ "inv_racks.POSICION, inv_equipos.NOMBRE_EQUIPO "
+				+ "from inv_cajas LEFT JOIN (select * from inv_alicuotas where inv_alicuotas.pasivo='0') as t ON inv_cajas.codigo_caja = t.codigo_caja "
+				+ "INNER JOIN inv_racks ON inv_cajas.CODIGO_RACK = inv_racks.CODIGO_RACK "
+				+ "INNER JOIN inv_equipos ON inv_racks.CODIGO_EQUIPO = inv_equipos.CODIGO_EQUIPO "
+				+ "INNER JOIN inv_cuartos ON inv_equipos.CODIGO_CUARTO = inv_cuartos.CODIGO_CUARTO "
+				+ "INNER JOIN inv_centros ON inv_cuartos.CODIGO_CENTRO = inv_centros.CODIGO_CENTRO "
+				+ "where inv_cajas.pasivo='0' and inv_cajas.CODIGO_ESTUDIO='" + boxStudy + "' and inv_centros.CODIGO_CENTRO='" + centerCode + "' "
+				+ "and inv_cajas.TIPO_ALICUOTAS like '%1b%' "
+				+ "GROUP BY inv_cajas.codigo_caja HAVING (((count(t.codigo_caja))<max(inv_cajas.capacidad))) "
+				+ "ORDER BY inv_equipos.PRIORIDAD, inv_racks.PRIORIDAD, inv_cajas.PRIORIDAD, inv_cajas.NOMBRE_CAJA");
+		List<Object[]> resultados = query.list();
+		return resultados;
 	}
-	
 	
 	
 	/**

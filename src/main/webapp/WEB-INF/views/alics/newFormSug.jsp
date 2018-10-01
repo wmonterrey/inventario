@@ -83,14 +83,22 @@
 											<select data-placeholder="<spring:message code="select" /> <spring:message code="boxStudy" />" name="boxStudy" id="boxStudy" class="form-control">
 												<option value=""></option>
 												<c:forEach items="${estudios}" var="estudio">
-													<c:choose> 
-														<c:when test="${estudio.estudio.studyCode eq alic.aliBox.boxStudy.studyCode}">
-															<option selected value="${estudio.estudio.studyCode}"><spring:message code="${estudio.estudio.studyName}" /></option>
-														</c:when>
-														<c:otherwise>
-															<option value="${estudio.estudio.studyCode}"><spring:message code="${estudio.estudio.studyName}" /></option>
-														</c:otherwise>
-													</c:choose> 
+													<option value="${estudio.estudio.studyCode}"><spring:message code="${estudio.estudio.studyName}" /></option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-4"><spring:message code="boxResultType" />:
+										<span class="required">
+											 *
+										</span>
+										</label>
+										<div class="col-md-8">
+											<select data-placeholder="<spring:message code="select" /> <spring:message code="boxResultType" />" name="boxResultType" id="boxResultType" class="form-control">
+												<option value=""></option>
+												<c:forEach items="${resultados}" var="resultado">
+													<option value="${resultado.catKey}"><spring:message code="${resultado.messageKey}" /></option>
 												</c:forEach>
 											</select>
 										</div>
@@ -124,6 +132,19 @@
 											<div class="col-md-4">
 												<input value="${alic.alicTypeTemp}" readonly id="alicTypeTemp" name="alicTypeTemp" type="text" class="form-control"/>
 											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-4"><spring:message code="aliBox" />:
+										<span class="required">
+											 *
+										</span>
+										</label>
+										<div class="col-md-8">
+											<select data-placeholder="<spring:message code="select" /> <spring:message code="aliBox" />" name="boxResults" id="boxResults" class="form-control">
+												<option value=""></option>
+												
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
@@ -295,8 +316,11 @@
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
 <c:set var="aliNotPattern"><spring:message code="aliNotPattern" /></c:set>
+<c:set var="aliNotPattern2"><spring:message code="aliNotPattern2" /></c:set>
 <c:set var="aliNotInList"><spring:message code="aliNotInList" /></c:set>
 <c:set var="regExpInv"><spring:message code="regExpInv" /></c:set>
+<c:set var="regExpInv2"><spring:message code="regExpInv2" /></c:set>
+<c:set var="noAlicStudy"><spring:message code="noAlicStudy" /></c:set>
 <script>
     $(function () {
     	$("li.addalic").removeClass("addalic").addClass("active");
@@ -310,8 +334,11 @@
 				getPosUrl: "${getPosUrl}",
 				successmessage: "${successmessage}",
 				aliNotPattern: "${aliNotPattern}",
+				aliNotPattern2: "${aliNotPattern2}",
 				aliNotInList: "${aliNotInList}",
 				regExpInv: "${regExpInv}",
+				regExpInv2: "${regExpInv2}",
+				noAlicStudy: "${noAlicStudy}",
 				errormessage: "${errormessage}"};
 		CreateAlic.init(parametros);
 		var ancho = "${100/9}"+"%";
