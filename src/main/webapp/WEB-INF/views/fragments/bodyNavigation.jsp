@@ -41,7 +41,7 @@
                                     <spring:message code="newalicsug"/></a>
                             </li>
                             <li class="newalicman">
-                                <a href="<spring:url value="/addloc/location" htmlEscape="true "/>">
+                                <a href="<spring:url value="/addalic/location" htmlEscape="true "/>">
                                     <i class="fa fa-hand-o-up"></i>
                                     <spring:message code="newalicman"/></a>
                             </li>

@@ -1,6 +1,5 @@
 package ni.org.ics.lab.inventario.service;
 
-import ni.org.ics.lab.inventario.domain.AliquotOutput;
 import ni.org.ics.lab.inventario.domain.AliquotTransfers;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

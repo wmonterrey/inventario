@@ -28,7 +28,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -279,7 +278,7 @@ public class AliquotOutputController {
                         files.add( fileData );
                     }
                 }
-
+                workbook.close();
 
         } catch (Exception e) {
             e.printStackTrace();

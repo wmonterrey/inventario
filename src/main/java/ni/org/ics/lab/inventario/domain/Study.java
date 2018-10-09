@@ -26,6 +26,7 @@ public class Study extends BaseMetaData implements Auditable{
 	private String studyCode;
 	private String studyName;
 	private String studyPattern;
+	private String studyFormat;
 	private String studyObs;
 	
 	@Id
@@ -60,6 +61,13 @@ public class Study extends BaseMetaData implements Auditable{
 	}
 	public void setStudyPattern(String studyPattern) {
 		this.studyPattern = studyPattern;
+	}
+	@Column(name = "PATRON_ALICUOTA", nullable = true, length =750)
+	public String getStudyFormat() {
+		return studyFormat;
+	}
+	public void setStudyFormat(String studyFormat) {
+		this.studyFormat = studyFormat;
 	}
 	@Override
 	public boolean equals(Object other) {

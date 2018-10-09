@@ -1,7 +1,5 @@
 package ni.org.ics.lab.inventario.domain.utils;
 
-import org.joda.time.DateTime;
-
 /**
  * @author ics
  */

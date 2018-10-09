@@ -288,11 +288,11 @@ public class AliquotTransferController {
                         files.add( fileData );
                     }
                 }
-
+                workbook.close();
 
         } catch (Exception e) {
             e.printStackTrace();
-
+            
         }
 
         }

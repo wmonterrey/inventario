@@ -2,10 +2,16 @@ var CreateAlic = function () {
 	
 	var handleSelect2 = function () {
     	$("#boxStudy").select2({});
+    	$("#boxResultType").select2({});
+    	$("#aliCond").select2({});
     };
     
     var alicPerm = [];
     var patron = "";
+    var formato = "";
+    var volumen = 0;
+    var volMin = 0;
+    var volMax = 0;
  
     return {
         //main function to initiate the module
@@ -15,36 +21,87 @@ var CreateAlic = function () {
             var form1 = $('#add-alic-form');
             var error1 = $('.alert-danger', form1);
             var success1 = $('.alert-success', form1);
+
+            $("#boxResults").select2({
+        		formatResult: function(caja) { 
+        			var originalOption = caja.element;
+                	var markup = "<table'><tr>";
+                    markup += "<td valign='top'><h5><b>" + caja.text + "</b>, "+parametros.posAvailable+ ": <b>" + $(originalOption).data('disponibles')+"</b></h5>";
+                    markup += "<div>" + parametros.boxRack+ ": " + $(originalOption).data('rack') + " , " + parametros.boxPosition+ ": " +  $(originalOption).data('posicion') +"</div>";
+                    markup += "<div>" + parametros.rackEquip+ ": " + $(originalOption).data('equipo') + " , " + parametros.rackPosition+ ": " +  $(originalOption).data('rackpos') +"</div>";
+                    markup += "</td></tr></table>";
+                    return markup; 
+                }
+        	});
             
             toastr.options = {
 					  "closeButton": true,
 					  "onclick": null,
 					  "showDuration": "300",
 					  "hideDuration": "1000",
-					  "timeOut": 0,
-					  "extendedTimeOut": 0,
+					  "timeOut": "6000",
+					  "extendedTimeOut": "0",
 					  "tapToDismiss": false
 					};
             
             $('#boxStudy').change(
             		function() {
+            			cleanForm(true);
+            			$('#aliCode').val("");
             			App.blockUI();
             			$.getJSON(parametros.getAlicUrl, {
             				boxStudy : $('#boxStudy').val(),
             				ajax : 'true'
             			}, function(data) {
-            				alicPerm = data;
-            				patron = alicPerm[0].estudio.studyPattern;
+            				if(data.length<=0){
+            					toastr["error"]( $('#boxStudy').text() + ' ' + parametros.noAlicStudy, "Error!!");
+            					return;
+            				}else{
+            					alicPerm = data;
+            					patron = alicPerm[0].estudio.studyPattern;
+            					formato = alicPerm[0].estudio.studyFormat;
+            					$('#boxResultType').focus();
+                    			$('#boxResultType').select2('open');
+            				}
             			});
             			App.unblockUI();
                     });
             
+            function cleanForm(borrarTodo)
+        	{
+            	if(borrarTodo) $('#alicTypeName').val("");
+            	if(borrarTodo) $('#alicTypeUse').val("");
+            	if(borrarTodo) $('#alicTypeTemp').val("");
+				$('#rackEquip').val("");
+				$('#boxRack').val("");
+				$('#aliBox').val("");
+				$('#aliPosition').val("");
+				$('#aliVol').val("");
+				$('#aliObs').val("");
+				$("#boxResults").select2('data',null);
+				$("#boxResults").empty();
+				$(".grid" ).empty();
+        	}
+            
             $('#aliCode').change(
             		function() {
             			App.blockUI();
+            			cleanForm(true);
             			var res = false;
+            			var resAlic = false;
+            			var alicuotaIngresada = null;
+            			if($('#boxStudy').val()==""){
+            				toastr["error"]( parametros.studyName + ' ' + parametros.requiredmessage, "Error!!");
+            				$('#aliCode').focus();
+            				return;
+            			}
+            			if($('#boxResultType').val()==""){
+            				toastr["error"]( parametros.boxResultType + ' ' + parametros.requiredmessage, "Error!!");
+            				$('#aliCode').focus();
+            				return;
+            			}
             			try{
-            				var patt = new RegExp(patron);
+            				var patt = new RegExp(patron,"i");
             				res = patt.test($('#aliCode').val());
             			}
 	            		catch(e){
@@ -53,78 +110,191 @@ var CreateAlic = function () {
 	            			return;
 	            		}
             			if(!Boolean(res)){
-      	    				toastr["error"](parametros.aliNotPattern, "Error!!");
+      	    				toastr["error"]($('#aliCode').val() + ' ' +parametros.aliNotPattern, "Error!!");
       	    				$('#aliCode').focus();
       	    				return;
             			}
-            			var alicuota = $('#aliCode').val().substring($('#aliCode').val().lastIndexOf(".")+1,$('#aliCode').val().length);
+            			
+            			try{
+            				var pattAlic = new RegExp(formato,"i");
+            				resAlic = pattAlic.test($('#aliCode').val());
+            				if(!Boolean(resAlic)){
+          	    				toastr["error"]($('#aliCode').val() + ' ' +parametros.aliNotPattern2, "Error!!");
+          	    				$('#aliCode').focus();
+          	    				return;
+                			}
+            				else{
+            					var alicuotaIngresada = $('#aliCode').val().match(pattAlic);
+            				}
+            				
+            			}
+	            		catch(e){
+	            			toastr["error"]( $('#aliCode').val() + ' ' + parametros.regExpInv2, "Error!!");
+	            			$('#aliCode').focus();
+	            			return;
+	            		}
+            				
+            			
             			var len = alicPerm.length;
+            			
             			var alicEncontrada = false; var alicName = ""; var alicUse = ""; var alicTemp = 0;
+
         				for ( var i = 0; i < len; i++) {
-        					if(alicuota.localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
-        						alicEncontrada = true; alicName = alicPerm[i].tipoAlicuota.alicTypeName; alicUse = alicPerm[i].tipoAlicuota.alicTypeUse; alicTemp=alicPerm[i].tipoAlicuota.alicTypeTemp;
+        					if(alicuotaIngresada[0].localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
+        						alicEncontrada = true; 
+        						alicName = alicPerm[i].tipoAlicuota.alicTypeName; 
+        						alicUse = alicPerm[i].tipoAlicuota.alicTypeUse; 
+        						alicTemp=alicPerm[i].tipoAlicuota.alicTypeTemp; 
+        						volumen=alicPerm[i].tipoAlicuota.alicTypeVol;
+        						volMin=alicPerm[i].tipoAlicuota.alicTypeVolMin;
+        						volMax=alicPerm[i].tipoAlicuota.alicTypeVolMax;
         						break;
         					}        					
         				}
+            			
         				if(Boolean(alicEncontrada)){
         					$('#alicTypeName').val(alicName);
         					$('#alicTypeUse').val(alicUse);
         					$('#alicTypeTemp').val(alicTemp);
+        					$('#alicTypeVolMin').val(volMin);
+        					$('#alicTypeVolMax').val(volMax);
+        					$('#aliVol').val(volumen);
         					App.blockUI();
                 			$.getJSON(parametros.getPosUrl, {
                 				boxStudy : $('#boxStudy').val(),
                 				alicTypeName: $('#alicTypeName').val(),
                 				alicTypeUse: $('#alicTypeUse').val(),
                 				alicTypeTemp: $('#alicTypeTemp').val(),
+                				boxResultType : $('#boxResultType').val(),
                 				ajax : 'true'
                 			}, function(data) {
-                				alicPerm = data;
-                				patron = alicPerm[0].estudio.studyPattern;
+                				
+                				if (data.length === 0) {
+            	    				toastr.options = {
+            	    						  "closeButton": true,
+            	    						  "onclick": null,
+            	    						  "showDuration": "300",
+            	    						  "hideDuration": "1000",
+            	    						  "timeOut": "6000",
+            	    						  "extendedTimeOut": "0",
+            	    						  "tapToDismiss": false
+            	    						};
+              	    				toastr["error"](parametros.posNotAvailable, "Error!!");   
+              	    				cleanForm(false);
+              	    				$('#aliCode').focus();
+            					}
+            					else{
+            						var html="<option value=''></option>";
+                    				var len = data.length;
+                    				for ( var i = 0; i < len; i++) {
+                    					html += "<option value='" + data[i].box.boxCode 
+                    					+ "' data-posicion='" + data[i].box.boxPosition + "'"
+                    					+ "' data-rack='" + data[i].box.boxRack.rackName + "'"
+                    					+ "' data-rackpos='" + data[i].box.boxRack.rackPosition + "'"
+                    					+ "' data-equipo='" + data[i].box.boxRack.rackEquip.equipName + "'"
+                    					+ "' data-disponibles='" + data[i].disponibles + "'>" 
+                    					+ data[i].box.boxName + "</option>";
+                    				}
+                    				$('#boxResults').html(html);
+            						toastr.success(data.length +" "+parametros.boxAvailable,parametros.successmessage);
+            						$('#boxResults').select2('open');
+            					}
                 			});
-                			App.unblockUI();
         				}
         				else{
-        					$('#alicTypeName').val("");
-        					$('#alicTypeUse').val("");
-        					$('#alicTypeTemp').val("");
-        					$('#rackEquip').val("");
-        					$('#boxRack').val("");
-        					$('#aliBox').val("");
-        					$('#aliPosition').val("");
-        					$('#aliVol').val("");
+        					cleanForm(true);
         					toastr.options = {
   	    						  "closeButton": true,
   	    						  "onclick": null,
   	    						  "showDuration": "300",
   	    						  "hideDuration": "1000",
-  	    						  "timeOut": 0,
-  	    						  "extendedTimeOut": 0,
+  	    						"timeOut": "6000",
+  	    					  "extendedTimeOut": "0",
   	    						  "tapToDismiss": false
   	    						};
     	    				toastr["error"](parametros.aliNotInList, "Error!!");
     	    				$('#aliCode').focus();
         				}
-        				$(".grid" ).empty();
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>1</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>2</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>3</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>4</p></div>" );
-        				$( ".grid" ).append( "<div class='grid-item'><p class='number'>5</p></div>" );
-        				var ancho = "50%";
-        		        $('.grid-item').css({"width":ancho});
-        		        $('.grid-item').css({"position":"relative"});
-        		        $('.grid-item').css({"float":"left"});
-        		        $('.grid-item').css({"height":"100px"});
-        		        $('.grid-item').css({"background":"#FFFFFF"});
-        		        $('.grid-item').css({"border":"1px solid #333"});
-        		        $('.grid-item').css({"border-color":"hsla(0, 0%, 0%, 0.2)"});
-        		        $('.grid').isotope({
-        		        	  // options
-        		        	  itemSelector: '.grid-item',
-        		        	  layoutMode: 'fitRows'
-        		        	});
         				App.unblockUI();
                     });
+            
+            $('#boxResults').change(
+            		function() {
+            			App.blockUI();
+            			$.getJSON(parametros.getBoxUrl, {
+            				boxCode : $('#boxResults').val(),
+            				ajax : 'true'
+            			}, function(data) {
+            				var item;
+            				$('#aliBox').val(data.box.boxName);
+    						$('#boxRack').val(data.box.boxRack.rackName);
+    						$('#rackEquip').val(data.box.boxRack.rackEquip.equipName);
+    						$('#aliPosition').val(data.primeraDisponible);
+    						$(".grid").empty();
+    	                    for (var i = 1; i <= data.box.boxCapacity; i++) {
+    	                    	item = "<div class='grid-item vacio' onclick='actualizarPosicion("+i+")'><p class='number'><a href='#'>"+i+"</a></p>";
+    	                    	for(var j = 0; j < data.aliquots.length; j++){
+    	                    		if(data.aliquots[j].aliPosition == i){
+    	                    			item = "<div class='grid-item lleno'><p class='number'>"+i+"</p>";
+    	                    			item += "<p class='symbol'>"+ data.aliquots[j].aliCode +"</p>";
+    	                    			item += "<p class='name'>"+ data.aliquots[j].aliVol +"</p>";
+    	                    		}
+    	                    	}
+    	                    	item += "</div>";
+    	                    	$(".grid").append(item);
+    	                    }
+    	                    var ancho = 100 / data.box.boxColumns + '%';
+    	                    $('.grid-item').css({"width": ancho});
+    	                    $('.grid-item').css({"position": "relative"});
+    	                    $('.grid-item').css({"float": "left"});
+    	                    $('.grid-item').css({"height": "100px"});
+    	                    $('.grid-item').css({"border": "1px solid #333"});
+    	                    $('.grid-item').css({"border-color": "hsla(0, 0%, 0%, 0.2)"});
+    	                    $('.grid-item.vacio').css({"background": "#EEEEEE"});
+    	                    $('.grid-item.lleno').css({"background": "#99CCFF"});
+    	                    $('.grid').isotope({
+    	                        // options
+    	                        itemSelector: '.grid-item',
+    	                        layoutMode: 'fitRows'
+    	                    });
+    						$('#aliVol').focus();
+            			});
+            			App.unblockUI();
+                    });
+            
+            $('#aliCond').change(
+            		function() {
+                  $('#aliObs').focus();
+            });
+            
+            $('#aliVol').on('keydown',function(event){
+            	event.stopImmediatePropagation();
+    		    if( event.which == 13 ){
+    		        event.preventDefault();
+    		        if($('#aliCond').val()==""){
+            			$('#aliCond').focus();
+            			$('#aliCond').select2('open');
+    		        }
+    		        else{
+    		        	$('#aliObs').focus();
+    		        }
+    		    }
+            });
+            
+            $('#aliObs').on('keydown',function(event){
+            	event.stopImmediatePropagation();
+    		    if( event.which == 13 ){
+    		        event.preventDefault();
+            			$('#guardar').focus();
+    		    }
+            });
+ 
+            $('#boxResultType').change(
+            		function() {
+            			cleanForm(true);
+            			$('#aliCode').val("");
+            			$('#aliCode').focus();
+            		});
             
             form1.validate({
                 errorElement: 'span', //default input error message container
@@ -150,6 +320,32 @@ var CreateAlic = function () {
                     },
                     boxStudy: {
                         required: true
+                    },
+                    boxResultType: {
+                        required: true
+                    },
+                    aliBox: {
+                        required: true
+                    },
+                    boxResults: {
+                        required: true
+                    },
+                    rackEquip: {
+                        required: true
+                    },
+                    boxRack: {
+                        required: true
+                    },
+                    aliPosition: {
+                        required: true
+                    },
+                    aliVol: {
+                        required: true,
+                        min: function ()  { return volMin},
+                        max: function ()  { return volMax}
+                    },
+                    aliCond:{
+                    	required:true
                     }
                 },
 
@@ -188,24 +384,25 @@ var CreateAlic = function () {
         	            , form1.serialize()
         	            , function( data )
         	            {
-        	    			box = JSON.parse(data);
-        	    			if (box.boxCode === undefined) {
+        	    			alicuota = JSON.parse(data);
+        	    			if (alicuota.aliCode === undefined) {
         	    				toastr.options = {
         	    						  "closeButton": true,
         	    						  "onclick": null,
         	    						  "showDuration": "300",
         	    						  "hideDuration": "1000",
-        	    						  "timeOut": 0,
-        	    						  "extendedTimeOut": 0,
+        	    						  "timeOut": "6000",
+        	    						  "extendedTimeOut": "0",
         	    						  "tapToDismiss": false
         	    						};
           	    				toastr["error"](data, "Error!!");        						
         					}
         					else{
-        						$('#boxCode').val(box.boxCode);
-        						toastr.success(parametros.successmessage,box.boxName);
+        						toastr.success(parametros.successmessage,alicuota.aliCode);
         					}
-        	            	$('#boxName').focus();
+        	    			cleanForm(true);
+        	    			$('#aliCode').val("");
+        	            	$('#aliCode').focus();
         	    			App.unblockUI();
         	            }
         	            , 'text' )
@@ -214,25 +411,6 @@ var CreateAlic = function () {
         		    		App.unblockUI();
         		  		});
         	}
-            
-            $(document).on('keypress','form input',function(event)
-    		{                
-    		    event.stopImmediatePropagation();
-    		    if( event.which == 13 )
-    		    {
-    		        event.preventDefault();
-    		        var $input = $('form input');
-    		        if( $(this).is( $input.last() ) )
-    		        {
-    		            //Time to submit the form!!!!
-    		            //alert( 'Hooray .....' );
-    		        }
-    		        else
-    		        {
-    		            $input.eq( $input.index( this ) + 1 ).focus();
-    		        }
-    		    }
-    		});
         }
     };
 

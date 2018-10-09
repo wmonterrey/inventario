@@ -1,7 +1,6 @@
 package ni.org.ics.lab.inventario.domain;
 
 import ni.org.ics.lab.inventario.domain.audit.Auditable;
-import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

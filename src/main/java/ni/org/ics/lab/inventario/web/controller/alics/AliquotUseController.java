@@ -3,11 +3,7 @@ package ni.org.ics.lab.inventario.web.controller.alics;
 import com.google.gson.Gson;
 import ni.org.ics.lab.inventario.domain.Aliquot;
 import ni.org.ics.lab.inventario.domain.AliquotUse;
-import ni.org.ics.lab.inventario.domain.Box;
-import ni.org.ics.lab.inventario.domain.Equipment;
-import ni.org.ics.lab.inventario.domain.relationships.AlicTypeStudy;
 import ni.org.ics.lab.inventario.domain.relationships.StudyCenter;
-import ni.org.ics.lab.inventario.language.MessageResource;
 import ni.org.ics.lab.inventario.service.*;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
 import org.slf4j.Logger;
@@ -24,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
