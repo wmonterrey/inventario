@@ -45,7 +45,7 @@
 						<li>
 							<i class="fa fa-home"></i>
 							<a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home" /></a>
-							<i class="fa fa-angle-right"></i> <a href="<spring:url value="/addalic/newAlic" htmlEscape="true "/>"><spring:message code="addalic" /></a>
+							<i class="fa fa-angle-right"></i> <a href="<spring:url value="/addalic/newAlicSug" htmlEscape="true "/>"><spring:message code="addalic" /></a>
 						</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -106,6 +106,7 @@
 									<div class="form-group">
 										<label class="control-label col-md-4"><spring:message code="aliCode" />
 										<span class="required">
+											*
 										</span>
 										</label>
 										<div class="col-md-8">
@@ -134,6 +135,10 @@
 											</div>
 										</div>
 									</div>
+									<div hidden class="form-group">
+										<input value="${alic.alicTypeVolMin}" readonly hidden id="alicTypeVolMin" name="alicTypeVolMin" type="text" class="form-control"/>
+										<input value="${alic.alicTypeVolMax}" readonly hidden id="alicTypeVolMax" name="alicTypeVolMax" type="text" class="form-control"/>
+									</div>
 									<div class="form-group">
 										<label class="control-label col-md-4"><spring:message code="aliBox" />:
 										<span class="required">
@@ -143,7 +148,6 @@
 										<div class="col-md-8">
 											<select data-placeholder="<spring:message code="select" /> <spring:message code="aliBox" />" name="boxResults" id="boxResults" class="form-control">
 												<option value=""></option>
-												
 											</select>
 										</div>
 									</div>
@@ -206,6 +210,7 @@
 									<div class="form-group">
 										<label class="control-label col-md-4"><spring:message code="aliVol" />
 										<span class="required">
+											*
 										</span>
 										</label>
 										<div class="col-md-8">
@@ -215,6 +220,21 @@
 													<i class="fa fa-keyboard-o"></i>
 												</span>
 											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-4"><spring:message code="aliCond" />:
+										<span class="required">
+											 *
+										</span>
+										</label>
+										<div class="col-md-8">
+											<select data-placeholder="<spring:message code="select" /> <spring:message code="aliCond" />" name="aliCond" id="aliCond" class="form-control">
+												<option value=""></option>
+												<c:forEach items="${condiciones}" var="condicion">
+													<option value="${condicion.catKey}"><spring:message code="${condicion.messageKey}" /></option>
+												</c:forEach>
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
@@ -235,7 +255,7 @@
 								<div class="form-actions fluid">
 									<div class="col-md-offset-6 col-md-6">
 										<button id="guardar" type="submit" class="btn btn-success"><spring:message code="save" /></button>
-										<a href="${fn:escapeXml(boxUrl)}" class="btn btn-danger"><spring:message code="end" /></a>
+										<a href="<spring:url value="/" htmlEscape="true "/>" class="btn btn-danger"><spring:message code="end" /></a>
 									</div>
 								</div>
 							</form>
@@ -313,14 +333,28 @@
 <spring:url value="/addalic/saveAlic" var="saveAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicUrl"/>
 <spring:url value="/addalic/getPosAlic" var="getPosUrl"/>
+<spring:url value="/addalic/getCajaSeleccionada" var="getBoxUrl"/>
 <c:set var="successmessage"><spring:message code="process.success" /></c:set>
 <c:set var="errormessage"><spring:message code="process.errors" /></c:set>
+<c:set var="posAvailable"><spring:message code="posAvailable" /></c:set>
+<c:set var="posNotAvailable"><spring:message code="posNotAvailable" /></c:set>
 <c:set var="aliNotPattern"><spring:message code="aliNotPattern" /></c:set>
 <c:set var="aliNotPattern2"><spring:message code="aliNotPattern2" /></c:set>
 <c:set var="aliNotInList"><spring:message code="aliNotInList" /></c:set>
 <c:set var="regExpInv"><spring:message code="regExpInv" /></c:set>
 <c:set var="regExpInv2"><spring:message code="regExpInv2" /></c:set>
 <c:set var="noAlicStudy"><spring:message code="noAlicStudy" /></c:set>
+
+<c:set var="boxAvailable"><spring:message code="boxAvailable" /></c:set>
+<c:set var="boxPosition"><spring:message code="boxPosition" /></c:set>
+<c:set var="boxRack"><spring:message code="boxRack" /></c:set>
+<c:set var="rackPosition"><spring:message code="rackPosition" /></c:set>
+<c:set var="rackEquip"><spring:message code="rackEquip" /></c:set>
+
+<c:set var="requiredmessage"><spring:message code="required" /></c:set>
+<c:set var="studyName"><spring:message code="studyName" /></c:set>
+<c:set var="boxResultType"><spring:message code="boxResultType" /></c:set>
+
 <script>
     $(function () {
     	$("li.addalic").removeClass("addalic").addClass("active");
@@ -332,6 +366,7 @@
 		var parametros = {saveAlicUrl: "${saveAlicUrl}",
 				getAlicUrl: "${getAlicUrl}",
 				getPosUrl: "${getPosUrl}",
+				getBoxUrl: "${getBoxUrl}",
 				successmessage: "${successmessage}",
 				aliNotPattern: "${aliNotPattern}",
 				aliNotPattern2: "${aliNotPattern2}",
@@ -339,22 +374,24 @@
 				regExpInv: "${regExpInv}",
 				regExpInv2: "${regExpInv2}",
 				noAlicStudy: "${noAlicStudy}",
-				errormessage: "${errormessage}"};
+				errormessage: "${errormessage}",
+				posAvailable: "${posAvailable}",
+				boxPosition: "${boxPosition}",
+				boxRack: "${boxRack}",
+				rackPosition: "${rackPosition}",
+				rackEquip: "${rackEquip}",
+				boxAvailable: "${boxAvailable}",
+				requiredmessage: "${requiredmessage}",
+				studyName: "${studyName}",
+				boxResultType: "${boxResultType}",
+				posNotAvailable: "${posNotAvailable}"};
 		CreateAlic.init(parametros);
-		var ancho = "${100/9}"+"%";
-        $('.grid-item').css({"width":ancho});
-        $('.grid-item').css({"position":"relative"});
-        $('.grid-item').css({"float":"left"});
-        $('.grid-item').css({"height":"100px"});
-        $('.grid-item').css({"background":"#FFFFFF"});
-        $('.grid-item').css({"border":"1px solid #333"});
-        $('.grid-item').css({"border-color":"hsla(0, 0%, 0%, 0.2)"});
-        $('.grid').isotope({
-        	  // options
-        	  itemSelector: '.grid-item',
-        	  layoutMode: 'fitRows'
-        	});
+		
 	});	
+
+	function actualizarPosicion(nuevaPos) {
+    	$('#aliPosition').val(nuevaPos);		
+	}
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

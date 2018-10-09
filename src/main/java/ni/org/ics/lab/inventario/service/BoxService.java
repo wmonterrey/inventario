@@ -139,15 +139,20 @@ public class BoxService {
 	public List<Object[]> getBoxSugerida(String boxStudy, String centerCode, String alicTypeName, String alicTypeUse, String alicTypeTemp, String alicTypeResult) {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createSQLQuery("select inv_cajas.NOMBRE_CAJA, inv_cajas.POSICION, inv_cajas.capacidad - count(t.codigo_caja) AS disponibles, inv_racks.NOMBRE_RACK, "
-				+ "inv_racks.POSICION, inv_equipos.NOMBRE_EQUIPO "
+		Query query = session.createSQLQuery("select inv_cajas.CODIGO_CAJA, inv_cajas.capacidad - count(t.codigo_caja) AS disponibles "
 				+ "from inv_cajas LEFT JOIN (select * from inv_alicuotas where inv_alicuotas.pasivo='0') as t ON inv_cajas.codigo_caja = t.codigo_caja "
 				+ "INNER JOIN inv_racks ON inv_cajas.CODIGO_RACK = inv_racks.CODIGO_RACK "
 				+ "INNER JOIN inv_equipos ON inv_racks.CODIGO_EQUIPO = inv_equipos.CODIGO_EQUIPO "
 				+ "INNER JOIN inv_cuartos ON inv_equipos.CODIGO_CUARTO = inv_cuartos.CODIGO_CUARTO "
 				+ "INNER JOIN inv_centros ON inv_cuartos.CODIGO_CENTRO = inv_centros.CODIGO_CENTRO "
 				+ "where inv_cajas.pasivo='0' and inv_cajas.CODIGO_ESTUDIO='" + boxStudy + "' and inv_centros.CODIGO_CENTRO='" + centerCode + "' "
-				+ "and inv_cajas.TIPO_ALICUOTAS like '%1b%' "
+				+ "and (inv_cajas.TIPO_ALICUOTAS like '%,"+alicTypeName+",%' "
+				+ "or inv_cajas.TIPO_ALICUOTAS like '%"+alicTypeName+",%' "
+				+ "or inv_cajas.TIPO_ALICUOTAS like '%,"+alicTypeName+"%' "
+				+ "or inv_cajas.TIPO_ALICUOTAS = '"+alicTypeName+"') "
+				+ "and inv_cajas.USO_ALICUOTAS='" + alicTypeUse + "' "
+				+ "and inv_cajas.TIPO_RESULTADO='" + alicTypeResult + "' "
+				+ "and inv_cajas.TEMPERATURA='" + alicTypeTemp + "' "
 				+ "GROUP BY inv_cajas.codigo_caja HAVING (((count(t.codigo_caja))<max(inv_cajas.capacidad))) "
 				+ "ORDER BY inv_equipos.PRIORIDAD, inv_racks.PRIORIDAD, inv_cajas.PRIORIDAD, inv_cajas.NOMBRE_CAJA");
 		List<Object[]> resultados = query.list();

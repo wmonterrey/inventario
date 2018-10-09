@@ -269,11 +269,16 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'notAvailable', 'No Disponible','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliNotPattern2', 'Formato de alicuota no encontrado en este código','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliNotInList', 'Alicuota no existe en este estudio o no está activa','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliNotInListBox', 'Alicuota no existe para esta caja','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'regExpInv2', 'Expresión de validación de alicuotas incorrecta','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'noAlicStudy', 'No hay alicuotas definidas en este estudio','0','0',0);
 
 /*Posiciones */
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'posNotAvailable', 'No hay lugares disponibles para este tipo de alicuota','0','0',0);
+
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'posAvailable', 'Disponibilidad','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'boxAvailable', 'Cajas disponibles','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'required', 'es requerido!','0','0',0);
 
 
 /*Tipos de Alicuotas*/

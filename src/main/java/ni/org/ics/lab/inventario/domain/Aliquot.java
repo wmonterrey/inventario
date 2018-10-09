@@ -28,6 +28,7 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	private static final long serialVersionUID = 1L;
 	private String aliCode;
 	private Box aliBox;
+	private String aliStudy;
 	private int aliPosition;
 	private float aliVol;
 	private String alicTypeName;
@@ -54,7 +55,13 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	public void setAliBox(Box aliBox) {
 		this.aliBox = aliBox;
 	}
-
+	@Column(name = "CODIGO_ESTUDIO", nullable = false, length =50)
+	public String getAliStudy() {
+		return aliStudy;
+	}
+	public void setAliStudy(String aliStudy) {
+		this.aliStudy = aliStudy;
+	}
 	@Column(name = "POSICION", nullable = false)
 	public int getAliPosition() {
 		return aliPosition;

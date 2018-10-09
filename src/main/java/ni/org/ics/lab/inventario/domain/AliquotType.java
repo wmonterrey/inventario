@@ -28,6 +28,8 @@ public class AliquotType extends BaseMetaData implements Auditable{
 	private String alicTypeUse;
 	private float alicTypeTemp;
 	private float alicTypeVol;
+	private float alicTypeVolMin;
+	private float alicTypeVolMax;
 	private String alicTypeSample;
 	private String alicTypeObs;
 	
@@ -77,6 +79,20 @@ public class AliquotType extends BaseMetaData implements Auditable{
 	}
 	public void setAlicTypeVol(float alicTypeVol) {
 		this.alicTypeVol = alicTypeVol;
+	}
+	@Column(name = "VOLUMEN_MIN", nullable = true)
+	public float getAlicTypeVolMin() {
+		return alicTypeVolMin;
+	}
+	public void setAlicTypeVolMin(float alicTypeVolMin) {
+		this.alicTypeVolMin = alicTypeVolMin;
+	}
+	@Column(name = "VOLUMEN_MAX", nullable = true)
+	public float getAlicTypeVolMax() {
+		return alicTypeVolMax;
+	}
+	public void setAlicTypeVolMax(float alicTypeVolMax) {
+		this.alicTypeVolMax = alicTypeVolMax;
 	}
 	@Column(name = "TIPO_MUESTRA", nullable = false, length =50)
 	public String getAlicTypeSample() {

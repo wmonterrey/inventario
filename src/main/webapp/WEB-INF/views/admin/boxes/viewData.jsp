@@ -387,8 +387,7 @@
 								    	<c:choose>
 											<c:when test="${alic.aliPosition==loop.count}">
 											    <p class="symbol"><a href="${fn:escapeXml(alicUrl)}"><c:out value="${alic.aliCode}" /></a></p>
-											    <p class="weigth"><c:out value="${alic.aliVol}" /></p>
-											    <p class="name"><c:out value="${alic.aliRes}" /></p>
+											    <p class="name"><c:out value="${alic.aliVol}" /></p>
 											</c:when>
 										</c:choose>
 									</c:forEach>

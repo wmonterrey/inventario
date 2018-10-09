@@ -27,13 +27,14 @@ public class SearchAliquotService {
      * @return un <code>Aliquot</code>
      */
 
-    public RegAlic getAliquot(String aliCode) {
+    @SuppressWarnings("unchecked")
+	public List<RegAlic> getAliquot(String aliCode) {
         // Retrieve session from Hibernate
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM RegAlic a where " +
-                "a.id =:aliCode");
-        query.setParameter("aliCode",aliCode);
-        RegAlic alic = (RegAlic) query.uniqueResult();
+                "a.id like:aliCode");
+        query.setParameter("aliCode",aliCode+'%');
+        List<RegAlic> alic = query.list();
         return alic;
     }
 

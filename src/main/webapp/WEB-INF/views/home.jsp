@@ -43,6 +43,11 @@
 				</div>
 			</div>
 			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			<div class="row">
+				
+			</div>
+			<!-- END PAGE CONTENT-->
 		</div>
 	</div>
 </div>

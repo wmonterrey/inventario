@@ -3,7 +3,6 @@ package ni.org.ics.lab.inventario.web.controller.alics;
 import ni.org.ics.lab.inventario.domain.RegAlic;
 import ni.org.ics.lab.inventario.domain.RegSalida;
 import ni.org.ics.lab.inventario.domain.RegUso;
-import ni.org.ics.lab.inventario.domain.relationships.StudyCenter;
 import ni.org.ics.lab.inventario.domain.utils.AliquotData;
 import ni.org.ics.lab.inventario.service.MessageResourceService;
 import ni.org.ics.lab.inventario.service.SearchAliquotService;
@@ -69,7 +68,7 @@ public class SearchAliquotController {
     public @ResponseBody
     LinkedList<AliquotData> searchAliquot(@RequestParam(value="aliCode") String aliCode) throws IOException {
         logger.info("Realizando busqueda en simlab");
-        RegAlic alic = null;
+        List<RegAlic> alic = null;
         List<RegUso> uList = null;
         RegSalida exitRec = null;
         alic = searchAliquotService.getAliquot(aliCode) ;
@@ -80,24 +79,26 @@ public class SearchAliquotController {
 
             try {
             if (alic != null){
-                alicData = new AliquotData();
-                alicData.setCodAlic(alic.getId());
-                alicData.setPosBox(alic.getPosBox());
-                alicData.setCodFreezer(alic.getCodFreezer());
-                if (alic.getCodRack() != null) alicData.setCodRack(alic.getCodRack());
-                alicData.setCodBox(alic.getCodBox());
-                if (alic.getNegPos() != null) alicData.setPosNeg(alic.getNegPos());
-                if (alic.getFehorReg() != null) alicData.setRegDate(alic.getFehorReg().toString());
-                if (alic.getCodUser() != null) alicData.setCodUser(alic.getCodUser());
-                if (alic.getVolAlic() != null) alicData.setAliVol(alic.getVolAlic());
-                if (alic.getPesoAlic() != null) alicData.setWeight(alic.getPesoAlic());
-                if (alic.getTipo() != null) alicData.setType(alic.getTipo());
-                if (alic.getCondicion() != null) alicData.setCondition(alic.getCondicion());
-                if (alic.getSeparada() != null) alicData.setSeparated(alic.getSeparada());
-                alicData.setNumDesc(alic.getNumDes());
-                alicData.setTable(messageResourceService.getMensaje("aliquot_reg").getSpanish());
-
-                files.add(alicData);
+            	for (RegAlic alicEnc: alic){
+	                alicData = new AliquotData();
+	                alicData.setCodAlic(alicEnc.getId());
+	                alicData.setPosBox(alicEnc.getPosBox());
+	                alicData.setCodFreezer(alicEnc.getCodFreezer());
+	                if (alicEnc.getCodRack() != null) alicData.setCodRack(alicEnc.getCodRack());
+	                alicData.setCodBox(alicEnc.getCodBox());
+	                if (alicEnc.getNegPos() != null) alicData.setPosNeg(alicEnc.getNegPos());
+	                if (alicEnc.getFehorReg() != null) alicData.setRegDate(alicEnc.getFehorReg().toString());
+	                if (alicEnc.getCodUser() != null) alicData.setCodUser(alicEnc.getCodUser());
+	                if (alicEnc.getVolAlic() != null) alicData.setAliVol(alicEnc.getVolAlic());
+	                if (alicEnc.getPesoAlic() != null) alicData.setWeight(alicEnc.getPesoAlic());
+	                if (alicEnc.getTipo() != null) alicData.setType(alicEnc.getTipo());
+	                if (alicEnc.getCondicion() != null) alicData.setCondition(alicEnc.getCondicion());
+	                if (alicEnc.getSeparada() != null) alicData.setSeparated(alicEnc.getSeparada());
+	                alicData.setNumDesc(alicEnc.getNumDes());
+	                alicData.setTable(messageResourceService.getMensaje("aliquot_reg").getSpanish());
+	
+	                files.add(alicData);
+            	}
             }
 
             if (uList != null){
