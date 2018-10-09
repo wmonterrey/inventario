@@ -61,6 +61,16 @@
                                     <i class="fa fa-plane"></i>
                                     <spring:message code="transfer_alic"/></a>
                             </li>
+                            <li class="request">
+                                <a href="<spring:url value="/samplerequest/enterForm" htmlEscape="true "/>">
+                                    <i class="fa fa-edit"></i>
+                                    <spring:message code="sample_request"/></a>
+                            </li>
+                            <li class="worksheet">
+                                <a href="<spring:url value="/worksheet/enterForm" htmlEscape="true "/>">
+                                    <i class="fa fa-file-excel-o"></i>
+                                    <spring:message code="sample_request"/></a>
+                            </li>
 
                         </ul>
                     </li>
