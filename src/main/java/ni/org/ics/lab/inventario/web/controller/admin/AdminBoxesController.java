@@ -30,6 +30,7 @@ import ni.org.ics.lab.inventario.users.model.UserSistema;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -123,6 +124,8 @@ public class AdminBoxesController {
     
     @RequestMapping(value = "viewBox/{boxCode}/", method = RequestMethod.GET)
     public String initView(Model model, @PathVariable(value = "boxCode") String boxCode){
+    	MessageResource mr = null;
+		String descCatalogo = null;
     	UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
     	Box box = boxService.getBox(boxCode, usuario.getUsername());
     	if (box!=null){
@@ -131,6 +134,14 @@ public class AdminBoxesController {
     		model.addAttribute("bitacora", bitacoraBox);
     		model.addAttribute("totalespacios", box.getBoxCapacity());
     		List<Aliquot> alics = aliquotService.getActiveAliquots(boxCode);
+    		for(Aliquot alic:alics) {
+        		mr = this.messageResourceService.getMensaje(alic.getAliCond(),"condicionCat");
+        		descCatalogo = (LocaleContextHolder.getLocale().getLanguage().equals("en")) ? mr.getEnglish(): mr.getSpanish();
+        		alic.setAliCond(descCatalogo);
+        		mr = this.messageResourceService.getMensaje(alic.getAliRes(),"tipoResultadoCat");
+        		descCatalogo = (LocaleContextHolder.getLocale().getLanguage().equals("en")) ? mr.getEnglish(): mr.getSpanish();
+        		alic.setAliRes(descCatalogo);
+            }
     		model.addAttribute("espaciosusados", alics.size());
     		model.addAttribute("alics", alics);
     		model.addAttribute("usuario", usuario);

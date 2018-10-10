@@ -20,7 +20,8 @@ public class AliquotUse extends BaseMetaData implements Auditable {
      */
     private static final long serialVersionUID = 1L;
     private String useCode;
-    private Aliquot aliCode;
+    private String aliCode;
+    private String aliStudy;
     private Box aliBox;
     private int aliPosition;
     private float aliVol;
@@ -41,19 +42,25 @@ public class AliquotUse extends BaseMetaData implements Auditable {
     }
 
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "CODIGO_ALIC")
-    @ForeignKey(name = "ALIC_USO_FK")
-    public Aliquot getAliCode() {
+    @Column(name = "CODIGO_ALIC", nullable = false, length = 50)
+    public String getAliCode() {
         return aliCode;
     }
 
-    public void setAliCode(Aliquot aliCode) {
+    public void setAliCode(String aliCode) {
         this.aliCode = aliCode;
     }
 
+    @Column(name = "CODIGO_ESTUDIO", nullable = false, length = 50)
+    public String getAliStudy() {
+		return aliStudy;
+	}
 
-    @ManyToOne(optional = false)
+	public void setAliStudy(String aliStudy) {
+		this.aliStudy = aliStudy;
+	}
+
+	@ManyToOne(optional = false)
     @JoinColumn(name = "CODIGO_CAJA")
     @ForeignKey(name = "ALICS_BOX_FK1")
     public Box getAliBox() {

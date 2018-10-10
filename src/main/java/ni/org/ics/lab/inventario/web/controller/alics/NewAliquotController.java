@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import ni.org.ics.lab.inventario.domain.Aliquot;
 import ni.org.ics.lab.inventario.domain.Box;
 import ni.org.ics.lab.inventario.domain.Equipment;
+import ni.org.ics.lab.inventario.domain.Rack;
 import ni.org.ics.lab.inventario.domain.complex.BoxAliquots;
 import ni.org.ics.lab.inventario.domain.relationships.AlicTypeStudy;
 import ni.org.ics.lab.inventario.domain.relationships.StudyCenter;
@@ -18,12 +19,15 @@ import ni.org.ics.lab.inventario.service.AliquotTypeService;
 import ni.org.ics.lab.inventario.service.BoxService;
 import ni.org.ics.lab.inventario.service.EquipoService;
 import ni.org.ics.lab.inventario.service.MessageResourceService;
+import ni.org.ics.lab.inventario.service.RackService;
 import ni.org.ics.lab.inventario.service.StudyCenterService;
 import ni.org.ics.lab.inventario.service.UsuarioService;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +64,8 @@ public class NewAliquotController {
 	private MessageResourceService messageResourceService;
 	@Resource(name="equipoService")
     private EquipoService equipoService;
+	@Resource(name="rackService")
+	private RackService rackService;
 
     @RequestMapping(value = "newAlicSug", method = RequestMethod.GET)
 	public String initCreation(Model model) {
@@ -111,6 +117,40 @@ public class NewAliquotController {
         return alics;	
     }
     
+    /**
+     * Retorna una lista de racks. Acepta una solicitud GET para JSON
+     * @return Un arreglo JSON de racks
+	 * @throws ParseException 
+     */
+    @RequestMapping(value = "racks", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<Rack> fetchRacksJson(@RequestParam(value = "equipCode", required = true) String equipCode) throws ParseException {
+        logger.info("Obteniendo los racks en JSON");
+        List<Rack> racks = null; 
+        UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        Equipment equipment = equipoService.getEquipment(equipCode, usuario.getUsername());
+        if (equipment!=null){
+        	racks = rackService.getRacks(equipCode);
+        }
+        return racks;	
+    }
+    
+    /**
+     * Retorna una lista de cajas. Acepta una solicitud GET para JSON
+     * @return Un arreglo JSON de racks
+	 * @throws ParseException 
+     */
+    @RequestMapping(value = "boxes", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<Box> fetchBoxesJson(@RequestParam(value = "rackCode", required = true) String rackCode) throws ParseException {
+        logger.info("Obteniendo los boxes en JSON");
+        List<Box> boxes = null; 
+        UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        Rack rack = rackService.getRack(rackCode, usuario.getUsername());
+        if (rack!=null){
+        	boxes = boxService.getBoxes(rackCode);
+        }
+        return boxes;	
+    }
+    
     
     /**
      * Retorna una lista de cajas. Acepta una solicitud GET para JSON
@@ -144,11 +184,21 @@ public class NewAliquotController {
     	logger.info("Obteniendo la posicion en JSON");
     	Box cajaSeleccionada;
     	boolean posOcupada= false;
+    	MessageResource mr = null;
+		String descCatalogo = null;
         UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         cajaSeleccionada = this.boxService.getBox(boxCode, usuario.getUsername());
         BoxAliquots cajaDatos = new BoxAliquots();
         cajaDatos.setBox(cajaSeleccionada);
         List<Aliquot> alicuotas = this.aliquotService.getActiveAliquots(boxCode);
+        for(Aliquot alic:alicuotas) {
+    		mr = this.messageResourceService.getMensaje(alic.getAliCond(),"condicionCat");
+    		descCatalogo = (LocaleContextHolder.getLocale().getLanguage().equals("en")) ? mr.getEnglish(): mr.getSpanish();
+    		alic.setAliCond(descCatalogo);
+    		mr = this.messageResourceService.getMensaje(alic.getAliRes(),"tipoResultadoCat");
+    		descCatalogo = (LocaleContextHolder.getLocale().getLanguage().equals("en")) ? mr.getEnglish(): mr.getSpanish();
+    		alic.setAliRes(descCatalogo);
+        }
         cajaDatos.setAliquots(alicuotas);
         for(Integer i = 1; i<=cajaSeleccionada.getBoxCapacity(); i++){
         	posOcupada = false;
@@ -194,7 +244,21 @@ public class NewAliquotController {
 			aliquot.setRecordDate(new Date());
 			aliquot.setRecordUser(usuario.getUsername());
 			this.aliquotService.saveAliquot(aliquot);
+			MessageResource mr = null;
+    		String descCatalogo = null;
+    		mr = this.messageResourceService.getMensaje(aliquot.getAliCond(),"condicionCat");
+    		descCatalogo = (LocaleContextHolder.getLocale().getLanguage().equals("en")) ? mr.getEnglish(): mr.getSpanish();
+    		aliquot.setAliCond(descCatalogo);
+    		mr = this.messageResourceService.getMensaje(aliquot.getAliRes(),"tipoResultadoCat");
+    		descCatalogo = (LocaleContextHolder.getLocale().getLanguage().equals("en")) ? mr.getEnglish(): mr.getSpanish();
+    		aliquot.setAliRes(descCatalogo);
 			return createJsonResponse(aliquot);
+    	}
+    	catch (DataIntegrityViolationException e){
+    		String message = e.getMostSpecificCause().getMessage();
+    		Gson gson = new Gson();
+    	    String json = gson.toJson(message);
+    		return new ResponseEntity<String>( json, HttpStatus.CREATED);
     	}
     	catch(Exception e){
     		Gson gson = new Gson();

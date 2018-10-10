@@ -229,7 +229,8 @@ var CreateLocation = function () {
     	                    			item = "<div class='grid-item lleno'><p class='number'>"+i+"</p>";
     	                    			item += "<p class='symbol'>"+ data.aliquots[j].aliCode +"</p>";
     	                    			item += "<p class='name'>"+ data.aliquots[j].aliVol +"</p>";
-    	                    			item += "<p class='name'>"+ data.aliquots[j].aliVol +"</p>";
+    	                    			item += "<p class='weight'>"+ data.aliquots[j].aliCond +"</p>";
+    	                    			item += "<p class='resultado'>"+ data.aliquots[j].aliRes +"</p>";
     	                    		}
     	                    	}
     	                    	item += "</div>";
@@ -320,13 +321,14 @@ var CreateLocation = function () {
             			var len = alicPermStu.length;
             			var len2 = alicPermBox.length;
             			
-            			var alicEncontrada = false; var alicName = ""; var alicUse = ""; var alicTemp = 0;
+            			var alicEncontrada = false; var alicName = ""; var alicUse = ""; var alicTemp = 0; var alicEncontradaBox = false;
 
         				for ( var i = 0; i < len; i++) {
         					if(alicuotaIngresada[0].localeCompare(alicPermStu[i].tipoAlicuota.alicTypeName)==0){
+        						alicEncontrada = true;
         						for(var j = 0; j < len2; j++){
         							if(alicuotaIngresada[0].localeCompare(alicPermBox[j])==0){
-		        						alicEncontrada = true; 
+        								alicEncontradaBox = true; 
 		        						alicName = alicPermStu[i].tipoAlicuota.alicTypeName; 
 		        						alicUse = alicPermStu[i].tipoAlicuota.alicTypeUse; 
 		        						alicTemp=alicPermStu[i].tipoAlicuota.alicTypeTemp; 
@@ -339,7 +341,7 @@ var CreateLocation = function () {
         					}        					
         				}
             			
-        				if(Boolean(alicEncontrada)){
+        				if(Boolean(alicEncontrada)&&Boolean(alicEncontradaBox)){
         					$('#alicTypeName').val(alicName);
         					$('#alicTypeUse').val(alicUse);
         					$('#alicTypeTemp').val(alicTemp);
@@ -348,18 +350,14 @@ var CreateLocation = function () {
         					$('#aliVol').val(volumen);
         					$('#aliVol').focus();
         				}
-        				else{
+        				else if(!Boolean(alicEncontrada)){
         					cleanForm2();
-        					toastr.options = {
-  	    						  "closeButton": true,
-  	    						  "onclick": null,
-  	    						  "showDuration": "300",
-  	    						  "hideDuration": "1000",
-  	    						"timeOut": "6000",
-  	    					  "extendedTimeOut": "0",
-  	    						  "tapToDismiss": false
-  	    						};
     	    				toastr["error"](parametros.aliNotInList, "Error!!");
+    	    				$('#aliCode').focus();
+        				}
+        				else if(!Boolean(alicEncontradaBox)){
+        					cleanForm2();
+    	    				toastr["error"](parametros.aliNotInListBox, "Error!!");
     	    				$('#aliCode').focus();
         				}
         				App.unblockUI();
@@ -400,14 +398,7 @@ var CreateLocation = function () {
                     {
                         alic = JSON.parse(data);
                         if (alic.aliCode === undefined) {
-                            toastr.options = {
-                                "closeButton": true,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "extendedTimeOut": 0,
-                                "tapToDismiss": false
-                            };
+                        	data = data.replace(/u0027/g,"");
                             toastr["error"](data, "Error!!");
                             App.unblockUI();
                         }

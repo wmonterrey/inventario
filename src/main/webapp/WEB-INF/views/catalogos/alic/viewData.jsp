@@ -195,6 +195,29 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
+												<label class="control-label col-md-3"><spring:message code="volMin" />:</label>
+												<div class="col-md-9">
+													<p class="form-control-static">
+														 <c:out value="${alicType.alicTypeVolMin}" />
+													</p>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label col-md-3"><spring:message code="volMax" />:</label>
+												<div class="col-md-9">
+													<p class="form-control-static">
+														 <c:out value="${alicType.alicTypeVolMax}" />
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--/row-->
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
 												<label class="control-label col-md-3"><spring:message code="alicTypeObs" />:</label>
 												<div class="col-md-9">
 													<p class="form-control-static">

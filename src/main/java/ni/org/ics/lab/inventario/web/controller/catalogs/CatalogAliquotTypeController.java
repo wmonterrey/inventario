@@ -116,6 +116,8 @@ public class CatalogAliquotTypeController {
 			, @RequestParam( value="alicTypeSample", required=true ) String alicTypeSample
 			, @RequestParam( value="alicTypeTemp", required=true ) float alicTypeTemp
 			, @RequestParam( value="alicTypeVol", required=true ) float alicTypeVol
+			, @RequestParam( value="alicTypeVolMin", required=true ) float alicTypeVolMin
+			, @RequestParam( value="alicTypeVolMax", required=true ) float alicTypeVolMax
 			, @RequestParam( value="alicTypeObs", required=false, defaultValue="" ) String alicTypeObs			
 	        )
 	{
@@ -134,6 +136,8 @@ public class CatalogAliquotTypeController {
 				alicType.setAlicTypeUse(alicTypeUse);
 				alicType.setAlicTypeTemp(alicTypeTemp);
 				alicType.setAlicTypeVol(alicTypeVol);
+				alicType.setAlicTypeVolMin(alicTypeVolMin);
+				alicType.setAlicTypeVolMax(alicTypeVolMax);
 				alicType.setAlicTypeSample(alicTypeSample);
 				//Guardar el nuevo tipo de alicuota
 				this.aliquotTypeService.saveAliquotType(alicType);
@@ -147,6 +151,8 @@ public class CatalogAliquotTypeController {
 				alicType.setAlicTypeUse(alicTypeUse);
 				alicType.setAlicTypeTemp(alicTypeTemp);
 				alicType.setAlicTypeVol(alicTypeVol);
+				alicType.setAlicTypeVolMin(alicTypeVolMin);
+				alicType.setAlicTypeVolMax(alicTypeVolMax);
 				alicType.setAlicTypeSample(alicTypeSample);
 				//Actualiza el tipo de alicuota
 				this.aliquotTypeService.saveAliquotType(alicType);

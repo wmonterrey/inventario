@@ -176,6 +176,30 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="control-label col-md-3"><spring:message code="volMin" />
+										<span class="required">
+											 *
+										</span>
+										</label>
+										<div class="col-md-5">
+											<div class="input-group">
+												<input value="${alicType.alicTypeVolMin}" id="alicTypeVolMin" name="alicTypeVolMin" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="volMin" />" class="form-control"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3"><spring:message code="volMax" />
+										<span class="required">
+											 *
+										</span>
+										</label>
+										<div class="col-md-5">
+											<div class="input-group">
+												<input value="${alicType.alicTypeVolMax}" id="alicTypeVolMax" name="alicTypeVolMax" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="volMax" />" class="form-control"/>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="control-label col-md-3"><spring:message code="alicTypeObs" />
 										<span class="required">
 											 

@@ -141,7 +141,7 @@
 										<label class="control-label col-md-3"><spring:message code="catalogalic" />
 										</label>
 										<div class="col-md-5">
-											<select multiple="multiple" class="multi-select" id="alicuotas" name="alicuotas">
+											<select id="alicuotas" class="form-control select2" multiple placeholder="<spring:message code="please.enter" /> <spring:message code="catalogalic" />">
 												<c:forEach items="${tiposalicestudio}" var="alics" varStatus="stat">
 													<c:set var="alicsEstudio" value="${stat.first ? '' : alicsEstudio} ${alics.tipoAlicuotaEstudioId.tipoAlicuota}" />
 												</c:forEach>

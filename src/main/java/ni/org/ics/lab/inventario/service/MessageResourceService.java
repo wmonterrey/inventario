@@ -88,6 +88,17 @@ public class MessageResourceService {
 		return  (MessageResource) query.uniqueResult();
 	}
 	
+    public MessageResource getMensaje(String catKey, String catRoot) {
+        // Retrieve session from Hibernate
+        Session session = sessionFactory.getCurrentSession();
+        // Create a Hibernate query (HQL)
+        Query query = session.createQuery("FROM MessageResource mens where mens.catRoot =:catRoot and mens.catKey =:catKey");
+        query.setParameter("catRoot",catRoot);
+        query.setParameter("catKey", catKey);
+        // Retrieve all
+        return  (MessageResource) query.uniqueResult();
+    }
+	
 	/**
 	 * Guarda un mensaje
 	 * 

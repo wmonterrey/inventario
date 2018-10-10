@@ -326,8 +326,8 @@
 <spring:url value="/resources/plugins/isotope/isotope.pkgd.js" var="isotope" />
 <script type="text/javascript" src="${isotope}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/admin/racks/racks" var="racksUrl"/>
-<spring:url value="/admin/boxes/boxes" var="boxesUrl"/>
+<spring:url value="/addalic/racks" var="racksUrl"/>
+<spring:url value="/addalic/boxes" var="boxesUrl"/>
 <spring:url value="/addalic/getCajaSeleccionada" var="getBoxUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicUrl"/>
 

@@ -79,7 +79,17 @@ public class AliquotService {
 	 */
 	public void saveAliquot(Aliquot alic) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(alic);
+		session.save(alic);
+	}
+	
+	/**
+	 * Actualiza un Aliquot
+	 * 
+	 * 
+	 */
+	public void updateAliquot(Aliquot alic) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(alic);
 	}
 
 	/**

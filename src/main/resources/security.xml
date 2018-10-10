@@ -6,21 +6,22 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 	
 	<http auto-config="true" request-matcher="regex">
+	    <intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/loginfailed" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/logout" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/resources/.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	    <intercept-url pattern="/alics/send.*" access="ROLE_SEND_ALIC" />
 	    <intercept-url pattern="/alics/use.*" access="ROLE_USE_ALIC" />
 	    <intercept-url pattern="/alics/search.*" access="ROLE_EDIT_ALIC,ROLE_DEL_ALIC" />
 	    <intercept-url pattern="/alics.*" access="ROLE_EDIT_ALIC,ROLE_DEL_ALIC,ROLE_USE_ALIC,ROLE_SEND_ALIC" />
-	    <intercept-url pattern="/addalic.*" access="ROLE_ADD_ALIC" />
-	    <intercept-url pattern="/temps.*" access="ROLE_TEMP" />
-	    <intercept-url pattern="/translation.*" access="ROLE_TRANS" />
+	    <intercept-url pattern="/addalic/.*" access="ROLE_ADD_ALIC" />
+	    <intercept-url pattern="/temps/.*" access="ROLE_TEMP" />
+	    <intercept-url pattern="/translation/.*" access="ROLE_TRANS" />
 	    <intercept-url pattern="/catalog.*" access="ROLE_CATALOG" />
 	    <intercept-url pattern="/admin.*" access="ROLE_ADMIN" />
 	    <intercept-url pattern="/super.*" access="ROLE_SUPER" />
-		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/loginfailed" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/logout" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/resources/.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/.*" access="ROLE_SUPER,ROLE_ADMIN" />
+
+		<intercept-url pattern="/.*" access="ROLE_ADD_ALIC,ROLE_ADMIN,ROLE_DEL_ALIC,ROLE_EDIT_ALIC,ROLE_SEND_ALIC,ROLE_CATALOG,ROLE_SUPER,ROLE_TEMP,ROLE_TRANS,ROLE_USE_ALIC" />
 		<form-login login-page="/login" default-target-url="/"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-url="/logout" 

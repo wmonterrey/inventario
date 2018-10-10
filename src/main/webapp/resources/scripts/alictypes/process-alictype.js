@@ -20,7 +20,7 @@ var CreateAlicType = function () {
             decimals: 1,
             boostat: 5,
             maxboostedstep: 10,
-            postfix: '°C'
+            postfix: 'ï¿½C'
         }); 
         $("#alicTypeVol").TouchSpin({
             inputGroupClass: 'input-large',
@@ -83,7 +83,17 @@ var CreateAlicType = function () {
                     alicTypeVol: {
                         required: true,
                         min: 0,
-                        max: 1500,
+                        max: 5000,
+                    },
+                    alicTypeVolMin: {
+                        required: true,
+                        min: 0,
+                        max: 5000,
+                    },
+                    alicTypeVolMax: {
+                        required: true,
+                        min: 0,
+                        max: 5000,
                     },
                     alicTypeUse: {
                         required: true

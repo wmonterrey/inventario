@@ -44,6 +44,15 @@ var CreateAlic = function () {
 					  "tapToDismiss": false
 					};
             
+            var table  = $('#lista_alicuotas').DataTable({
+                // set the initial value
+            	"bPaginate": true,
+                "iDisplayLength": 10,
+                "oLanguage": {
+        			"sUrl": parametros.dataTablesLang
+                }
+            });
+            
             $('#boxStudy').change(
             		function() {
             			cleanForm(true);
@@ -80,7 +89,7 @@ var CreateAlic = function () {
 				$('#aliObs').val("");
 				$("#boxResults").select2('data',null);
 				$("#boxResults").empty();
-				$(".grid" ).empty();
+				if(borrarTodo) $(".grid" ).empty();
         	}
             
             $('#aliCode').change(
@@ -170,15 +179,6 @@ var CreateAlic = function () {
                 			}, function(data) {
                 				
                 				if (data.length === 0) {
-            	    				toastr.options = {
-            	    						  "closeButton": true,
-            	    						  "onclick": null,
-            	    						  "showDuration": "300",
-            	    						  "hideDuration": "1000",
-            	    						  "timeOut": "6000",
-            	    						  "extendedTimeOut": "0",
-            	    						  "tapToDismiss": false
-            	    						};
               	    				toastr["error"](parametros.posNotAvailable, "Error!!");   
               	    				cleanForm(false);
               	    				$('#aliCode').focus();
@@ -203,15 +203,6 @@ var CreateAlic = function () {
         				}
         				else{
         					cleanForm(true);
-        					toastr.options = {
-  	    						  "closeButton": true,
-  	    						  "onclick": null,
-  	    						  "showDuration": "300",
-  	    						  "hideDuration": "1000",
-  	    						"timeOut": "6000",
-  	    					  "extendedTimeOut": "0",
-  	    						  "tapToDismiss": false
-  	    						};
     	    				toastr["error"](parametros.aliNotInList, "Error!!");
     	    				$('#aliCode').focus();
         				}
@@ -219,48 +210,11 @@ var CreateAlic = function () {
                     });
             
             $('#boxResults').change(
-            		function() {
-            			App.blockUI();
-            			$.getJSON(parametros.getBoxUrl, {
-            				boxCode : $('#boxResults').val(),
-            				ajax : 'true'
-            			}, function(data) {
-            				var item;
-            				$('#aliBox').val(data.box.boxName);
-    						$('#boxRack').val(data.box.boxRack.rackName);
-    						$('#rackEquip').val(data.box.boxRack.rackEquip.equipName);
-    						$('#aliPosition').val(data.primeraDisponible);
-    						$(".grid").empty();
-    	                    for (var i = 1; i <= data.box.boxCapacity; i++) {
-    	                    	item = "<div class='grid-item vacio' onclick='actualizarPosicion("+i+")'><p class='number'><a href='#'>"+i+"</a></p>";
-    	                    	for(var j = 0; j < data.aliquots.length; j++){
-    	                    		if(data.aliquots[j].aliPosition == i){
-    	                    			item = "<div class='grid-item lleno'><p class='number'>"+i+"</p>";
-    	                    			item += "<p class='symbol'>"+ data.aliquots[j].aliCode +"</p>";
-    	                    			item += "<p class='name'>"+ data.aliquots[j].aliVol +"</p>";
-    	                    		}
-    	                    	}
-    	                    	item += "</div>";
-    	                    	$(".grid").append(item);
-    	                    }
-    	                    var ancho = 100 / data.box.boxColumns + '%';
-    	                    $('.grid-item').css({"width": ancho});
-    	                    $('.grid-item').css({"position": "relative"});
-    	                    $('.grid-item').css({"float": "left"});
-    	                    $('.grid-item').css({"height": "100px"});
-    	                    $('.grid-item').css({"border": "1px solid #333"});
-    	                    $('.grid-item').css({"border-color": "hsla(0, 0%, 0%, 0.2)"});
-    	                    $('.grid-item.vacio').css({"background": "#EEEEEE"});
-    	                    $('.grid-item.lleno').css({"background": "#99CCFF"});
-    	                    $('.grid').isotope({
-    	                        // options
-    	                        itemSelector: '.grid-item',
-    	                        layoutMode: 'fitRows'
-    	                    });
-    						$('#aliVol').focus();
-            			});
-            			App.unblockUI();
-                    });
+            		function(){
+            			llenarCaja();
+            			$('#aliVol').focus();
+            			$('#aliVol').select();
+            		});
             
             $('#aliCond').change(
             		function() {
@@ -374,11 +328,12 @@ var CreateAlic = function () {
                     success1.show();
                     error1.hide();
                     processAlic();
+                    $('#aliCode').val("");
+	            	$('#aliCode').focus();
                 }
             });
             
-            function processAlic()
-        	{
+            function processAlic(){
             	App.blockUI();
         	    $.post( parametros.saveAlicUrl
         	            , form1.serialize()
@@ -386,23 +341,14 @@ var CreateAlic = function () {
         	            {
         	    			alicuota = JSON.parse(data);
         	    			if (alicuota.aliCode === undefined) {
-        	    				toastr.options = {
-        	    						  "closeButton": true,
-        	    						  "onclick": null,
-        	    						  "showDuration": "300",
-        	    						  "hideDuration": "1000",
-        	    						  "timeOut": "6000",
-        	    						  "extendedTimeOut": "0",
-        	    						  "tapToDismiss": false
-        	    						};
+        	    				data = data.replace(/u0027/g,"");
           	    				toastr["error"](data, "Error!!");        						
         					}
         					else{
         						toastr.success(parametros.successmessage,alicuota.aliCode);
+        						table.fnAddData([alicuota.aliCode,alicuota.aliBox.boxStudy.studyName,alicuota.aliBox.boxName,alicuota.aliPosition,alicuota.aliVol,alicuota.aliCond,alicuota.aliRes,alicuota.aliObs,null]);
         					}
-        	    			cleanForm(true);
-        	    			$('#aliCode').val("");
-        	            	$('#aliCode').focus();
+        	    			llenarCaja();
         	    			App.unblockUI();
         	            }
         	            , 'text' )
@@ -411,6 +357,50 @@ var CreateAlic = function () {
         		    		App.unblockUI();
         		  		});
         	}
+            
+            function llenarCaja() {
+    			App.blockUI();
+    			$.getJSON(parametros.getBoxUrl, {
+    				boxCode : $('#boxResults').val(),
+    				ajax : 'true'
+    			}, function(data) {
+    				var item;
+    				$('#aliBox').val(data.box.boxName);
+					$('#boxRack').val(data.box.boxRack.rackName);
+					$('#rackEquip').val(data.box.boxRack.rackEquip.equipName);
+					$('#aliPosition').val(data.primeraDisponible);
+					$(".grid").empty();
+                    for (var i = 1; i <= data.box.boxCapacity; i++) {
+                    	item = "<div class='grid-item vacio' onclick='actualizarPosicion("+i+")'><p class='number'><a href='#'>"+i+"</a></p>";
+                    	for(var j = 0; j < data.aliquots.length; j++){
+                    		if(data.aliquots[j].aliPosition == i){
+                    			item = "<div class='grid-item lleno'><p class='number'>"+i+"</p>";
+                    			item += "<p class='symbol'>"+ data.aliquots[j].aliCode +"</p>";
+                    			item += "<p class='name'>"+ data.aliquots[j].aliVol +"</p>";
+                    			item += "<p class='weight'>"+ data.aliquots[j].aliCond +"</p>";
+                    			item += "<p class='resultado'>"+ data.aliquots[j].aliRes +"</p>";
+                    		}
+                    	}
+                    	item += "</div>";
+                    	$(".grid").append(item);
+                    }
+                    var ancho = 100 / data.box.boxColumns + '%';
+                    $('.grid-item').css({"width": ancho});
+                    $('.grid-item').css({"position": "relative"});
+                    $('.grid-item').css({"float": "left"});
+                    $('.grid-item').css({"height": "100px"});
+                    $('.grid-item').css({"border": "1px solid #333"});
+                    $('.grid-item').css({"border-color": "hsla(0, 0%, 0%, 0.2)"});
+                    $('.grid-item.vacio').css({"background": "#EEEEEE"});
+                    $('.grid-item.lleno').css({"background": "#99CCFF"});
+                    $('.grid').isotope({
+                        // options
+                        itemSelector: '.grid-item',
+                        layoutMode: 'fitRows'
+                    });
+    			});
+    			App.unblockUI();
+            }
         }
     };
 

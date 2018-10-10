@@ -106,7 +106,7 @@ public class AliquotUseController {
                         alic.setPasive( '1' );
                     }
 
-                    this.aliquotService.saveAliquot(alic);
+                    this.aliquotService.updateAliquot(alic);
 
 
                     return createJsonResponse(alicUse);

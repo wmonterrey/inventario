@@ -23,6 +23,7 @@ public class AliquotTransfers extends BaseMetaData implements Auditable{
     private String transferCode;
     private String centerCode;
 	private String aliCode;
+	private String aliStudy;
 	private int aliPosition;
 	private String aliEquip;
 	private String aliRack;
@@ -79,7 +80,16 @@ public class AliquotTransfers extends BaseMetaData implements Auditable{
         this.aliCode = aliCode;
     }
 
-    @Column(name = "CODIGO_CAJA",length =50)
+    @Column(name = "CODIGO_ESTUDIO", nullable = false, length =50)
+    public String getAliStudy() {
+		return aliStudy;
+	}
+
+	public void setAliStudy(String aliStudy) {
+		this.aliStudy = aliStudy;
+	}
+
+	@Column(name = "CODIGO_CAJA",length =50)
     public String getAliBox() {
         return aliBox;
     }

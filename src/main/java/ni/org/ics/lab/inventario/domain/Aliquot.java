@@ -26,9 +26,8 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String aliCode;
+	private AliquotId aliId;
 	private Box aliBox;
-	private String aliStudy;
 	private int aliPosition;
 	private float aliVol;
 	private String alicTypeName;
@@ -37,14 +36,12 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	private String aliSep;
 	private String aliObs;
 	
-
 	@Id
-	@Column(name = "CODIGO_ALIC", nullable = false, length =50)
-	public String getAliCode() {
-		return aliCode;
+	public AliquotId getAliId() {
+		return aliId;
 	}
-	public void setAliCode(String aliCode) {
-		this.aliCode = aliCode;
+	public void setAliId(AliquotId aliId) {
+		this.aliId = aliId;
 	}
 	@ManyToOne(optional=false)
 	@JoinColumn(name="CODIGO_CAJA")
@@ -54,13 +51,6 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	}
 	public void setAliBox(Box aliBox) {
 		this.aliBox = aliBox;
-	}
-	@Column(name = "CODIGO_ESTUDIO", nullable = false, length =50)
-	public String getAliStudy() {
-		return aliStudy;
-	}
-	public void setAliStudy(String aliStudy) {
-		this.aliStudy = aliStudy;
 	}
 	@Column(name = "POSICION", nullable = false)
 	public int getAliPosition() {
@@ -123,7 +113,11 @@ public class Aliquot extends BaseMetaData implements Auditable{
 		
 		Aliquot castOther = (Aliquot) other;
 
-		return (this.getAliCode().equals(castOther.getAliCode()));
+		return (this.getAliId().equals(castOther.getAliId()));
+	}
+	@Override
+	public String toString(){
+		return aliId.getAliCode();
 	}
 	@Override
 	public boolean isFieldAuditable(String fieldname) {

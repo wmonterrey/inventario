@@ -13,6 +13,10 @@
 <head>
 <jsp:include page="../fragments/headTag.jsp" />
 <!-- BEGIN PAGE LEVEL STYLES -->
+<spring:url value="/resources/plugins/data-tables/DT_bootstrap.css" var="dtbootcss" />
+<link rel="stylesheet" href="${dtbootcss}"/>
+<spring:url value="/resources/plugins/data-tables/TableTools/css/dataTables.tableTools.css" var="dtttcss" />
+<link rel="stylesheet" href="${dtttcss}"/>
 <spring:url value="/resources/plugins/select2/select2_conquer.css" var="sel2css" />
 <link rel="stylesheet" type="text/css" href="${sel2css}"/>
 <spring:url value="/resources/plugins/jquery-multi-select/css/multi-select.css" var="jqmscss" />
@@ -281,6 +285,44 @@
 					</div>
 				</div>
 			</div>
+			<!-- BEGIN ROW -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN TABLE PORTLET-->
+					<div class="portlet">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-database"></i>
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+								<a href="javascript:;" class="remove"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+							<table class="table table-striped table-hover table-bordered" id="lista_alicuotas">
+							<thead>
+								<tr>
+									<th><spring:message code="aliCode" /></th>
+									<th><spring:message code="boxStudy" /></th>
+									<th><spring:message code="aliBox" /></th>
+									<th><spring:message code="aliPosition" /></th>
+									<th><spring:message code="aliVol" /></th>
+									<th><spring:message code="aliCond" /></th>
+									<th><spring:message code="aliRes" /></th>
+									<th><spring:message code="aliObs" /></th>
+									<th></th>
+								</tr>
+							</thead>
+							</table>
+							</div>
+						</div>
+					</div>
+					<!-- END TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END ROW -->
 			<!-- END PAGE CONTENT -->
 		</div>
 	</div>
@@ -325,10 +367,20 @@
 <script src="${jQValidationLoc}"/></script>
 <spring:url value="/resources/plugins/select2/select2_locale_{language}.js" var="Select2Loc">
 	<spring:param name="language" value="${lenguaje}" />
-</spring:url>				
+</spring:url>	
+<spring:url value="/resources/plugins/data-tables/jquery.dataTables.js" var="jQueryDataTables" />
+<script type="text/javascript" src="${jQueryDataTables}"></script>			
 <script src="${Select2Loc}"/></script>
 <spring:url value="/resources/plugins/isotope/isotope.pkgd.js" var="isotope" />
 <script type="text/javascript" src="${isotope}"></script>
+<spring:url value="/resources/plugins/data-tables/DT_bootstrap.js" var="dataTablesBS" />
+<script type="text/javascript" src="${dataTablesBS}"></script>
+<spring:url value="/resources/plugins/data-tables/TableTools/js/dataTables.tableTools.js" var="dataTablesTT" />
+<script type="text/javascript" src="${dataTablesTT}"></script>
+<spring:url value="/resources/plugins/data-tables/TableTools/swf/copy_csv_xls_pdf.swf" var="dataTablesTTSWF" />
+<spring:url value="/resources/plugins/data-tables/i18n/label_{language}.json" var="dataTablesLang">
+	<spring:param name="language" value="${lenguaje}" />
+</spring:url>
 <!-- END PAGE LEVEL SCRIPTS -->
 <spring:url value="/addalic/saveAlic" var="saveAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicUrl"/>
@@ -384,6 +436,7 @@
 				requiredmessage: "${requiredmessage}",
 				studyName: "${studyName}",
 				boxResultType: "${boxResultType}",
+				dataTablesLang: "${dataTablesLang}",
 				posNotAvailable: "${posNotAvailable}"};
 		CreateAlic.init(parametros);
 		

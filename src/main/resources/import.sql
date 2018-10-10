@@ -19,9 +19,9 @@ INSERT INTO `inv_usuarios_roles` (`ROL`, `NOMBRE_USUARIO`, `PASIVO`, `FECHA_REGI
 INSERT INTO `inv_usuarios_roles` (`ROL`, `NOMBRE_USUARIO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('ROLE_TEMP', 'admin', '0', '2017-03-30 12:17:14', 'admin');
 
 
-INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`) VALUES ('00000000-0586-034f-0000-00001a5dae20', '0', '2017-03-29 07:59:59', 'admin', '1b', '', 'SUERO', -80, 'PCR', 140);
-INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`) VALUES ('00000000-0586-034f-0000-00001a5e318d', '0', '2017-03-29 08:00:32', 'admin', '1c', '', 'SUERO', -80, 'PCR', 140);
-INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`) VALUES ('00000000-0586-034f-0000-00001a5e6239', '0', '2017-03-29 08:00:45', 'admin', '1d', '', 'SUERO', -80, 'PCR', 140);
+INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`, `VOLUMEN_MAX`, `VOLUMEN_MIN`) VALUES ('00000000-0586-034f-0000-00001a5dae20', '0', '2017-03-29 07:59:59', 'admin', '1b', '', 'SUERO', -80, 'PCR', 140,50,500);
+INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`, `VOLUMEN_MAX`, `VOLUMEN_MIN`) VALUES ('00000000-0586-034f-0000-00001a5e318d', '0', '2017-03-29 08:00:32', 'admin', '1c', '', 'SUERO', -80, 'PCR', 140,50,500);
+INSERT INTO `inv_tipos_alicuota` (`CODIGO_TIPO_ALIC`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_TIPO_ALIC`, `OBS_TIPO_ALIC`, `TIPO_MUESTRA`, `TEMPERATURA`, `USO_ALIC`, `VOLUMEN`, `VOLUMEN_MAX`, `VOLUMEN_MIN`) VALUES ('00000000-0586-034f-0000-00001a5e6239', '0', '2017-03-29 08:00:45', 'admin', '1d', '', 'SUERO', -80, 'PCR', 140,50,500);
 INSERT INTO `inv_estudios` (`CODIGO_ESTUDIO`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`, `NOMBRE_ESTUDIO`, `OBS_ESTUDIO`, `PATRON_ESTUDIO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '0', '2017-03-29 08:01:24', 'admin', 'Estudio Clínico', '', '^\\d{1,5}\\.[1|2|3|4|9]{1}[a|b|c|d|e|f|g|h|t|j|k|i|s|u|r]{1}$|^\\d{1,5}\\.[1|2|3|4|9]{1}[xx]{2}|\\d{1,5}\\.[1|9]{1}[rv1|rv2|rv3]{3}$|^\\d{1,5}\\.[1|2|3|9]{1}[q1|q2]{2}$');
 INSERT INTO `inv_tipos_alicuotas_estudios` (`ESTUDIO`, `TIPO_ALICUOTA`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '00000000-0586-034f-0000-00001a5dae20', '0', '2017-03-29 08:01:24', 'admin');
 INSERT INTO `inv_tipos_alicuotas_estudios` (`ESTUDIO`, `TIPO_ALICUOTA`, `PASIVO`, `FECHA_REGISTRO`, `USUARIO_REGISTRO`) VALUES ('00000000-0586-034f-0000-00001a5efa26', '00000000-0586-034f-0000-00001a5e318d', '0', '2017-03-29 08:01:24', 'admin');
@@ -439,7 +439,6 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'packingManager', 'Resp. Embalaje','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process', 'Procesar','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'select_file', 'Seleccionar archivo','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process', 'Procesar','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'import_file', 'Importar Archivo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'msg_yes', 'Si','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'msg_no', 'No','0','0',0);
@@ -474,4 +473,5 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`
 
 
 
-
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'volMin', 'Volumen mínimo','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'volMax', 'Volumen máximo','0','0',0);

@@ -1,7 +1,10 @@
 var CreateStudy = function () {
 	
 	var handleMultiSelect = function () {
-		$('#alicuotas').multiSelect();
+		$('#alicuotas').select2({
+            placeholder: "Select a State",
+            allowClear: true
+        });
     };
 
     return {

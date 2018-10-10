@@ -22,6 +22,7 @@ public class AliquotOutput extends BaseMetaData implements Auditable{
 	private static final long serialVersionUID = 1L;
     private String exitCode;
 	private String aliCode;
+	private String aliStudy;
 	private int aliPosition;
 	private String aliEquip;
 	private String aliRack;
@@ -64,8 +65,14 @@ public class AliquotOutput extends BaseMetaData implements Auditable{
     public void setAliCode(String aliCode) {
         this.aliCode = aliCode;
     }
-
-    @Column(name = "CODIGO_CAJA",length =50)
+    @Column(name = "CODIGO_ESTUDIO", nullable = false, length =50)
+    public String getAliStudy() {
+		return aliStudy;
+	}
+	public void setAliStudy(String aliStudy) {
+		this.aliStudy = aliStudy;
+	}
+	@Column(name = "CODIGO_CAJA",length =50)
     public String getAliBox() {
         return aliBox;
     }

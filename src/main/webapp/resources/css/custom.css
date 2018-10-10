@@ -17,7 +17,7 @@
   position: absolute;
   right: 8px;
   top: 5px;
-  font-size: 15px;
+  font-size: 12px;
 }
 .grid-item .symbol {
   position: absolute;
@@ -31,13 +31,19 @@
   position: absolute;
 
   left: 10px;
-  top: 60px;
+  top: 40px;
   text-transform: none;
   letter-spacing: 0;
   font-size: 12px;
   font-weight: normal;
 }
 .grid-item .weight {
+  position: absolute;
+  left: 10px;
+  top: 56px;
+  font-size: 12px;
+}
+.grid-item .resultado {
   position: absolute;
   left: 10px;
   top: 76px;
