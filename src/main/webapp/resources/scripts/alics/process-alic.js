@@ -340,13 +340,13 @@ var CreateAlic = function () {
         	            , function( data )
         	            {
         	    			alicuota = JSON.parse(data);
-        	    			if (alicuota.aliCode === undefined) {
+        	    			if (alicuota.aliId === undefined) {
         	    				data = data.replace(/u0027/g,"");
           	    				toastr["error"](data, "Error!!");        						
         					}
         					else{
-        						toastr.success(parametros.successmessage,alicuota.aliCode);
-        						table.fnAddData([alicuota.aliCode,alicuota.aliBox.boxStudy.studyName,alicuota.aliBox.boxName,alicuota.aliPosition,alicuota.aliVol,alicuota.aliCond,alicuota.aliRes,alicuota.aliObs,null]);
+        						toastr.success(parametros.successmessage,alicuota.aliId.aliCode);
+        						table.fnAddData([alicuota.aliId.aliCode,alicuota.aliBox.boxStudy.studyName,alicuota.aliBox.boxName,alicuota.aliPosition,alicuota.aliVol,alicuota.aliCond,alicuota.aliRes,alicuota.aliObs,null]);
         					}
         	    			llenarCaja();
         	    			App.unblockUI();
@@ -375,7 +375,7 @@ var CreateAlic = function () {
                     	for(var j = 0; j < data.aliquots.length; j++){
                     		if(data.aliquots[j].aliPosition == i){
                     			item = "<div class='grid-item lleno'><p class='number'>"+i+"</p>";
-                    			item += "<p class='symbol'>"+ data.aliquots[j].aliCode +"</p>";
+                    			item += "<p class='symbol'>"+ data.aliquots[j].aliId.aliCode +"</p>";
                     			item += "<p class='name'>"+ data.aliquots[j].aliVol +"</p>";
                     			item += "<p class='weight'>"+ data.aliquots[j].aliCond +"</p>";
                     			item += "<p class='resultado'>"+ data.aliquots[j].aliRes +"</p>";

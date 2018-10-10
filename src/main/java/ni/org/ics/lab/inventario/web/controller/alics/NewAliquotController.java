@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import ni.org.ics.lab.inventario.domain.Aliquot;
+import ni.org.ics.lab.inventario.domain.AliquotId;
 import ni.org.ics.lab.inventario.domain.Box;
 import ni.org.ics.lab.inventario.domain.Equipment;
 import ni.org.ics.lab.inventario.domain.Rack;
@@ -230,10 +231,10 @@ public class NewAliquotController {
     	try{
 			UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
 			Box box = this.boxService.getBox(boxResults, usuario.getUsername());
+			AliquotId aliId = new AliquotId(aliCode,box.getBoxStudy().getStudyCode());
 			Aliquot aliquot = new Aliquot();
-			aliquot.setAliCode(aliCode);
+			aliquot.setAliId(aliId);
 			aliquot.setAliBox(box);
-			aliquot.setAliStudy(box.getBoxStudy().getStudyCode());
 			aliquot.setAliPosition(aliPosition);
 			aliquot.setAliVol(aliVol);
 			aliquot.setAlicTypeName(alicTypeName);

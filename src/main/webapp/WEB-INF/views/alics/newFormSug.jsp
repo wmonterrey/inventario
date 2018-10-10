@@ -115,7 +115,7 @@
 										</label>
 										<div class="col-md-8">
 											<div class="input-group">
-												<input value="${alic.aliCode}" id="aliCode" name="aliCode" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="aliCode" />" class="form-control"/>
+												<input value="${alic.aliId.aliCode}" id="aliCode" name="aliCode" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="aliCode" />" class="form-control"/>
 												<span class="input-group-addon">
 													<i class="fa fa-barcode"></i>
 												</span>

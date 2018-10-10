@@ -382,11 +382,11 @@
 								    <c:forEach items="${alics}" var="alic">
 								    	<spring:url value="/alics/viewAlic/{alic}/"
 											var="alicUrl">
-											<spring:param name="alic" value="${alic.aliCode}" />
+											<spring:param name="alic" value="${alic.aliId.aliCode}" />
 										</spring:url>
 								    	<c:choose>
 											<c:when test="${alic.aliPosition==loop.count}">
-											    <p class="symbol"><a href="${fn:escapeXml(alicUrl)}"><c:out value="${alic.aliCode}" /></a></p>
+											    <p class="symbol"><a href="${fn:escapeXml(alicUrl)}"><c:out value="${alic.aliId.aliCode}" /></a></p>
 											    <p class="name"><c:out value="${alic.aliVol}" /></p>
 											    <p class="weight"><c:out value="${alic.aliCond}" /></p>
 											    <p class="resultado"><c:out value="${alic.aliRes}" /></p>
