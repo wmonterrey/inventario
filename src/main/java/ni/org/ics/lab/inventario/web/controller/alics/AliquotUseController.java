@@ -61,11 +61,12 @@ public class AliquotUseController {
 
     @RequestMapping(value = "getAlic", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    Aliquot fetchBoxJson(@RequestParam(value = "aliCode", required = false) String aliCode) {
+    Aliquot fetchBoxJson(@RequestParam(value = "aliCode") String aliCode
+            , @RequestParam( value="study") String study) {
         logger.info("Obteniendo informacion de alicuota en JSON");
         Aliquot alic = null;
         UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
-        alic = aliquotService.getAliquot(aliCode, usuario.getUsername()  ) ;
+        alic = aliquotService.getAliquotByStudyCode(aliCode, usuario.getUsername(), study) ;
         return alic;
     }
 
@@ -82,7 +83,7 @@ public class AliquotUseController {
             float res = 0;
 
             if (alic != null){
-                    alicUse.setAliCode(alic);
+                    alicUse.setAliCode(alic.getAliId().getAliCode());
                     alicUse.setRecordUser(usuario.getUsername());
                     alicUse.setAliCondition(alic.getAliCond());
                     alicUse.setAliBox(alic.getAliBox());
@@ -91,6 +92,7 @@ public class AliquotUseController {
                     alicUse.setAliUsedVol(usedVol);
                     alicUse.setAliUse(use);
                     alicUse.setRecordDate(new Date());
+                    alicUse.setAliStudy(alic.getAliId().getAliStudy());
 
                     //Save aliquot alicUse
                     this.aliquotUseService.saveAliquotUse(alicUse);

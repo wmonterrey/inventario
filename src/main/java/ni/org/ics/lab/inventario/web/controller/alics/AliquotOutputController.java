@@ -82,6 +82,8 @@ public class AliquotOutputController {
         String resultado ="";
         String codes ="";
         String codes2 ="";
+        String studies ="";
+        String studies2 ="";
         String enic ="";
         String transportation ="";
         String containerNum ="";
@@ -94,6 +96,7 @@ public class AliquotOutputController {
         String requestBy ="";
         String approveBy ="";
         String purpose ="";
+        String study ="";
 
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(),"UTF8"));
@@ -106,6 +109,12 @@ public class AliquotOutputController {
 
             if (jsonpObject.get("codes2") != null && !jsonpObject.get("codes2").getAsString().isEmpty())
                 codes2 = jsonpObject.get("codes2").getAsString();
+
+            if (jsonpObject.get("studies") != null && !jsonpObject.get("studies").getAsString().isEmpty())
+                studies = jsonpObject.get("studies").getAsString();
+
+            if (jsonpObject.get("studies2") != null && !jsonpObject.get("studies2").getAsString().isEmpty())
+                studies2 = jsonpObject.get("studies2").getAsString();
 
             if (jsonpObject.get("enic") != null && !jsonpObject.get("enic").getAsString().isEmpty())
                 enic = jsonpObject.get("enic").getAsString();
@@ -149,13 +158,16 @@ public class AliquotOutputController {
             if(codes != ""){
 
                 String[] arrayCodes = codes.split(",");
+                String[] arrayStudies = studies.split(",");
+                int cont = 0;
                 for (String aliCode : arrayCodes) {
-
+                    String codeStudy = arrayStudies[cont];
+                    cont++;
                     //search alicode
-                    Aliquot alic = aliquotService.getAliquot(aliCode, usuario.getUsername());
+                    Aliquot alic = aliquotService.getAliquotByStudyCode(aliCode, usuario.getUsername(), codeStudy);
                     AliquotOutput alicOut = new AliquotOutput();
-
-                    alicOut.setAliCode(alic.getAliCode());
+                    alicOut.setAliStudy(alic.getAliId().getAliStudy());
+                    alicOut.setAliCode(alic.getAliId().getAliCode());
                     alicOut.setRecordUser(usuario.getUsername());
                     alicOut.setRecordDate(new Date());
                     alicOut.setAliCond(alic.getAliCond());
@@ -181,11 +193,11 @@ public class AliquotOutputController {
                     alicOut.setAliRack(alic.getAliBox().getBoxRack().getRackCode());
                     alicOut.setAliEquip(alic.getAliBox().getBoxRack().getRackEquip().getEquipCode());
 
-                    alicOutputService.saveAliquotUse(alicOut);
+                    alicOutputService.saveAliquotOutput(alicOut);
 
                     //update alic
                     alic.setPasive( '1' );
-                    aliquotService.saveAliquot(alic);
+                    aliquotService.updateAliquot(alic);
 
                 }
 
@@ -194,9 +206,12 @@ public class AliquotOutputController {
             if(codes2 != ""){
 
                 String[] arrayCodes = codes2.split(",");
+                String[] arrayStudies2 = studies2.split(",");
+                int cont = 0;
                 for (String aliCode : arrayCodes) {
+                    String codeStudy = arrayStudies2[cont];
+                    cont++;
 
-                    //search alicode
                     AliquotOutput alicOut = new AliquotOutput();
 
                     alicOut.setAliCode(aliCode);
@@ -214,7 +229,8 @@ public class AliquotOutputController {
                     alicOut.setPurpose(purpose);
                     alicOut.setRequest(requestBy);
                     alicOut.setTransportation(transportation);
-                    alicOutputService.saveAliquotUse(alicOut);
+                    alicOut.setAliStudy(codeStudy);
+                    alicOutputService.saveAliquotOutput(alicOut);
 
                 }
 
@@ -224,7 +240,7 @@ public class AliquotOutputController {
     } catch (Exception ex) {
             logger.error(ex.getMessage(),ex);
             ex.printStackTrace();
-            resultado = String.valueOf( messageResourceService.getMensaje("alicDuplicated" ) );
+            resultado = String.valueOf( messageResourceService.getMensaje("process.errors" ) );
             resultado=resultado+". \n "+ex.getMessage();
 
         }finally {

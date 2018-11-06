@@ -87,6 +87,8 @@ public class AliquotTransferController {
         String resultado ="";
         String codes ="";
         String codes2 ="";
+        String studies ="";
+        String studies2 ="";
         String enic ="";
         String transportation ="";
         String containerNum ="";
@@ -112,6 +114,12 @@ public class AliquotTransferController {
 
             if (jsonpObject.get("codes2") != null && !jsonpObject.get("codes2").getAsString().isEmpty())
                 codes2 = jsonpObject.get("codes2").getAsString();
+
+            if (jsonpObject.get("studies") != null && !jsonpObject.get("studies").getAsString().isEmpty())
+                studies = jsonpObject.get("studies").getAsString();
+
+            if (jsonpObject.get("studies2") != null && !jsonpObject.get("studies2").getAsString().isEmpty())
+                studies2 = jsonpObject.get("studies2").getAsString();
 
             if (jsonpObject.get("enic") != null && !jsonpObject.get("enic").getAsString().isEmpty())
                 enic = jsonpObject.get("enic").getAsString();
@@ -158,13 +166,16 @@ public class AliquotTransferController {
             if(codes != ""){
 
                 String[] arrayCodes = codes.split(",");
+                String[] arrayStudies = studies.split(",");
+                int cont = 0;
                 for (String aliCode : arrayCodes) {
-
+                    String codeStudy = arrayStudies[cont];
+                    cont++;
                     //search alicode
-                    Aliquot alic = aliquotService.getAliquot(aliCode, usuario.getUsername());
+                    Aliquot alic = aliquotService.getAliquotByStudyCode(aliCode, usuario.getUsername(),codeStudy);
                     AliquotTransfers alicTransfer = new AliquotTransfers();
 
-                    alicTransfer.setAliCode(alic.getAliCode());
+                    alicTransfer.setAliCode(alic.getAliId().getAliCode());
                     alicTransfer.setRecordUser(usuario.getUsername());
                     alicTransfer.setRecordDate(new Date());
                     alicTransfer.setAliCond(alic.getAliCond());
@@ -190,12 +201,13 @@ public class AliquotTransferController {
                     alicTransfer.setAliRack(alic.getAliBox().getBoxRack().getRackCode());
                     alicTransfer.setAliEquip(alic.getAliBox().getBoxRack().getRackEquip().getEquipCode());
                     alicTransfer.setCenterCode(center);
+                    alicTransfer.setAliStudy(alic.getAliId().getAliStudy());
 
                     alicTransferService.saveAliquotTransfer(alicTransfer);
 
                     //update alic
                     alic.setPasive( '1' );
-                    aliquotService.saveAliquot(alic);
+                    aliquotService.updateAliquot(alic);
 
                 }
 
@@ -204,7 +216,11 @@ public class AliquotTransferController {
             if(codes2 != ""){
 
                 String[] arrayCodes = codes2.split(",");
+                String[] arrayStudies2 = studies2.split(",");
+                int cont = 0;
                 for (String aliCode : arrayCodes) {
+                    String codeStudy = arrayStudies2[cont];
+                    cont++;
 
                     AliquotTransfers alicTransf = new AliquotTransfers();
 
@@ -224,6 +240,7 @@ public class AliquotTransferController {
                     alicTransf.setRequest(requestBy);
                     alicTransf.setTransportation(transportation);
                     alicTransf.setCenterCode(center);
+                    alicTransf.setAliStudy(codeStudy);
                     alicTransferService.saveAliquotTransfer(alicTransf);
 
                 }
@@ -234,7 +251,7 @@ public class AliquotTransferController {
     } catch (Exception ex) {
             logger.error(ex.getMessage(),ex);
             ex.printStackTrace();
-            resultado = String.valueOf( messageResourceService.getMensaje("alicDuplicated" ) );
+            resultado = String.valueOf( messageResourceService.getMensaje("process.errors" ) );
             resultado=resultado+". \n "+ex.getMessage();
 
         }finally {

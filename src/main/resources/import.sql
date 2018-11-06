@@ -449,6 +449,7 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'added_alic', 'Alicuotas agregadas.','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'repeated_alics', 'Registros encontrados en la tabla.','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'transfer_alic', 'Transferir Alicuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'process', 'Procesar','0','0',0);
 
 /* Búsqueda de muestras en simlab*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'simlab_menu', 'Simlab','0','0',0);
@@ -475,3 +476,22 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catKey`, `catPasive`, `catRoot`
 
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'volMin', 'Volumen mínimo','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'volMax', 'Volumen máximo','0','0',0);
+
+/* Solicitud muestra*/
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'sample_request', 'Solicitud de Muestras','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'request_date', 'Fecha de Solicitud','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'resp_request', 'Responsable de la Solicitud','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'approvedBy', 'Autorizado por','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'code', 'Código','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'aliVol2', 'Volumen Alicuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'subAliVol', 'Volumen Sub-Alicuota','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'sampling_date', 'Fecha de Toma de Muestra','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'purpose_request', 'Propósito de la solicitud','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'save_request', 'Guardar Solicitud','0','0',0);
+
+/*Busqueda Solicitud*/
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'search_request', 'Buscar Solicitud','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'initDate', 'Fecha Inicio','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'endDate', 'Fecha Fin','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'view_details', 'Visualizar detalles','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'idRequest', 'Id Solicitud','0','0',0);

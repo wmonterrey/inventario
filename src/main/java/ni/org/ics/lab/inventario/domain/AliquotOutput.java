@@ -7,14 +7,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Simple objeto de dominio que representa una alicuota
+ * Simple objeto de dominio que representa la salida de alicuota(s)
  * 
  * 
  * @author William Aviles
  **/
 
 @Entity
-@Table(name = "inv_salidas_alicuotas", catalog = "inventario")
+@Table(name = "inv_salidas_alicuotas", catalog = "inventario", uniqueConstraints={@UniqueConstraint(columnNames = {"CODIGO_ALIC","CODIGO_ESTUDIO","PASIVO"})})
 public class AliquotOutput extends BaseMetaData implements Auditable{
 	/**
 	 * 

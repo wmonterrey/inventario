@@ -24,7 +24,7 @@ public class AliquotOutputService {
      *
      *
      */
-    public void saveAliquotUse(AliquotOutput alicOut) {
+    public void saveAliquotOutput(AliquotOutput alicOut) {
         Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(alicOut);
     }

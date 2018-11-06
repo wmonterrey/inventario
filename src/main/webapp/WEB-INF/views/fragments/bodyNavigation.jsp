@@ -66,10 +66,10 @@
                                     <i class="fa fa-edit"></i>
                                     <spring:message code="sample_request"/></a>
                             </li>
-                            <li class="worksheet">
-                                <a href="<spring:url value="/worksheet/enterForm" htmlEscape="true "/>">
-                                    <i class="fa fa-file-excel-o"></i>
-                                    <spring:message code="sample_request"/></a>
+                            <li class="requestSheet">
+                                <a href="<spring:url value="/requestsheet/enterForm" htmlEscape="true "/>">
+                                    <i class="fa fa-search"></i>
+                                    <spring:message code="search_request"/></a>
                             </li>
 
                         </ul>

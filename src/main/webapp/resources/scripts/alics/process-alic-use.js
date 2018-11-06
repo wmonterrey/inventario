@@ -140,98 +140,98 @@ var CreateUse = function () {
 
                 });
 
-            $('#aliCode').change(
-
-                function() {
-                    App.blockUI();
-
-                    var res = false;
-                    try{
-                        var patt = new RegExp(patron);
-                        res = patt.test($('#aliCode').val());
-                    }
-                    catch(e){
-                        toastr["error"]( $('#aliCode').val() + ' ' + parametros.regExpInv, "Error!!");
-                        $('#aliCode').focus();
-                        return;
-                    }
-                    if(!Boolean(res)){
-                        toastr["error"](parametros.aliNotPattern, "Error!!");
-                        $('#aliCode').focus();
-                        return;
-                    }
-                    var alicuota = $('#aliCode').val().substring($('#aliCode').val().lastIndexOf(".")+1,$('#aliCode').val().length);
-                    var len = alicPerm.length;
-                    var alicEncontrada = false; var alicName = ""; var alicUse = ""; var alicTemp = 0; var code = "";
-                    for ( var i = 0; i < len; i++) {
-                        if(alicuota.localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
-                            alicEncontrada = true; alicName = alicPerm[i].tipoAlicuota.alicTypeName; alicUse = alicPerm[i].tipoAlicuota.alicTypeUse; alicTemp=alicPerm[i].tipoAlicuota.alicTypeTemp; code=alicPerm[i].tipoAlicuota.alicTypeCode;
-                            break;
-                        }
-                    }
-                    if(Boolean(alicEncontrada)){
-                        $('#alicTypeName').val(alicName);
-                        $('#alicTypeUse').val(alicUse);
-                        $('#alicTypeTemp').val(alicTemp);
-                        $('#type').val(code);
-                    }else{
-                        toastr.options = {
-                            "closeButton": true,
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "extendedTimeOut": 0,
-                            "tapToDismiss": false
-                        };
-                        toastr["error"](parametros.aliNotInList, "Error!!");
-                        $('#aliCode').focus();
-                    }
-
-                    App.unblockUI();
-                });
-
 
 
             function showInfo() {
-                App.blockUI();
-
-                var aliCode = $('#aliCode').val();
-                $('#aliPosition').val('');
-                $('#aliVol').val('');
-                $('#rackEquip').val('');
-                $('#boxRack').val('');
-                $('#aliBox').val('');
-                $('#dData').hide();
                 $('#add-alic-use1').hide();
 
+                //validate the code entered according to study
+                var res = false;
+                try{
+                    var patt = new RegExp(patron);
+                    res = patt.test($('#aliCode').val());
+                }
+                catch(e){
+                    toastr["error"]( $('#aliCode').val() + ' ' + parametros.regExpInv, "Error!!");
+                    $('#aliCode').focus();
+                    return;
+                }
+                if(!Boolean(res)){
+                    toastr["error"](parametros.aliNotPattern, "Error!!");
+                    $('#aliCode').focus();
+                    return;
+                }
 
-                $.getJSON(parametros.getAlicUrl, {
-                    aliCode: aliCode,
-                    ajax: 'true'
-                }, function (data) {
-                    if (data != null){
-                        $('#aliPosition').val(data.aliPosition);
-                        $('#aliVol').val(data.aliVol);
-                        $('#rackEquip').val(data.aliBox.boxRack.rackEquip.equipName);
-                        $('#boxRack').val(data.aliBox.boxRack.rackName);
-                        $('#aliBox').val(data.aliBox.boxName);
-                        $('#aliCode1').val(aliCode);
-                        $('#add-alic-use1').show();
 
-                    }else{
-                        toastr.options = {
-                            "closeButton": true,
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "extendedTimeOut": 0,
-                            "tapToDismiss": false
-                        };
-                        toastr["error"](parametros.msgNotFound, "Error!!");
+               var alicuota = $('#aliCode').val().substring($('#aliCode').val().lastIndexOf(".")+1,$('#aliCode').val().length);
+                var len = alicPerm.length;
+                var alicEncontrada = false;
+                for ( var i = 0; i < len; i++) {
+                    if(alicuota.localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
+                        alicEncontrada = true;
+                        break;
                     }
+                }
+                if(Boolean(alicEncontrada)){
+                    App.blockUI();
 
-                    App.unblockUI();
-                });
+                    var aliCode = $('#aliCode').val();
+                    var study = $('#boxStudy').val();
+                    $('#aliPosition').val('');
+                    $('#aliVol').val('');
+                    $('#rackEquip').val('');
+                    $('#boxRack').val('');
+                    $('#aliBox').val('');
+                    $('#dData').hide();
+                    $('#add-alic-use1').hide();
+
+
+                    $.getJSON(parametros.getAlicUrl, {
+                        aliCode: aliCode,
+                        study: study,
+                        ajax: 'true'
+                    }, function (data) {
+                        if (data != null){
+                            $('#aliPosition').val(data.aliPosition);
+                            $('#aliVol').val(data.aliVol);
+                            $('#rackEquip').val(data.aliBox.boxRack.rackEquip.equipName);
+                            $('#boxRack').val(data.aliBox.boxRack.rackName);
+                            $('#aliBox').val(data.aliBox.boxName);
+                            $('#aliCode1').val(aliCode);
+                            $('#add-alic-use1').show();
+
+                        }else{
+                            toastr.options = {
+                                "closeButton": true,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "extendedTimeOut": 0,
+                                "tapToDismiss": false
+                            };
+                            toastr["info"](parametros.msgNotFound, aliCode);
+                        }
+
+
+                        App.unblockUI();
+                    });
+
+
+                }else{
+                    toastr.options = {
+                        "closeButton": true,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "extendedTimeOut": 0,
+                        "tapToDismiss": false
+                    };
+                    toastr["error"](parametros.aliNotInList, "Error!!");
+                    $('#aliCode').focus();
+                }
+
+
+
 
 
             }

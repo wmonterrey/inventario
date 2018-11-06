@@ -218,52 +218,6 @@ var CreateTransfer = function () {
             });
 
 
-            form3.validate({
-                errorElement: 'span', //default input error message container
-                errorClass: 'help-block', // default input error message class
-                focusInvalid: true, // do not focus the last invalid input
-                ignore: "",
-                rules: {
-                    rows: {
-                        required: true
-                    },
-                    columns: {
-                        required: true
-                    }
-
-                },
-
-                invalidHandler: function (event, validator) { //display error alert on form submit
-                    success3.hide();
-                    error3.show();
-
-                    App.scrollTo(error3, -200);
-                },
-
-                highlight: function (element) { // hightlight error inputs
-                    $(element)
-                        .closest('.form-group').addClass('has-error'); // set error class to the control group
-                },
-
-                unhighlight: function (element) { // revert the change done by hightlight
-                    $(element)
-                        .closest('.form-group').removeClass('has-error'); // set error class to the control group
-                },
-
-                success: function (label) {
-                    label
-                        .closest('.form-group').removeClass('has-error'); // set success class to the control group
-                },
-
-                submitHandler: function (form) {
-                    success3.show();
-                    error3.hide();
-
-                }
-            });
-
-
-
             $('#boxStudy').change(
                 function () {
                     var boxStudy = $('#boxStudy').val();
@@ -280,6 +234,15 @@ var CreateTransfer = function () {
 
                         });
                         App.unblockUI();
+                    }
+
+                    var rows = $('#rows').val();
+                    var columns = $('#columns').val();
+
+                    if (rows != '' && columns != '' && boxStudy != ''){
+                        $('#dImportFile').show();
+                    }else{
+                        $('#dImportFile').hide();
                     }
 
                 });
@@ -338,8 +301,10 @@ var CreateTransfer = function () {
             function searchAlic() {
                 $("#sendDate").val(tod1.toISOString().substr(0, 10));
                 var aliCode = $('#aliCode').val();
+                var study = $('#boxStudy').val();
                 $.getJSON(parametros.getAlicUrl, {
                     aliCode: aliCode,
+                    study: study,
                     ajax: 'true'
                 }, function (data) {
                     if (data != null) {
@@ -353,11 +318,13 @@ var CreateTransfer = function () {
 
                         if (len > 0) {
                             var firstCellArray = [];
+                            var secondCellArray = [];
                             $.each(table1.fnGetData(), function (i, row) {
                                 firstCellArray.push(row[0]);
+                                secondCellArray.push(row[1]);
                             });
 
-                            if (firstCellArray.indexOf(aliCode) >= 0) {
+                            if (firstCellArray.indexOf(aliCode) >= 0 && secondCellArray.indexOf(study) >= 0) {
                                 toastr.options = {
                                     "closeButton": true,
                                     "onclick": null,
@@ -379,7 +346,7 @@ var CreateTransfer = function () {
                                     res = data.aliRes;
                                 }
 
-                                table1.fnAddData([data.aliCode, data.aliBox.boxRack.rackEquip.equipName, data.aliBox.boxRack.rackName, data.aliBox.boxName, data.aliPosition, res, data.aliVol, date1, data.recordUser, "<button type='button' value='" + data.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
+                                table1.fnAddData([data.aliId.aliCode, data.aliId.aliStudy, data.aliBox.boxRack.rackEquip.equipName, data.aliBox.boxRack.rackName, data.aliBox.boxName, data.aliPosition, res, data.aliVol, date1, data.recordUser, "<button type='button' value='" + data.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
                                 toastr.success(parametros.successmessage);
 
                             }
@@ -394,7 +361,7 @@ var CreateTransfer = function () {
                                 res = data.aliRes;
                             }
 
-                            table1.fnAddData([data.aliCode, data.aliBox.boxRack.rackEquip.equipName, data.aliBox.boxRack.rackName, data.aliBox.boxName, data.aliPosition, res, data.aliVol, date1, data.recordUser, "<button type='button' value='" + data.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
+                            table1.fnAddData([data.aliId.aliCode, data.aliId.aliStudy, data.aliBox.boxRack.rackEquip.equipName, data.aliBox.boxRack.rackName, data.aliBox.boxName, data.aliPosition, res, data.aliVol, date1, data.recordUser, "<button type='button' value='" + data.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
                             toastr.success(parametros.successmessage);
 
                         }
@@ -466,12 +433,24 @@ var CreateTransfer = function () {
                     codes2.push(row[0]);
                 });
 
+                var studies = [];
+                $.each(table1.fnGetData(), function (i, row) {
+                    studies.push(row[1]);
+                });
+
+                var studies2 = [];
+                $.each(table2.fnGetData(), function (i, row) {
+                    studies2.push(row[1]);
+                });
+
                 var obj = {};
                 var dt = $("#sendDate").val();
                 var dtF = new Date(dt);
 
                 obj['codes'] = codes.toString();
                 obj['codes2'] = codes2.toString();
+                obj['studies'] = studies.toString();
+                obj['studies2'] = studies2.toString();
                 obj['mensaje'] = '';
                 obj['enic'] = $("#enic").val();
                 obj['transportation'] = $('#transportation').find('option:selected').val();
@@ -550,8 +529,9 @@ var CreateTransfer = function () {
                 function () {
                     var rows = $('#rows').val();
                     var columns = $('#columns').val();
+                    var boxStudy = $('#boxStudy').val();
 
-                    if (rows != '' && columns != ''){
+                    if (rows != '' && columns != '' && boxStudy != '' ){
                         $('#dImportFile').show();
                     }else{
                         $('#dImportFile').hide();
@@ -563,8 +543,9 @@ var CreateTransfer = function () {
                 function () {
                     var rows = $('#rows').val();
                     var columns = $('#columns').val();
+                    var boxStudy = $('#boxStudy').val();
 
-                    if (rows != '' && columns != ''){
+                    if (rows != '' && columns != '' && boxStudy != '' ){
                         $('#dImportFile').show();
                     }else{
                         $('#dImportFile').hide();
@@ -593,6 +574,8 @@ var CreateTransfer = function () {
                    },
                  done: function (e, data) {
                      var length = data.result.length;
+                     var study = $('#boxStudy').val();
+
                      $("#sendDate").val(tod1.toISOString().substr(0, 10));
                      if (length > 0){
                          //check repeated records
@@ -600,6 +583,11 @@ var CreateTransfer = function () {
                          var dt1 = null;
                          var cont = 0;
                          $('#dTable').show();
+
+                         //clean inputs
+                         $('#rows').val('');
+                         $('#columns').val('');
+                         $('#boxStudy').val('').change();
 
                          for (var i = 0; i < length; i++) {
 
@@ -616,12 +604,12 @@ var CreateTransfer = function () {
                                  });
 
                                  if (firstCellArray.indexOf(data.result[i].aliCode) === -1) {
-                                     table2.fnAddData([data.result[i].aliCode, "<button type='button' value='" + data.result.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
+                                     table2.fnAddData([data.result[i].aliCode, study, "<button type='button' value='" + data.result.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
                                      cont++;
                                  }
                              } else{
                                  //add Data in empty table
-                                 table2.fnAddData([data.result[i].aliCode,"<button type='button' value='" + data.result.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
+                                 table2.fnAddData([data.result[i].aliCode, study, "<button type='button' value='" + data.result.aliCode + "' class='btn btn-danger btn-xs butt fa fa-times'></button>"]);
                                  cont++;
                              }
                          }

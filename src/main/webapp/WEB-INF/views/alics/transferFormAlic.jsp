@@ -108,13 +108,10 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-2">
-                                                <button disabled id="btnSearch" name="btnSearch" class="btn btn-primary">
-                                                    <spring:message code="search"/></button>
-
-                                            </div>
-
                                         </div>
+
+
+                                        <legend style="font-size: medium"><spring:message code="searchalic"/></legend>
 
 
                                         <div class="form-group">
@@ -133,6 +130,12 @@
 													<i class="fa fa-barcode"></i>
 												</span>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <button disabled id="btnSearch" name="btnSearch" class="btn btn-primary">
+                                                    <spring:message code="search"/></button>
+
                                             </div>
 
                                         </div>
@@ -226,6 +229,7 @@
                                         <thead>
                                         <tr>
                                             <th><spring:message code="aliCode"/></th>
+                                            <th><spring:message code="studyCode"/></th>
                                             <th><spring:message code="equipCode"/></th>
                                             <th><spring:message code="rackCode"/></th>
                                             <th><spring:message code="boxCode"/></th>
@@ -259,6 +263,7 @@
                                         <thead>
                                         <tr>
                                             <th><spring:message code="aliCode"/></th>
+                                            <th><spring:message code="studyCode"/></th>
                                             <th><spring:message code="delete"/></th>
                                         </tr>
                                         </thead>
@@ -272,7 +277,7 @@
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="fa fa-file"></i>
-                                    <spring:message code="alic_output"/>
+                                    <spring:message code="transfer_alic"/>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>

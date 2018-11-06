@@ -108,14 +108,9 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-2">
-                                                <button disabled id="btnSearch" name="btnSearch" class="btn btn-primary">
-                                                    <spring:message code="search"/></button>
-
-                                            </div>
-
                                         </div>
 
+                                        <legend style="font-size: medium"><spring:message code="searchalic"/></legend>
 
                                         <div class="form-group">
                                             <label style="text-align: left"
@@ -135,11 +130,16 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-2">
+                                                <button disabled id="btnSearch" name="btnSearch" class="btn btn-primary">
+                                                    <spring:message code="search"/></button>
+
+                                            </div>
+
                                         </div>
 
-
-
                                     </div>
+
                                 </form>
 
                                 <form action="#" autocomplete="off" id="upload-form" class="form-horizontal">
@@ -190,12 +190,11 @@
                                                     <input type="file" data-url="uploadFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="btn btn-default display-hide" name="file1" id="file1">
                                                 </div>
 
-
-
-
-
-
                                 </div>
+
+
+
+
                                 </div>
 
                                 </form>
@@ -226,6 +225,7 @@
                                         <thead>
                                         <tr>
                                             <th><spring:message code="aliCode"/></th>
+                                            <th><spring:message code="studyCode"/></th>
                                             <th><spring:message code="equipCode"/></th>
                                             <th><spring:message code="rackCode"/></th>
                                             <th><spring:message code="boxCode"/></th>
@@ -259,6 +259,7 @@
                                         <thead>
                                         <tr>
                                             <th><spring:message code="aliCode"/></th>
+                                            <th><spring:message code="studyCode"/></th>
                                             <th><spring:message code="delete"/></th>
                                         </tr>
                                         </thead>
