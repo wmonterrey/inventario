@@ -488,6 +488,8 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'sampling_date', 'Fecha de Toma de Muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'purpose_request', 'Propósito de la solicitud','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'save_request', 'Guardar Solicitud','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'reqTitle', 'Solicitud de Muestra para CNDR/ICS-Nicaragua','0','0',0);
+
 
 /*Busqueda Solicitud*/
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'search_request', 'Buscar Solicitud','0','0',0);
