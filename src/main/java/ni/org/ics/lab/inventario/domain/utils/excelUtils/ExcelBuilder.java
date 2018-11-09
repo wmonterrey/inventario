@@ -39,6 +39,7 @@ public class ExcelBuilder extends AbstractExcelView {
         String h1 = model.get( "header1" ).toString();
         String h2 = model.get( "header2" ).toString();
         String h3 = model.get( "header3" ).toString();
+        String detailTitle = model.get( "detailTitle" ).toString();
 
         String reporte = model.get( "report" ).toString();
         // create a new Excel sheet
@@ -48,7 +49,7 @@ public class ExcelBuilder extends AbstractExcelView {
         // create style for header cells
         Font boldFont = workbook.createFont();
         boldFont.setFontName( "Arial" );
-        boldFont.setFontHeight( (short) (11 * 17) );
+        boldFont.setFontHeight( (short) (12 * 20) );
         boldFont.setColor( HSSFColor.BLACK.index );
         boldFont.setBold(true);
 
@@ -118,23 +119,26 @@ public class ExcelBuilder extends AbstractExcelView {
         //tabla con dx positivos
         // create header row
         HSSFRow header1 = sheet.createRow( 1 );
-        createHorizontalCellRange( sheet, header1, h1, 0, 1, false, boldCellStyle );
-        createHorizontalCellRange( sheet, header1, request.getRequestDate(), 2, 7, false, dateCellStyle );
+        createHorizontalCellRange( sheet, header1, h1, 0, 2, false, boldCellStyle );
+        createHorizontalCellRange( sheet, header1, request.getRequestDate(), 3, 7, false, dateCellStyle );
 
         header1 = sheet.createRow( 2 );
-        createHorizontalCellRange( sheet, header1, h2, 0, 1, false, boldCellStyle );
-        createHorizontalCellRange( sheet, header1, request.getRespRequest(), 2, 7, false, contentCellStyle );
+        createHorizontalCellRange( sheet, header1, h2, 0, 2, false, boldCellStyle );
+        createHorizontalCellRange( sheet, header1, request.getRespRequest(), 3, 7, false, contentCellStyle );
 
         header1 = sheet.createRow( 3 );
-        createHorizontalCellRange( sheet, header1, h3, 0, 1, false, boldCellStyle );
-        createHorizontalCellRange( sheet, header1, request.getAuthorizedBy(), 2, 7, false, contentCellStyle );
+        createHorizontalCellRange( sheet, header1, h3, 0, 2, false, boldCellStyle );
+        createHorizontalCellRange( sheet, header1, request.getAuthorizedBy(), 3, 7, false, contentCellStyle );
 
 
         HSSFRow header = sheet.createRow( 5 );
         setHeaderTable( header, headerStyle2, columns );
+        int nro = 0;
 
         for (SampleRequestDetail registro : reqList) {
             HSSFRow aRow = sheet.createRow( rowCount++ );
+            nro++;
+            setRowData1( aRow,nro,contentCellStyle);
             setRowData( aRow, registro, contentCellStyle, dateCellStyle );
         }
         if (reqList.size() <= 0) {
@@ -144,17 +148,15 @@ public class ExcelBuilder extends AbstractExcelView {
             aRow.getCell( 0 ).setCellStyle( noDataCellStyle );
         }
 
-
-        for (int i = 0; i < columns.size(); i++) {
-            sheet.autoSizeColumn( i );
-        }
-
         // create style for title cells
         CellStyle titleStyle = workbook.createCellStyle();
+        titleStyle.setFillForegroundColor(HSSFColor.GREEN.index);
+        titleStyle.setFillPattern( FillPatternType.SOLID_FOREGROUND );
+        titleStyle.setAlignment( HorizontalAlignment.CENTER );
         font = workbook.createFont();
         font.setFontName( "Arial" );
         font.setBold( true );
-        font.setFontHeight( (short) (16 * 20) );
+        font.setFontHeight( (short) (12 * 18) );
         font.setColor( HSSFColor.BLACK.index );
         titleStyle.setFont( font );
 
@@ -168,9 +170,15 @@ public class ExcelBuilder extends AbstractExcelView {
         filterStyle.setFont( font );
 
         HSSFRow title = sheet.createRow( 0 );
-        title.createCell( 1 ).setCellValue( model.get( "title" ).toString() );
-        title.getCell( 1 ).setCellStyle( titleStyle );
+        createHorizontalCellRange( sheet, title, model.get( "title" ).toString(), 0, 7, false, titleStyle );
 
+        title = sheet.createRow( 4 );
+        createHorizontalCellRange( sheet, title, detailTitle, 0, 7, false, titleStyle );
+
+
+        for (int i = 0; i < columns.size(); i++) {
+            sheet.autoSizeColumn( i );
+        }
 
     }
 
@@ -185,61 +193,70 @@ public class ExcelBuilder extends AbstractExcelView {
     }
 
     public static void setRowData(HSSFRow aRow, SampleRequestDetail registro, CellStyle contentCellStyle, CellStyle dateCellStyle) {
-        aRow.createCell( 0 );
-        aRow.getCell( 0 ).setCellValue( registro.getCode() );
-        aRow.getCell( 0 ).setCellType( CellType.STRING );
-        aRow.getCell( 0 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 1 );
-        aRow.getCell( 1 ).setCellValue( registro.getAliCode() );
+        aRow.getCell( 1 ).setCellValue( registro.getCode() );
         aRow.getCell( 1 ).setCellType( CellType.STRING );
         aRow.getCell( 1 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 2 );
-        aRow.getCell( 2 ).setCellValue( registro.getAliVol() );
-        aRow.getCell( 2 ).setCellType( CellType.NUMERIC );
+        aRow.getCell( 2 ).setCellValue( registro.getAliCode() );
+        aRow.getCell( 2 ).setCellType( CellType.STRING );
         aRow.getCell( 2 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 3 );
-        aRow.getCell( 3 ).setCellValue( registro.getSubAliVol() );
+        aRow.getCell( 3 ).setCellValue( registro.getAliVol() );
         aRow.getCell( 3 ).setCellType( CellType.NUMERIC );
         aRow.getCell( 3 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 4 );
-        aRow.getCell( 4 ).setCellValue( registro.getStudy() );
-        aRow.getCell( 4 ).setCellType( CellType.STRING );
+        aRow.getCell( 4 ).setCellValue( registro.getSubAliVol() );
+        aRow.getCell( 4 ).setCellType( CellType.NUMERIC );
         aRow.getCell( 4 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 5 );
-        aRow.getCell( 5 ).setCellValue( registro.getAlicTypeName() );
+        aRow.getCell( 5 ).setCellValue( registro.getStudy() );
         aRow.getCell( 5 ).setCellType( CellType.STRING );
         aRow.getCell( 5 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 6 );
-        aRow.getCell( 6 ).setCellValue( registro.getSamplingDate() );
-        aRow.getCell( 6 ).setCellStyle( dateCellStyle );
+        aRow.getCell( 6 ).setCellValue( registro.getAlicTypeName() );
+        aRow.getCell( 6 ).setCellType( CellType.STRING );
+        aRow.getCell( 6 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 7 );
-        aRow.getCell( 7 ).setCellValue( registro.getPurposeRequest() );
-        aRow.getCell( 7 ).setCellType( CellType.STRING );
-        aRow.getCell( 7 ).setCellStyle( contentCellStyle );
+        aRow.getCell( 7 ).setCellValue( registro.getSamplingDate() );
+        aRow.getCell( 7 ).setCellStyle( dateCellStyle );
 
         aRow.createCell( 8 );
-        aRow.getCell( 8 ).setCellValue( registro.getRecordUser() );
+        aRow.getCell( 8 ).setCellValue( registro.getPurposeRequest() );
         aRow.getCell( 8 ).setCellType( CellType.STRING );
         aRow.getCell( 8 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 9 );
-        aRow.getCell( 9 ).setCellValue( registro.getDestination() );
+        aRow.getCell( 9 ).setCellValue( registro.getRecordUser() );
         aRow.getCell( 9 ).setCellType( CellType.STRING );
         aRow.getCell( 9 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 10 );
-        aRow.getCell( 10 ).setCellValue( registro.getComments() );
+        aRow.getCell( 10 ).setCellValue( registro.getDestination() );
         aRow.getCell( 10 ).setCellType( CellType.STRING );
         aRow.getCell( 10 ).setCellStyle( contentCellStyle );
 
+        aRow.createCell( 11 );
+        aRow.getCell( 11 ).setCellValue( registro.getComments() );
+        aRow.getCell( 11 ).setCellType( CellType.STRING );
+        aRow.getCell( 11 ).setCellStyle( contentCellStyle );
 
+
+    }
+
+    public static void setRowData1(HSSFRow aRow, int nro, CellStyle contentCellStyle) {
+
+        aRow.createCell( 0 );
+        aRow.getCell( 0 ).setCellValue(nro);
+        aRow.getCell( 0 ).setCellType( CellType.NUMERIC );
+        aRow.getCell( 0 ).setCellStyle( contentCellStyle );
     }
 
 

@@ -488,7 +488,6 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'sampling_date', 'Fecha de Toma de Muestra','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'purpose_request', 'Propósito de la solicitud','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'save_request', 'Guardar Solicitud','0','0',0);
-INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'reqTitle', 'Solicitud de Muestra para CNDR/ICS-Nicaragua','0','0',0);
 
 
 /*Busqueda Solicitud*/
@@ -497,3 +496,7 @@ INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) V
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'endDate', 'Fecha Fin','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'view_details', 'Visualizar detalles','0','0',0);
 INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'idRequest', 'Id Solicitud','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'detailTitle', 'Detalles de las muestras solicitadas','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'reqTitle', 'Solicitud de Muestra para CNDR/ICS-Nicaragua','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'requestMxICS', 'Solicitud Mx Biologicas ICS','0','0',0);
+INSERT INTO `inv_mensajes` (`messageKey`, `es`, `catPasive`, `isCat`, `orden`) VALUES ( 'numLabel', 'No.','0','0',0);

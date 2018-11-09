@@ -187,9 +187,6 @@ var RequestSheet = function () {
             {
 
                 var len =  details.length;
-                console.log(details);
-                console.log(len);
-
 
                 var child = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
                     '<tr><td style="font-weight: bold">' + parametros.code + '</td><td style="font-weight: bold">' + parametros.aliCode + '</td><td style="font-weight: bold">' + parametros.aliVol2 + '</td><td style="font-weight: bold">' + parametros.subAliVol + '</td><td style="font-weight: bold">' + parametros.boxStudy + '</td><td style="font-weight: bold">' + parametros.alicTypeSample + '</td><td style="font-weight: bold">' + parametros.samplingDate + '</td><td style="font-weight: bold">' + parametros.purposeRequest + '</td><td style="font-weight: bold">' + parametros.username + '</td><td style="font-weight: bold">' + parametros.destination + '</td><td style="font-weight: bold">' + parametros.centerObs + '</td></tr>';

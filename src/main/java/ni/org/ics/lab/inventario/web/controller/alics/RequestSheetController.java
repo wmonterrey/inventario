@@ -2,10 +2,8 @@ package ni.org.ics.lab.inventario.web.controller.alics;
 
 import ni.org.ics.lab.inventario.domain.SampleRequest;
 import ni.org.ics.lab.inventario.domain.SampleRequestDetail;
-import ni.org.ics.lab.inventario.service.MessageResourceService;
-import ni.org.ics.lab.inventario.service.RequestSheetService;
-import ni.org.ics.lab.inventario.service.SampleRequestService;
-import ni.org.ics.lab.inventario.service.UsuarioService;
+import ni.org.ics.lab.inventario.domain.Study;
+import ni.org.ics.lab.inventario.service.*;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +40,8 @@ public class RequestSheetController {
     private MessageResourceService messageResource;
     @Resource(name="sampleRequestService")
     private SampleRequestService requestService;
+    @Resource(name="estudioService")
+    private EstudioService estudioService;
 
     @RequestMapping(value = "enterForm", method = RequestMethod.GET)
     public String initCreation(Model model) {
@@ -91,13 +91,15 @@ public class RequestSheetController {
         excelView.addObject("detail", req);
         excelView.addObject("columns", columnas);
         excelView.addObject("request", request);
-        excelView.addObject("report", "Solicitud Mx Biologicas ICS");
+        excelView.addObject("report", messageResource.getMensaje("requestMxICS").getSpanish());
+        excelView.addObject("detailTitle", messageResource.getMensaje("detailTitle").getSpanish());
 
         return excelView;
     }
 
 
     private void setNombreColumnasReqSheet(List<String> columnas){
+        columnas.add(messageResource.getMensaje("numLabel" ).getSpanish());
         columnas.add(messageResource.getMensaje("code" ).getSpanish());
         columnas.add(messageResource.getMensaje("aliCode" ).getSpanish());
         columnas.add(messageResource.getMensaje("aliVol2" ).getSpanish());
