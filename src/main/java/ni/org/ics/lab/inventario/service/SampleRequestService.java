@@ -23,8 +23,7 @@ public class SampleRequestService {
     private SessionFactory sessionFactory;
 
     /**
-     * Guarda un SampleRequest
-     *
+     * Save SampleRequest
      *
      */
     public void saveSampleRequest(SampleRequest sampleReq) {
@@ -33,8 +32,7 @@ public class SampleRequestService {
     }
 
     /**
-     * Guarda un SampleRequest
-     *
+     * Save SampleRequestDetail
      *
      */
     public void saveSampleReqDetail(SampleRequestDetail detail) {
@@ -42,7 +40,11 @@ public class SampleRequestService {
         session.saveOrUpdate(detail);
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Get SampleRequest by idRequest
+     *
+     */
+
     public SampleRequest getRequestById(String idRequest) {
         // Retrieve session from Hibernate
         Session session = sessionFactory.getCurrentSession();
