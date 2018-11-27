@@ -215,7 +215,7 @@ public class ExcelBuilder extends AbstractExcelView {
         aRow.getCell( 4 ).setCellStyle( contentCellStyle );
 
         aRow.createCell( 5 );
-        aRow.getCell( 5 ).setCellValue( registro.getStudy() );
+        aRow.getCell( 5 ).setCellValue(registro.getStudy().getStudyName());
         aRow.getCell( 5 ).setCellType( CellType.STRING );
         aRow.getCell( 5 ).setCellStyle( contentCellStyle );
 

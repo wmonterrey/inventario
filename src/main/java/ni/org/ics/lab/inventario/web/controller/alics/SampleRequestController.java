@@ -2,15 +2,9 @@ package ni.org.ics.lab.inventario.web.controller.alics;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import ni.org.ics.lab.inventario.domain.Aliquot;
-import ni.org.ics.lab.inventario.domain.AliquotOutput;
-import ni.org.ics.lab.inventario.domain.SampleRequest;
-import ni.org.ics.lab.inventario.domain.SampleRequestDetail;
+import ni.org.ics.lab.inventario.domain.*;
 import ni.org.ics.lab.inventario.domain.relationships.StudyCenter;
-import ni.org.ics.lab.inventario.service.MessageResourceService;
-import ni.org.ics.lab.inventario.service.SampleRequestService;
-import ni.org.ics.lab.inventario.service.StudyCenterService;
-import ni.org.ics.lab.inventario.service.UsuarioService;
+import ni.org.ics.lab.inventario.service.*;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +44,9 @@ public class SampleRequestController {
     private MessageResourceService messageResourceService;
     @Resource(name="sampleRequestService")
     private SampleRequestService sampleRequestService;
+    @Resource(name="estudioService")
+    private EstudioService estudioService;
+
 
     @RequestMapping(value = "enterForm", method = RequestMethod.GET)
     public String initCreation(Model model) {
@@ -146,7 +143,8 @@ public class SampleRequestController {
                     }
 
                     if(sam[4] != null){
-                        detail.setStudy(sam[4]);
+                        Study study = estudioService.getStudy( sam[4]);
+                        detail.setStudy(study);
                     }
 
                     if(sam[5] != null){
@@ -165,11 +163,11 @@ public class SampleRequestController {
                         detail.setDestination(sam[8]);
                     }
 
-                    if (sam.length == 10){
-                        if(sam[9] != null){
+
+                    if(!sam[9].equals("")){
                             detail.setComments(sam[9]);
                         }
-                    }
+
 
 
                     sampleRequestService.saveSampleReqDetail(detail);

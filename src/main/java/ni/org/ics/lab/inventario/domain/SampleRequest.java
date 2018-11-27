@@ -2,6 +2,7 @@ package ni.org.ics.lab.inventario.domain;
 
 import ni.org.ics.lab.inventario.domain.audit.Auditable;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -32,7 +33,9 @@ public class SampleRequest extends BaseMetaData implements Auditable {
         this.idRequest = idRequest;
     }
 
+
     @Column(name = "FECHA_SOLICITUD", nullable = false)
+    @Temporal(TemporalType.DATE)
     public Date getRequestDate() {
         return requestDate;
     }

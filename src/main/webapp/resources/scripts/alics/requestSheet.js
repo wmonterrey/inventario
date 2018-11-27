@@ -157,8 +157,11 @@ var RequestSheet = function () {
                             var action = parametros.getDownloadExcelUrl + "?code="+code ;
                             var date = new Date(data[i].requestDate);
 
+                            var date1 = data[i].requestDate;
+
+
                             //add Data in empty table
-                            table1.fnAddData(["<img src='../resources/img/details_open.png' />", data[i].idRequest, date.toLocaleString(), data[i].respRequest, data[i].authorizedBy,'<a title="Descargar Excel" href=' + action + ' class="btn btn-success btn-xs"><i class="fa fa-file-excel-o"></i></a>' ]);
+                            table1.fnAddData(["<img src='../resources/img/details_open.png' />", data[i].idRequest, date.toLocaleDateString() , data[i].respRequest, data[i].authorizedBy,'<a title="Descargar Excel" href=' + action + ' class="btn btn-success btn-xs"><i class="fa fa-file-excel-o"></i></a>' ]);
                         }
 
 
@@ -205,7 +208,7 @@ var RequestSheet = function () {
 
 
                     child = child +
-                        '<tr></tr><tr><td>' + details[i].code + '</td><td>' + details[i].aliCode + '</td><td>' + details[i].aliVol + '</td><td>' + details[i].subAliVol + '</td><td>' + details[i].study + '</td><td>' + details[i].alicTypeName + '</td><td>' + dt.toLocaleDateString() + '</td><td>' + details[i].purposeRequest + '</td><td>' + details[i].recordUser + '</td><td>' + details[i].destination + '</td><td>' + obs + '</td></tr>';
+                        '<tr></tr><tr><td>' + details[i].code + '</td><td>' + details[i].aliCode + '</td><td>' + details[i].aliVol + '</td><td>' + details[i].subAliVol + '</td><td>' + details[i].study.studyName + '</td><td>' + details[i].alicTypeName + '</td><td>' + dt.toLocaleDateString() + '</td><td>' + details[i].purposeRequest + '</td><td>' + details[i].recordUser + '</td><td>' + details[i].destination + '</td><td>' + obs + '</td></tr>';
                 }
                 child = child + '</table>';
                 return child;

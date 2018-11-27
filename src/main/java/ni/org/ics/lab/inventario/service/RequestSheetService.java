@@ -27,7 +27,7 @@ public class RequestSheetService {
     public List<SampleRequest> getAllRequestByDates(Date fromDate, Date toDate) {
         // Retrieve session from Hibernate
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("FROM SampleRequest req where req.requestDate between :fromDate and :toDate order by req.recordDate");
+        Query query = session.createQuery("FROM SampleRequest req where req.requestDate between :fromDate and :toDate order by req.recordDate desc");
         query.setParameter("fromDate",fromDate);
         query.setParameter("toDate",toDate);
         return query.list();

@@ -21,7 +21,7 @@ public class SampleRequestDetail extends BaseMetaData implements Auditable {
     private String aliCode;
     private float aliVol;
     private float subAliVol;
-    private String study;
+    private Study study;
     private String alicTypeName;
     private Date samplingDate;
     private String purposeRequest;
@@ -88,12 +88,14 @@ public class SampleRequestDetail extends BaseMetaData implements Auditable {
         this.subAliVol = subAliVol;
     }
 
-    @Column(name = "NOMBRE_ESTUDIO", nullable = false, length =150)
-    public String getStudy() {
+    @ManyToOne(optional=false)
+    @JoinColumn(name="NOMBRE_ESTUDIO")
+    @ForeignKey(name = "STUDY_REQ_FK")
+    public Study getStudy() {
         return study;
     }
 
-    public void setStudy(String study) {
+    public void setStudy(Study study) {
         this.study = study;
     }
 
