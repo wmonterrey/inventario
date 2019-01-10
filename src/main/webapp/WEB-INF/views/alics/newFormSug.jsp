@@ -59,7 +59,7 @@
 			<!-- BEGIN PAGE CONTENT-->
 			
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div class="portlet">
 						<div class="portlet-title">
 							<div class="caption">
@@ -266,7 +266,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-9">
 					<div class="portlet">
 						<div class="portlet-title">
 							<div class="caption">

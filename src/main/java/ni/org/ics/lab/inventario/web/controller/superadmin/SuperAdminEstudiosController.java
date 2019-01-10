@@ -120,6 +120,7 @@ public class SuperAdminEstudiosController {
 	public ResponseEntity<String> processStudyForm( @RequestParam(value="studyCode", required=false, defaultValue="" ) String studyCode
 			, @RequestParam( value="studyName", required=true ) String studyName
 			, @RequestParam( value="studyPattern", required=true ) String studyPattern
+			, @RequestParam( value="studyFormat", required=true ) String studyFormat
 			, @RequestParam( value="alicuotas", required=false, defaultValue="" ) List<String> alicuotas
 			, @RequestParam( value="studyObs", required=false, defaultValue="" ) String studyObs			
 	        )
@@ -137,6 +138,7 @@ public class SuperAdminEstudiosController {
 				study.setStudyName(studyName);
 				study.setStudyObs(studyObs);
 				study.setStudyPattern(studyPattern);
+				study.setStudyFormat(studyFormat);
 				//Guardar el nuevo estudio
 				this.estudioService.saveStudy(study);
 				//Agregar los tipos de alicuotas seleccionados al estudio
@@ -154,6 +156,7 @@ public class SuperAdminEstudiosController {
 				study = this.estudioService.getStudy(studyCode);
 				study.setStudyName(studyName);
 				study.setStudyPattern(studyPattern);
+				study.setStudyFormat(studyFormat);
 				study.setStudyObs(studyObs);
 				//Actualiza el centro
 				this.estudioService.saveStudy(study);

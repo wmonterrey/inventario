@@ -11,8 +11,10 @@
 		<intercept-url pattern="/logout" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<intercept-url pattern="/resources/.*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	    <intercept-url pattern="/alics/send.*" access="ROLE_SEND_ALIC" />
+	    <intercept-url pattern="/alics/transfer.*" access="ROLE_SEND_ALIC" />
+	    <intercept-url pattern="/alics/request.*" access="ROLE_SEND_ALIC" />
 	    <intercept-url pattern="/alics/use.*" access="ROLE_USE_ALIC" />
-	    <intercept-url pattern="/alics/search.*" access="ROLE_EDIT_ALIC,ROLE_DEL_ALIC" />
+	    <intercept-url pattern="/alics/search.*" access="ROLE_ADD_ALIC,ROLE_EDIT_ALIC,ROLE_DEL_ALIC,ROLE_USE_ALIC,ROLE_SEND_ALIC" />
 	    <intercept-url pattern="/alics.*" access="ROLE_EDIT_ALIC,ROLE_DEL_ALIC,ROLE_USE_ALIC,ROLE_SEND_ALIC" />
 	    <intercept-url pattern="/addalic/.*" access="ROLE_ADD_ALIC" />
 	    <intercept-url pattern="/temps/.*" access="ROLE_TEMP" />

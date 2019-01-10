@@ -189,6 +189,10 @@ var CreateLocation = function () {
             $('#rackCode').change(
                 function() {
                     App.blockUI();
+                    $("#boxName").select2('data',null);
+    				$("#boxName").empty();
+    				$('#boxStudy').val("");
+    				$(".grid").empty();
                     $.getJSON(parametros.boxesUrl, {
                         rackCode : $('#rackCode').val(),
                         ajax : 'true'
@@ -198,8 +202,8 @@ var CreateLocation = function () {
                         var html='<option value=""></option>';
                         var len = data.length;
                         for ( var i = 0; i < len; i++) {
-                            html += '<option value="' + data[i].boxCode + '">'
-                                + data[i].boxName + " - "  + data[i].boxStudy.studyName + " - "  + data[i].boxAlicUse + " - "  + data[i].boxAlicType + " - "  + data[i].boxResult +  '</option>';
+                            html += '<option value="' + data[i].box.boxCode + '">'
+                                + data[i].box.boxName + " - "  + data[i].box.boxStudy.studyName + " - "  + data[i].box.boxAlicUse + " - "  + data[i].box.boxAlicType + " - "  + data[i].box.boxResult + " - "  + data[i].disponibles  +  '</option>';
                         }
                         $('#boxName').html(html);
                         $('#boxName').focus();
@@ -307,7 +311,7 @@ var CreateLocation = function () {
           	    				return;
                 			}
             				else{
-            					var alicuotaIngresada = $('#aliCode').val().match(pattAlic);
+            					alicuotaIngresada = $('#aliCode').val().match(pattAlic);
             				}
             				
             			}
@@ -317,14 +321,17 @@ var CreateLocation = function () {
 	            			return;
 	            		}
             				
+	            		if(formato.localeCompare('.+')==0) alicuotaIngresada[0]="ANY";
             			
             			var len = alicPermStu.length;
             			var len2 = alicPermBox.length;
             			
             			var alicEncontrada = false; var alicName = ""; var alicUse = ""; var alicTemp = 0; var alicEncontradaBox = false;
+            			var varAlicTypeName = null;
 
         				for ( var i = 0; i < len; i++) {
-        					if(alicuotaIngresada[0].localeCompare(alicPermStu[i].tipoAlicuota.alicTypeName)==0){
+        					varAlicTypeName = alicPermStu[i].tipoAlicuota.alicTypeName;
+        					if(alicuotaIngresada[0].localeCompare(varAlicTypeName)==0){
         						alicEncontrada = true;
         						for(var j = 0; j < len2; j++){
         							if(alicuotaIngresada[0].localeCompare(alicPermBox[j])==0){

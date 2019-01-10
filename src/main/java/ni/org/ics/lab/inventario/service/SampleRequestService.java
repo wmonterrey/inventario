@@ -1,6 +1,5 @@
 package ni.org.ics.lab.inventario.service;
 
-import ni.org.ics.lab.inventario.domain.AliquotOutput;
 import ni.org.ics.lab.inventario.domain.SampleRequest;
 import ni.org.ics.lab.inventario.domain.SampleRequestDetail;
 import org.hibernate.Query;

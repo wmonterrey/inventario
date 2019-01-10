@@ -38,7 +38,7 @@ import java.util.*;
  * @author ics
  */
 @Controller
-@RequestMapping("/alictransfer*")
+@RequestMapping("/alics/transfer/*")
 public class AliquotTransferController {
 
     private static final Logger logger = LoggerFactory.getLogger(AliquotUseController.class);

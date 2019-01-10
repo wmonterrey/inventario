@@ -142,6 +142,8 @@ var CreateAlic = function () {
 	            			$('#aliCode').focus();
 	            			return;
 	            		}
+	            		
+	            		if(formato.localeCompare('.+')==0) alicuotaIngresada[0]="ANY";
             				
             			
             			var len = alicPerm.length;

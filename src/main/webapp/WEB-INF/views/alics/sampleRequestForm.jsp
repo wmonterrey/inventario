@@ -46,7 +46,7 @@
                                 <i class="fa fa-home"></i>
                                 <a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home"/></a>
                                 <i class="fa fa-angle-right"></i> <a
-                                    href="<spring:url value="/samplerequest/enterForm" htmlEscape="true "/>"><spring:message
+                                    href="<spring:url value="/alics/request/samplerequest/enterForm" htmlEscape="true "/>"><spring:message
                                     code="sample_request"/></a>
                             </li>
                         </ul>
@@ -438,9 +438,9 @@
 <spring:url value="/resources/plugins/isotope/isotope.pkgd.js" var="isotope"/>
 <script type="text/javascript" src="${isotope}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/alicUse/getAlic" var="getAlicUrl"/>
+<spring:url value="/alics/use/getAlic" var="getAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicStudyUrl"/>
-<spring:url value="/samplerequest/saveRequest" var="saveRequestUrl"/>
+<spring:url value="/alics/request/samplerequest/saveRequest" var="saveRequestUrl"/>
 
 <c:set var="successmessage"><spring:message code="process.success"/></c:set>
 <c:set var="errormessage"><spring:message code="process.errors"/></c:set>
@@ -452,7 +452,7 @@
 <c:set var="aliNotPattern"><spring:message code="aliNotPattern"/></c:set>
 <script>
     $(function () {
-        $("li.addalic").removeClass("request").addClass("active");
+        $("li.alics").removeClass("request").addClass("active");
         $("li.request").removeClass("request").addClass("active");
     });
 </script>

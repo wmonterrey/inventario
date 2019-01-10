@@ -152,6 +152,29 @@ public class NewAliquotController {
         return boxes;	
     }
     
+    /**
+     * Retorna una lista de cajas. Acepta una solicitud GET para JSON
+     * @return Un arreglo JSON de racks
+	 * @throws ParseException 
+     */
+    @RequestMapping(value = "boxesav", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody List<BoxAliquots> fetchBoxesWithDispJson(@RequestParam(value = "rackCode", required = true) String rackCode) throws ParseException {
+        logger.info("Obteniendo los boxes en JSON");
+        List<Box> boxes = null; 
+        List<BoxAliquots> cajas = new ArrayList<BoxAliquots>();
+        Long disponibles;
+        UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        Rack rack = rackService.getRack(rackCode, usuario.getUsername());
+        if (rack!=null){
+        	boxes = boxService.getBoxes(rackCode);
+        }
+        for(Box b:boxes) {
+        	disponibles = b.getBoxCapacity() - this.boxService.getEspaciosOcupados(b.getBoxCode());
+        	cajas.add(new BoxAliquots(b,disponibles.intValue()));
+        }
+        return cajas;	
+    }
+    
     
     /**
      * Retorna una lista de cajas. Acepta una solicitud GET para JSON

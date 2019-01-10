@@ -43,6 +43,11 @@ var CreateStudy = function () {
                         minlength: 1,
                         maxlength: 750
                     },
+                    studyFormat: {
+                        required: true,
+                        minlength: 1,
+                        maxlength: 750
+                    },
                     studyObs: {
                         required: false,
                         maxlength: 500

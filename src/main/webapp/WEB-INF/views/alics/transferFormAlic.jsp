@@ -719,10 +719,10 @@
 
 
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/alicUse/getAlic" var="getAlicUrl"/>
+<spring:url value="/alics/use/getAlic" var="getAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicStudyUrl"/>
-<spring:url value="/alictransfer/saveTransfer" var="saveAlicUrl"/>
-<spring:url value="/alictransfer/uploadFile" var="uploadFileUrl"/>
+<spring:url value="/alics/transfer/saveTransfer" var="saveAlicUrl"/>
+<spring:url value="/alics/transfer/uploadFile" var="uploadFileUrl"/>
 
 <c:set var="successmessage">
     <spring:message code="process.success"/>
@@ -763,7 +763,7 @@
 
 <script>
     $(function () {
-        $("li.addalic").removeClass("addalic").addClass("active");
+        $("li.alics").removeClass("addalic").addClass("active");
         $("li.transferAlic").removeClass("transferAlic").addClass("active");
     });
 </script>

@@ -48,7 +48,7 @@
                                 <i class="fa fa-home"></i>
                                 <a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home"/></a>
                                 <i class="fa fa-angle-right"></i> <a
-                                    href="<spring:url value="/alicoutput/exitForm" htmlEscape="true "/>"><spring:message
+                                    href="<spring:url value="/alics/send/exitForm" htmlEscape="true "/>"><spring:message
                                     code="alic_output"/></a>
                             </li>
                         </ul>
@@ -693,10 +693,10 @@
 
 
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/alicUse/getAlic" var="getAlicUrl"/>
+<spring:url value="/alics/use/getAlic" var="getAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicStudyUrl"/>
-<spring:url value="/alicoutput/saveExit" var="saveAlicUrl"/>
-<spring:url value="/alicoutput/uploadFile" var="uploadFileUrl"/>
+<spring:url value="/alics/send/saveExit" var="saveAlicUrl"/>
+<spring:url value="/alics/send/uploadFile" var="uploadFileUrl"/>
 
 <c:set var="successmessage">
     <spring:message code="process.success"/>
@@ -737,8 +737,8 @@
 
 <script>
     $(function () {
-        $("li.addalic").removeClass("addalic").addClass("active");
-        $("li.exitalic").removeClass("exitalic").addClass("active");
+        $("li.alics").removeClass("alics").addClass("active");
+        $("li.sendalic").removeClass("sendalic").addClass("active");
     });
 </script>
 <script>

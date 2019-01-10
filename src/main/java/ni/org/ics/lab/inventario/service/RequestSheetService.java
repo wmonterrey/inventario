@@ -1,6 +1,5 @@
 package ni.org.ics.lab.inventario.service;
 
-import ni.org.ics.lab.inventario.domain.RegUso;
 import ni.org.ics.lab.inventario.domain.SampleRequest;
 import ni.org.ics.lab.inventario.domain.SampleRequestDetail;
 import org.hibernate.Query;
@@ -33,7 +32,8 @@ public class RequestSheetService {
         return query.list();
     }
 
-    public List<SampleRequestDetail> getRequestByCode(String code) {
+    @SuppressWarnings("unchecked")
+	public List<SampleRequestDetail> getRequestByCode(String code) {
         // Retrieve session from Hibernate
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM SampleRequestDetail req where req.idRequest.idRequest =:code ");

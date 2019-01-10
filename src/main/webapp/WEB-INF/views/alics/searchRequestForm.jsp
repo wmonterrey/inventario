@@ -220,9 +220,9 @@
 <spring:url value="/resources/plugins/isotope/isotope.pkgd.js" var="isotope"/>
 <script type="text/javascript" src="${isotope}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/requestsheet/searchRequests" var="getReqUrl"/>
-<spring:url value="/requestsheet/searchRequest" var="getRequestUrl"/>
-<spring:url value="/requestsheet/requestSheet" var="getDownloadExcelUrl"/>
+<spring:url value="/alics/request/requestsheet/searchRequests" var="getReqUrl"/>
+<spring:url value="/alics/request/requestsheet/searchRequest" var="getRequestUrl"/>
+<spring:url value="/alics/request/requestsheet/requestSheet" var="getDownloadExcelUrl"/>
 
 <c:set var="successmessage"><spring:message code="process.success"/></c:set>
 <c:set var="errormessage"><spring:message code="process.errors"/></c:set>
@@ -249,7 +249,7 @@
 
 <script>
     $(function () {
-        $("li.addalic").removeClass("requestSheet").addClass("active");
+        $("li.alics").removeClass("requestSheet").addClass("active");
         $("li.requestSheet").removeClass("requestSheet").addClass("active");
     });
 </script>

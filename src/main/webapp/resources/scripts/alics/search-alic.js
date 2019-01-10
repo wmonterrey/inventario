@@ -40,6 +40,63 @@ var SearchAlic = function () {
 
 
             });
+            
+            var table2 = $('#list2').DataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                "t" +
+                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_dt_basic) {
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#list2'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    responsiveHelper_dt_basic.respond();
+                },
+
+                "oLanguage": {
+                    "sUrl": parametros.dataTablesLang
+                },
+
+                "scrollX": true
+
+
+
+            });
+            
+            
+            var table3 = $('#list3').DataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+                "t" +
+                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "autoWidth": true,
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_dt_basic) {
+                        responsiveHelper_dt_basic = new ResponsiveDatatablesHelper($('#list3'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    responsiveHelper_dt_basic.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    responsiveHelper_dt_basic.respond();
+                },
+
+                "oLanguage": {
+                    "sUrl": parametros.dataTablesLang
+                },
+
+                "scrollX": true
+
+
+
+            });
 
             toastr.options = {
                 "closeButton": true,
@@ -57,10 +114,6 @@ var SearchAlic = function () {
                 ignore: "",
                 rules: {
                     aliCode: {
-                        required: true
-                    },
-
-                    boxStudy:{
                         required: true
                     }
 
@@ -106,15 +159,17 @@ var SearchAlic = function () {
                     aliCode: aliCode,
                     ajax: 'true'
                 }, function (data) {
-                        var length = data.length;
-
+                        var length = data.alics.length;
+                        table1.fnClearTable();
                         if (length > 0){
-                            table1.fnClearTable();
+                            
                             $('#dList').show();
 
                             for (var i = 0; i < length; i++) {
                                 //add Data in empty table
-                                table1.fnAddData([data[i].codAlic, data[i].posBox, data[i].codFreezer, data[i].codRack, data[i].codBox, data[i].posNeg, data[i].regDate, data[i].codUser, data[i].aliVol, data[i].weight, data[i].type, data[i].condition, data[i].separated, data[i].numDesc, data[i].destination, data[i].user, data[i].outputDate, data[i].usedVol, data[i].use, data[i].userUse, data[i].useDate, data[i].table]);
+                                table1.fnAddData([data.alics[i].aliId.aliCode, data.alics[i].aliBox.boxStudy.studyName, data.alics[i].aliBox.boxRack.rackEquip.equipRoom.roomCenter.centerName, data.alics[i].aliBox.boxName,
+                                	data.alics[i].aliPosition,data.alics[i].aliBox.boxRack.rackName,
+                                	data.alics[i].aliBox.boxPosition,data.alics[i].aliBox.boxRack.rackEquip.equipName,data.alics[i].aliBox.boxRack.rackPosition,data.alics[i].aliVol]);
                             }
 
 
@@ -128,6 +183,37 @@ var SearchAlic = function () {
                                 "tapToDismiss": false
                             };
                             toastr["info"](parametros.msgNotFound, "Info!");
+                        }
+                        
+                        var length2 = data.alicsused.length;
+                        table2.fnClearTable();
+                        if (length2 > 0){
+                            
+                            $('#eList').show();
+
+                            for (var i = 0; i < length2; i++) {
+                                //add Data in empty table
+                                table2.fnAddData([data.alicsused[i].aliCode, data.alicsused[i].aliBox.boxStudy.studyName, data.alicsused[i].aliBox.boxRack.rackEquip.equipRoom.roomCenter.centerName, data.alicsused[i].aliBox.boxName,
+                                	data.alicsused[i].aliPosition,data.alicsused[i].aliBox.boxRack.rackName,
+                                	data.alicsused[i].aliBox.boxPosition,data.alicsused[i].aliBox.boxRack.rackEquip.equipName,data.alicsused[i].aliBox.boxRack.rackPosition,data.alicsused[i].aliVol]);
+                            }
+
+                        }
+                        
+                        
+                        var length3 = data.alicssent.length;
+                        table3.fnClearTable();
+                        if (length3 > 0){
+                            
+                            $('#fList').show();
+
+                            for (var i = 0; i < length3; i++) {
+                                //add Data in empty table
+                                table3.fnAddData([data.alicssent[i].aliCode, data.alicssent[i].eNic, data.alicssent[i].aliDestination, data.alicssent[i].aliBox,
+                                	data.alicssent[i].aliPosition,data.alicssent[i].aliRack,
+                                	data.alicssent[i].aliRack,data.alicssent[i].aliEquip,data.alicssent[i].aliEquip,data.alicssent[i].aliVol]);
+                            }
+
                         }
 
 

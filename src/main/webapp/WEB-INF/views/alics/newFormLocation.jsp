@@ -45,7 +45,7 @@
                             <li>
                                 <i class="fa fa-home"></i>
                                 <a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home" /></a>
-                                <i class="fa fa-angle-right"></i> <a href="<spring:url value="/addloc/location" htmlEscape="true "/>"><spring:message code="addalic" /></a>
+                                <i class="fa fa-angle-right"></i> <a href="<spring:url value="/addalic/location" htmlEscape="true "/>"><spring:message code="addalic" /></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -55,7 +55,7 @@
                 <!-- BEGIN PAGE CONTENT-->
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <div class="portlet">
                             <div class="portlet-title">
                                 <div class="caption">
@@ -74,12 +74,8 @@
                                             <spring:message code="form.errors" />
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-4"><spring:message code="rackEquip" />
-                                                <span class="required">
-											 *
-										</span>
-                                            </label>
-                                            <div class="col-md-8">
+                                            
+                                            <div class="col-md-3">
                                                 <select data-placeholder="<spring:message code="select" /> <spring:message code="rackEquip" />" name="rackEquip" id="rackEquip" class="form-control">
                                                     <option value=""></option>
                                                     <c:forEach items="${equipos}" var="equipo">
@@ -94,50 +90,23 @@
                                                     </c:forEach>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-4"><spring:message code="rackName" />:
-                                                <span class="required">
-											 *
-										</span>
-                                            </label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-3">
                                                 <select data-placeholder="<spring:message code="select" /> <spring:message code="rackName" />" name="rackCode" id="rackCode" class="form-control">
                                                     <option value=""></option>
                                                 </select>
                                             </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label col-md-4"><spring:message code="boxName" />:
-                                                <span class="required">
-											 *
-										</span>
-                                            </label>
-                                            <div class="col-md-8">
+                                            <div class="col-md-6">
                                                 <select data-placeholder="<spring:message code="select" /> <spring:message code="boxName" />" name="boxName" id="boxName" class="form-control">
                                                     <option value=""></option>
-
                                                 </select>
                                             </div>
                                         </div>
-
-
                                     </div>
-
-                                    <div class="form-actions fluid">
-                                        <div class="col-md-offset-5 col-md-6">
-                                            <button id="btnLoad" name="btnLoad" class="btn btn-primary"><spring:message code="ok" /></button>
-                                            <a href="<spring:url value="/" htmlEscape="true "/>" class="btn btn-danger"><spring:message code="end" /></a>
-                                        </div>
-                                    </div>
-
-
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="portlet">
                             <div class="portlet-title">
                                 <div class="caption">
@@ -148,14 +117,14 @@
                                     <a href="javascript:;" class="remove"></a>
                                 </div>
                             </div>
+                            <div class="portlet-body form">
+                                <div class="grid" id="caja" >
+                                </div>
+                            </div>
                             <div class="display-hide form-actions" id="legend" >
 								<div class="form-group">
                                     <label style="background-color: #428bca;color: #ffffff" class="col-md-2"><spring:message code="available" /></label>
                                     <label style="background-color: #d9534f;color: #ffffff" class="col-md-2"><spring:message code="notAvailable" /></label>
-                                </div>
-                            </div>
-                            <div class="portlet-body form">
-                                <div class="grid" id="caja" >
                                 </div>
                             </div>
                         </div>
@@ -327,7 +296,7 @@
 <script type="text/javascript" src="${isotope}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <spring:url value="/addalic/racks" var="racksUrl"/>
-<spring:url value="/addalic/boxes" var="boxesUrl"/>
+<spring:url value="/addalic/boxesav" var="boxesUrl"/>
 <spring:url value="/addalic/getCajaSeleccionada" var="getBoxUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicUrl"/>
 

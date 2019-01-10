@@ -37,7 +37,7 @@ import java.util.*;
  * @author ics
  */
 @Controller
-@RequestMapping("/alicoutput/*")
+@RequestMapping("/alics/send/*")
 public class AliquotOutputController {
 
     private static final Logger logger = LoggerFactory.getLogger(AliquotUseController.class);
@@ -96,7 +96,7 @@ public class AliquotOutputController {
         String requestBy ="";
         String approveBy ="";
         String purpose ="";
-        String study ="";
+        //String study ="";
 
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(),"UTF8"));

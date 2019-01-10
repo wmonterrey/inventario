@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +31,8 @@ public class ExcelBuilder extends AbstractExcelView {
             buildExcelRequestSheet( model, workbook );
     }
 
-    private void buildExcelRequestSheet(Map<String, Object> model, HSSFWorkbook workbook) {
+    @SuppressWarnings({ "deprecation", "unchecked" })
+	private void buildExcelRequestSheet(Map<String, Object> model, HSSFWorkbook workbook) {
         List<SampleRequestDetail> reqList = (List<SampleRequestDetail>) model.get( "detail" );
         List<String> columns = (List<String>) model.get( "columns" );
         SampleRequest request = (SampleRequest) model.get( "request" );

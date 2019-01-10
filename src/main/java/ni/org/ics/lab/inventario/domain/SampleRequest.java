@@ -2,8 +2,6 @@ package ni.org.ics.lab.inventario.domain;
 
 import ni.org.ics.lab.inventario.domain.audit.Auditable;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,7 +13,11 @@ import java.util.Date;
 @Table(name = "inv_solicitud_mx", catalog = "inventario")
 public class SampleRequest extends BaseMetaData implements Auditable {
 
-    private String idRequest;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String idRequest;
     private Date requestDate;
     private String respRequest;
     private String authorizedBy;

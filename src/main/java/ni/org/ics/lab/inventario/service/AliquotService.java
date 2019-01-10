@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import ni.org.ics.lab.inventario.domain.Aliquot;
+import ni.org.ics.lab.inventario.domain.AliquotOutput;
+import ni.org.ics.lab.inventario.domain.AliquotUse;
 import ni.org.ics.lab.inventario.domain.relationships.UserCenter;
 
 import org.hibernate.Query;
@@ -174,6 +176,34 @@ public class AliquotService {
 			}
 		}
 		return null;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Aliquot> getAliquotsSearch(String aliCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Aliquot a where a.aliId.aliCode like:aliCode");
+		query.setParameter("aliCode",aliCode+'%');
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<AliquotUse> getAliquotsUseSearch(String aliCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM AliquotUse a where a.aliCode like:aliCode");
+		query.setParameter("aliCode",aliCode+'%');
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<AliquotOutput> getAliquotsOutputSearch(String aliCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM AliquotOutput a where a.aliCode like:aliCode");
+		query.setParameter("aliCode",aliCode+'%');
+		return query.list();
 	}
 	
 }

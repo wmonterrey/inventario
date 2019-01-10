@@ -34,6 +34,8 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	private String aliRes;
 	private String aliCond;
 	private String aliSep;
+	private String aliStatus;
+	private int aliDesc=0;
 	private String aliObs;
 	
 	@Id
@@ -87,12 +89,26 @@ public class Aliquot extends BaseMetaData implements Auditable{
 	public void setAliCond(String aliCond) {
 		this.aliCond = aliCond;
 	}
+	@Column(name = "ESTADO_ALIC", nullable = true, length =10)
+	public String getAliStatus() {
+		return aliStatus;
+	}
+	public void setAliStatus(String aliStatus) {
+		this.aliStatus = aliStatus;
+	}
 	@Column(name = "SEPARA_ALIC", nullable = true, length =10)
 	public String getAliSep() {
 		return aliSep;
 	}
 	public void setAliSep(String aliSep) {
 		this.aliSep = aliSep;
+	}
+	@Column(name = "DESCONGELAMIENTOS", nullable = true)
+	public int getAliDesc() {
+		return aliDesc;
+	}
+	public void setAliDesc(int aliDesc) {
+		this.aliDesc = aliDesc;
 	}
 	@Column(name = "OBS_ALIC", nullable = true, length =500)
 	public String getAliObs() {

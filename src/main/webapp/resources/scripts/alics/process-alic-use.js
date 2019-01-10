@@ -198,6 +198,7 @@ var CreateUse = function () {
                             $('#boxRack').val(data.aliBox.boxRack.rackName);
                             $('#aliBox').val(data.aliBox.boxName);
                             $('#aliCode1').val(aliCode);
+                            $('#study1').val(study);
                             $('#add-alic-use1').show();
 
                         }else{

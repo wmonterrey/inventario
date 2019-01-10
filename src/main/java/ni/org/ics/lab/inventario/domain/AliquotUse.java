@@ -27,6 +27,7 @@ public class AliquotUse extends BaseMetaData implements Auditable {
     private float aliVol;
     private float aliUsedVol;
     private String aliUse;
+    private int aliDesc=0;
     private String aliCondition;
 
     @Id
@@ -115,6 +116,13 @@ public class AliquotUse extends BaseMetaData implements Auditable {
     public void setAliCondition(String aliCondition) {
         this.aliCondition = aliCondition;
     }
+    @Column(name = "DESCONGELAMIENTOS", nullable = true)
+	public int getAliDesc() {
+		return aliDesc;
+	}
+	public void setAliDesc(int aliDesc) {
+		this.aliDesc = aliDesc;
+	}
 
     @Override
     public boolean equals(Object other) {

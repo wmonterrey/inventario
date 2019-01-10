@@ -3,9 +3,7 @@ package ni.org.ics.lab.inventario.domain;
 // Generated Nov 15, 2012 9:23:03 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -13,8 +11,8 @@ import java.util.Date;
 /**
  * RegUso
  */
-@Entity
-@Table(name = "reg_alic_uso", catalog = "simlab")
+//@Entity
+//@Table(name = "reg_alic_uso", catalog = "simlab")
 public class RegUso implements java.io.Serializable {
 
 	/**

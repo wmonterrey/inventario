@@ -46,7 +46,7 @@
                                 <i class="fa fa-home"></i>
                                 <a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home"/></a>
                                 <i class="fa fa-angle-right"></i> <a
-                                    href="<spring:url value="/alicUse/enterForm" htmlEscape="true "/>"><spring:message
+                                    href="<spring:url value="/alics/use/" htmlEscape="true "/>"><spring:message
                                     code="alic_use_menu"/></a>
                             </li>
                         </ul>
@@ -273,6 +273,7 @@
                                                 </div>
 
                                                 <input id="aliCode1" name="aliCode1" type="text" class="form-control display-hide"/>
+                                                <input id="study1" name="study1" type="text" class="form-control display-hide"/>
 
                                             </div>
 
@@ -345,9 +346,9 @@
 <spring:url value="/resources/plugins/isotope/isotope.pkgd.js" var="isotope"/>
 <script type="text/javascript" src="${isotope}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/alicUse/getAlic" var="getAlicUrl"/>
+<spring:url value="/alics/use/getAlic" var="getAlicUrl"/>
 <spring:url value="/addalic/getAlicStudy" var="getAlicStudyUrl"/>
-<spring:url value="/alicUse/saveUse" var="saveAlicUrl"/>
+<spring:url value="/alics/use/saveUse" var="saveAlicUrl"/>
 
 <c:set var="successmessage"><spring:message code="process.success"/></c:set>
 <c:set var="errormessage"><spring:message code="process.errors"/></c:set>
@@ -359,8 +360,8 @@
 <c:set var="aliNotPattern"><spring:message code="aliNotPattern"/></c:set>
 <script>
     $(function () {
-        $("li.addalic").removeClass("addalic").addClass("active");
-        $("li.newalicuse").removeClass("newalicuse").addClass("active");
+        $("li.alics").removeClass("alics").addClass("active");
+        $("li.usealic").removeClass("usealic").addClass("active");
     });
 </script>
 <script>

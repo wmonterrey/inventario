@@ -45,53 +45,6 @@
                                     <i class="fa fa-hand-o-up"></i>
                                     <spring:message code="newalicman"/></a>
                             </li>
-                            <li class="newalicuse">
-                                <a href="<spring:url value="/alicUse/enterForm" htmlEscape="true "/>">
-                                    <i class="fa fa-edit"></i>
-                                    <spring:message code="alic_use_menu"/></a>
-                            </li>
-                            <li class="exitalic">
-                                <a href="<spring:url value="/alicoutput/exitForm" htmlEscape="true "/>">
-                                    <i class="fa fa-sign-out"></i>
-                                    <spring:message code="alic_output"/></a>
-                            </li>
-
-                            <li class="transferAlic">
-                                <a href="<spring:url value="/alictransfer/transferAlic" htmlEscape="true "/>">
-                                    <i class="fa fa-plane"></i>
-                                    <spring:message code="transfer_alic"/></a>
-                            </li>
-                            <li class="request">
-                                <a href="<spring:url value="/samplerequest/enterForm" htmlEscape="true "/>">
-                                    <i class="fa fa-edit"></i>
-                                    <spring:message code="sample_request"/></a>
-                            </li>
-                            <li class="requestSheet">
-                                <a href="<spring:url value="/requestsheet/enterForm" htmlEscape="true "/>">
-                                    <i class="fa fa-search"></i>
-                                    <spring:message code="search_request"/></a>
-                            </li>
-
-                        </ul>
-                    </li>
-                </sec:authorize>
-                <sec:authorize url="/simlab/">
-                    <li class="simlab">
-                        <a href="javascript:;">
-                            <i class="fa fa-database"></i>
-                            <span class="title">
-						<spring:message code="simlab_menu"/>
-					</span>
-                            <span class="arrow ">
-					</span>
-                        </a>
-                        <ul class="sub-menu">
-                            <li class="searchAlic">
-                                <a href="<spring:url value="/searchalic/enterForm" htmlEscape="true "/>">
-                                    <i class="fa fa-search"></i>
-                                    <spring:message code="searchalic"/></a>
-                            </li>
-
                         </ul>
                     </li>
                 </sec:authorize>
@@ -120,11 +73,27 @@
                             </sec:authorize>
                             <sec:authorize url="/alics/send/">
                                 <li class="sendalic">
-                                    <a href="<spring:url value="/alics/send/" htmlEscape="true "/>">
+                                    <a href="<spring:url value="/alics/send/exitForm" htmlEscape="true "/>">
                                         <i class="fa fa-send"></i>
                                         <spring:message code="sendalic"/></a>
                                 </li>
+                                <li class="transferAlic">
+	                                <a href="<spring:url value="/alics/transfer/transferAlic" htmlEscape="true "/>">
+	                                    <i class="fa fa-plane"></i>
+	                                    <spring:message code="transfer_alic"/></a>
+	                            </li>
+	                            <li class="request">
+	                                <a href="<spring:url value="/alics/request/samplerequest/enterForm" htmlEscape="true "/>">
+	                                    <i class="fa fa-edit"></i>
+	                                    <spring:message code="sample_request"/></a>
+	                            </li>
+	                            <li class="requestSheet">
+	                                <a href="<spring:url value="/alics/request/requestsheet/enterForm" htmlEscape="true "/>">
+	                                    <i class="fa fa-search"></i>
+	                                    <spring:message code="search_request"/></a>
+	                            </li>
                             </sec:authorize>
+                            
                         </ul>
                     </li>
                 </sec:authorize>

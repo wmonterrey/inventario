@@ -32,7 +32,7 @@ import java.util.Map;
  * @author ics
  */
 @Controller
-@RequestMapping("/samplerequest/*")
+@RequestMapping("/alics/request/samplerequest/*")
 public class SampleRequestController {
 
     private static final Logger logger = LoggerFactory.getLogger(SampleRequestController.class);

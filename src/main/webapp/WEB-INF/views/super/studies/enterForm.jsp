@@ -123,6 +123,21 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="control-label col-md-3"><spring:message code="studyFormat" />
+										<span class="required">
+											 *
+										</span>
+										</label>
+										<div class="col-md-5">
+											<div class="input-group">
+												<input value="${study.studyFormat}" id="studyFormat" name="studyFormat" type="text" placeholder="<spring:message code="please.enter" /> <spring:message code="studyFormat" />" class="form-control"/>
+												<span class="input-group-addon">
+													<i class="fa fa-keyboard-o"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="control-label col-md-3"><spring:message code="studyObs" />
 										<span class="required">
 											 
@@ -141,7 +156,7 @@
 										<label class="control-label col-md-3"><spring:message code="catalogalic" />
 										</label>
 										<div class="col-md-5">
-											<select id="alicuotas" class="form-control select2" multiple placeholder="<spring:message code="please.enter" /> <spring:message code="catalogalic" />">
+											<select id="alicuotas" name="alicuotas" class="form-control select2" multiple placeholder="<spring:message code="please.enter" /> <spring:message code="catalogalic" />">
 												<c:forEach items="${tiposalicestudio}" var="alics" varStatus="stat">
 													<c:set var="alicsEstudio" value="${stat.first ? '' : alicsEstudio} ${alics.tipoAlicuotaEstudioId.tipoAlicuota}" />
 												</c:forEach>

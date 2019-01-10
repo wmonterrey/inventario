@@ -15,7 +15,11 @@ import java.util.Date;
 @Table(name = "inv_solicitud_mx_detalle", catalog = "inventario")
 public class SampleRequestDetail extends BaseMetaData implements Auditable {
 
-    private String idDetail;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String idDetail;
     private SampleRequest idRequest;
     private String code;
     private String aliCode;

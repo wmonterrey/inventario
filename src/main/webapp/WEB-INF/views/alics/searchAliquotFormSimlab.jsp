@@ -46,7 +46,7 @@
                                 <i class="fa fa-home"></i>
                                 <a href="<spring:url value="/" htmlEscape="true "/>"><spring:message code="home"/></a>
                                 <i class="fa fa-angle-right"></i> <a
-                                    href="<spring:url value="/alics/search/" htmlEscape="true "/>"><spring:message
+                                    href="<spring:url value="/searchalic/enterForm" htmlEscape="true "/>"><spring:message
                                     code="searchalic"/></a>
                             </li>
                         </ul>
@@ -121,7 +121,7 @@
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="fa fa-database"></i>
-                                    <spring:message code="aliActive"/>
+                                    <spring:message code="alic_found"/>
                                 </div>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
@@ -134,96 +134,28 @@
                                     <thead>
                                     <tr>
                                         <th><spring:message code="aliCode"/></th>
-                                        <th><spring:message code="boxStudy"/></th>
-                                        <th><spring:message code="centerName"/></th>
-                                        <th><spring:message code="aliBox"/></th>
                                         <th><spring:message code="aliPosition"/></th>
-                                        <th><spring:message code="boxRack"/></th>
-                                        <th><spring:message code="boxPosition"/></th>
-                                        <th><spring:message code="rackEquip"/></th>
-                                        <th><spring:message code="rackPosition"/></th>
-                                        <th><spring:message code="aliVol"/></th>
-                                    </tr>
-                                    </thead>
-
-                                </table>
-                                        </div>
-                                    </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    
-                    
-                    <div id="eList" class="row display-hide">
-                    <div class="col-md-12">
-                        <div class="portlet">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-database"></i>
-                                    <spring:message code="aliUsed"/>
-                                </div>
-                                <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-
-                                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
-                                <table class="table table-striped table-hover display nowrap dataTable no-footer table-bordered" id="list2" style="width: 100%;" role="grid">
-                                    <thead>
-                                    <tr>
-                                        <th><spring:message code="aliCode"/></th>
-                                        <th><spring:message code="boxStudy"/></th>
-                                        <th><spring:message code="centerName"/></th>
-                                        <th><spring:message code="aliBox"/></th>
-                                        <th><spring:message code="aliPosition"/></th>
-                                        <th><spring:message code="boxRack"/></th>
-                                        <th><spring:message code="boxPosition"/></th>
-                                        <th><spring:message code="rackEquip"/></th>
-                                        <th><spring:message code="rackPosition"/></th>
-                                        <th><spring:message code="aliVol"/></th>
-                                    </tr>
-                                    </thead>
-
-                                </table>
-                                        </div>
-                                    </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    
-                    <div id="fList" class="row display-hide">
-                    <div class="col-md-12">
-                        <div class="portlet">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-database"></i>
-                                    <spring:message code="aliSent"/>
-                                </div>
-                                <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                </div>
-                            </div>
-                            <div class="portlet-body">
-
-                                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; width: 100%;">
-                                <table class="table table-striped table-hover display nowrap dataTable no-footer table-bordered" id="list3" style="width: 100%;" role="grid">
-                                    <thead>
-                                    <tr>
-                                        <th><spring:message code="aliCode"/></th>
-                                        <th><spring:message code="enic"/></th>
+                                        <th><spring:message code="equipCode"/></th>
+                                        <th><spring:message code="rackCode"/></th>
+                                        <th><spring:message code="boxCode"/></th>
+                                        <th><spring:message code="pos_neg"/></th>
+                                        <th><spring:message code="register_date"/></th>
+                                        <th><spring:message code="username"/></th>
+                                        <th><spring:message code="alicTypeVol"/></th>
+                                        <th><spring:message code="weight"/></th>
+                                        <th><spring:message code="boxType"/></th>
+                                        <th><spring:message code="aliCond"/></th>
+                                        <th><spring:message code="separated"/></th>
+                                        <th><spring:message code="num_desc"/></th>
                                         <th><spring:message code="destination"/></th>
-                                        <th><spring:message code="aliBox"/></th>
-                                        <th><spring:message code="aliPosition"/></th>
-                                        <th><spring:message code="boxRack"/></th>
-                                        <th><spring:message code="boxPosition"/></th>
-                                        <th><spring:message code="rackEquip"/></th>
-                                        <th><spring:message code="rackPosition"/></th>
-                                        <th><spring:message code="aliVol"/></th>
+                                        <th><spring:message code="user_output"/></th>
+                                        <th><spring:message code="logoutdate"/></th>
+                                        <th><spring:message code="used_volume"/></th>
+                                        <th><spring:message code="use"/></th>
+                                        <th><spring:message code="user_use"/></th>
+                                        <th><spring:message code="use_date"/></th>
+                                        <th><spring:message code="table"/></th>
+
                                     </tr>
                                     </thead>
 
@@ -235,11 +167,7 @@
 
                         </div>
                     </div>
-                    
-                    
                 </div>
-                
-                
 
 
                 <!-- END PAGE CONTENT -->
@@ -293,7 +221,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <spring:url value="/resources/scripts/app.js" var="App"/>
 <script src="${App}" type="text/javascript"></script>
-<spring:url value="/resources/scripts/alics/search-alic.js" var="searchScript"/>
+<spring:url value="/resources/scripts/alics/search-alic-simlab.js" var="searchScript"/>
 <script src="${searchScript}" type="text/javascript"></script>
 <spring:url value="/resources/plugins/jquery-validation/localization/messages_{language}.js" var="jQValidationLoc">
     <spring:param name="language" value="${lenguaje}"/>
@@ -307,7 +235,9 @@
 <spring:url value="/resources/plugins/isotope/isotope.pkgd.js" var="isotope"/>
 <script type="text/javascript" src="${isotope}"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
-<spring:url value="/alics/search/getAlics/" var="getAlicUrl"/>
+<spring:url value="/searchalic/getAlic" var="getAlicUrl"/>
+<spring:url value="/addalic/getAlicStudy" var="getAlicStudyUrl"/>
+<spring:url value="/alicUse/saveUse" var="saveAlicUrl"/>
 
 <c:set var="successmessage"><spring:message code="process.success"/></c:set>
 <c:set var="errormessage"><spring:message code="process.errors"/></c:set>
@@ -322,15 +252,17 @@
 </c:set>
 <script>
     $(function () {
-    	 $("li.alics").removeClass("alics").addClass("active");
-         $("li.searchalic").removeClass("searchalic").addClass("active");
+        $("li.simlab").removeClass("simlab").addClass("active");
+        $("li.searchAlic").removeClass("searchAlic").addClass("active");
     });
 </script>
 <script>
     jQuery(document).ready(function () {
         App.init();
         var parametros = {
+            saveAlicUrl: "${saveAlicUrl}",
             getAlicUrl: "${getAlicUrl}",
+            getAlicStudyUrl: "${getAlicStudyUrl}",
             successmessage: "${successmessage}",
             aliNotPattern: "${aliNotPattern}",
             aliNotInList: "${aliNotInList}",

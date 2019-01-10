@@ -2,7 +2,6 @@ package ni.org.ics.lab.inventario.web.controller.alics;
 
 import ni.org.ics.lab.inventario.domain.SampleRequest;
 import ni.org.ics.lab.inventario.domain.SampleRequestDetail;
-import ni.org.ics.lab.inventario.domain.Study;
 import ni.org.ics.lab.inventario.service.*;
 import ni.org.ics.lab.inventario.users.model.UserSistema;
 import org.slf4j.Logger;
@@ -27,7 +26,7 @@ import java.util.List;
  * @author ics
  */
 @Controller
-@RequestMapping("/requestsheet/*")
+@RequestMapping("/alics/request/requestsheet/*")
 public class RequestSheetController {
 
 

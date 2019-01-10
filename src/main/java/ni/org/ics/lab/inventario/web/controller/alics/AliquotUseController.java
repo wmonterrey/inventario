@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/alicUse/*")
+@RequestMapping("/alics/use/*")
 public class AliquotUseController {
 
     private static final Logger logger = LoggerFactory.getLogger(AliquotUseController.class);
@@ -44,7 +44,7 @@ public class AliquotUseController {
     @Resource(name="studyCenterService")
     private StudyCenterService studyCenterService;
 
-    @RequestMapping(value = "enterForm", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String initCreation(Model model) {
         logger.debug("Creando uso de Muestra");
         UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -72,6 +72,7 @@ public class AliquotUseController {
 
     @RequestMapping( value="saveUse", method=RequestMethod.POST)
     public ResponseEntity<String> processSaveForm(@RequestParam( value="aliCode1", required=true ) String aliCode
+            , @RequestParam( value="study1", required=true ) String study1
             , @RequestParam( value="use", required=false ) String use
             , @RequestParam( value="usedVol", required=true ) float usedVol
     )
@@ -79,7 +80,7 @@ public class AliquotUseController {
         try{
             UserSistema usuario = usuarioService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
             AliquotUse alicUse = new AliquotUse();
-            Aliquot alic = aliquotService.getAliquot(aliCode, usuario.getUsername());
+            Aliquot alic = aliquotService.getAliquotByStudyCode(aliCode, usuario.getUsername(),study1);
             float res = 0;
 
             if (alic != null){
@@ -91,6 +92,7 @@ public class AliquotUseController {
                     alicUse.setAliVol(alic.getAliVol());
                     alicUse.setAliUsedVol(usedVol);
                     alicUse.setAliUse(use);
+                    alicUse.setAliDesc(alic.getAliDesc());
                     alicUse.setRecordDate(new Date());
                     alicUse.setAliStudy(alic.getAliId().getAliStudy());
 
@@ -100,6 +102,9 @@ public class AliquotUseController {
 
                     //update volume aliquot
                     res = alic.getAliVol() - usedVol;
+                    
+                    //update thaws
+                    alic.setAliDesc(alic.getAliDesc()+1);
 
                     if(res != 0){
                         alic.setAliVol(res);

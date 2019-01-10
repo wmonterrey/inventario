@@ -159,6 +159,15 @@ public class BoxService {
 		return resultados;
 	}
 	
+	//Regresa espacios ocupados en la caja
+	public Long getEspaciosOcupados(String boxCode) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("Select count(*) from Aliquot ali where ali.pasive='0' and ali.aliBox.boxCode =:boxCode");
+		query.setParameter("boxCode", boxCode);
+		return (Long) query.uniqueResult();
+	}
+	
 	
 	/**
 	 * Guarda un Box
