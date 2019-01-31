@@ -344,6 +344,7 @@
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <jsp:include page="../../fragments/corePlugins.jsp" />
+<jsp:include page="../../fragments/bodyUtils.jsp" />
 <!-- BEGIN PAGE LEVEL PLUGINS -->	
 <c:choose>
 	<c:when test="${cookie.invLang.value == null}">

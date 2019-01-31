@@ -145,34 +145,7 @@ var CreateUse = function () {
             function showInfo() {
                 $('#add-alic-use1').hide();
 
-                //validate the code entered according to study
-                var res = false;
-                try{
-                    var patt = new RegExp(patron);
-                    res = patt.test($('#aliCode').val());
-                }
-                catch(e){
-                    toastr["error"]( $('#aliCode').val() + ' ' + parametros.regExpInv, "Error!!");
-                    $('#aliCode').focus();
-                    return;
-                }
-                if(!Boolean(res)){
-                    toastr["error"](parametros.aliNotPattern, "Error!!");
-                    $('#aliCode').focus();
-                    return;
-                }
-
-
-               var alicuota = $('#aliCode').val().substring($('#aliCode').val().lastIndexOf(".")+1,$('#aliCode').val().length);
-                var len = alicPerm.length;
-                var alicEncontrada = false;
-                for ( var i = 0; i < len; i++) {
-                    if(alicuota.localeCompare(alicPerm[i].tipoAlicuota.alicTypeName)==0){
-                        alicEncontrada = true;
-                        break;
-                    }
-                }
-                if(Boolean(alicEncontrada)){
+                
                     App.blockUI();
 
                     var aliCode = $('#aliCode').val();
@@ -218,18 +191,6 @@ var CreateUse = function () {
                     });
 
 
-                }else{
-                    toastr.options = {
-                        "closeButton": true,
-                        "onclick": null,
-                        "showDuration": "300",
-                        "hideDuration": "1000",
-                        "extendedTimeOut": 0,
-                        "tapToDismiss": false
-                    };
-                    toastr["error"](parametros.aliNotInList, "Error!!");
-                    $('#aliCode').focus();
-                }
 
 
 

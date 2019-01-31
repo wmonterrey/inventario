@@ -38,7 +38,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-					<spring:message code="title" /> <small><spring:message code="catalogalic" /></small>
+					<spring:message code="title" /> <small><spring:message code="catalogall" /></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -113,6 +113,7 @@
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <jsp:include page="../../fragments/corePlugins.jsp" />
+<jsp:include page="../../fragments/bodyUtils.jsp" />
 <!-- BEGIN PAGE LEVEL PLUGINS -->	
 <c:choose>
 	<c:when test="${cookie.invLang.value == null}">
@@ -132,10 +133,23 @@
 <spring:url value="/resources/plugins/data-tables/i18n/label_{language}.json" var="dataTablesLang">
 	<spring:param name="language" value="${lenguaje}" />
 </spring:url>	
+<spring:url value="/resources/plugins/jquery-validation/dist/jquery.validate.min.js" var="jQValidation" />
+<script type="text/javascript" src="${jQValidation}"></script>
+<spring:url value="/resources/plugins/jquery-validation/dist/additional-methods.min.js" var="jQValidationAdd" />
+<script type="text/javascript" src="${jQValidationAdd}"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <spring:url value="/resources/scripts/app.js" var="App" />
 <script src="${App}" type="text/javascript"></script>
+
+  <spring:url value="/resources/scripts/catalogs/Catalogos.js" var="searchCatalogoScript" />  
+  <script src="${searchCatalogoScript}"></script>
+  <spring:url value="/catalog/all/catalogos/" var="catalogosUrl"/>
+  <spring:url value="/catalog/all/editCatalogo/" var="editCatalogoUrl"/>
+  <c:set var="successmessage"><spring:message code="process.success" /></c:set>
+<c:set var="errormessage"><spring:message code="process.errors" /></c:set>
+<c:set var="waitmessage"><spring:message code="process.wait" /></c:set>
+  <c:set var="noResults"><spring:message code="noResults" /></c:set>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
     $(function () {
@@ -146,6 +160,10 @@
 <script>
 	jQuery(document).ready(function() {
 		App.init();
+		var parametros = {catalogosUrl: "${catalogosUrl}",editCatalogoUrl: "${editCatalogoUrl}",successmessage: "${successmessage}",
+				errormessage: "${errormessage}",waitmessage: "${waitmessage}" ,dataTablesLang: "${dataTablesLang}",noResults: "${noResults}"
+		};
+		ProcessSearch.init(parametros);
 	});
 	    
 </script>

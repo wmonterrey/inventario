@@ -66,6 +66,29 @@ public class MessageResourceService {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<MessageResource> loadCatalogos(String parametro) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("FROM MessageResource mr where ((lower(mr.messageKey) like :parametro or lower(mr.spanish) like :parametro or lower(mr.english) like :parametro) and mr.isCat ='1')");
+		query.setParameter("parametro", '%'+parametro.toLowerCase()+'%');
+		// Retrieve all
+		return  query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<MessageResource> getCatalogoTodos(String catalogo) {
+		// Retrieve session from Hibernate
+		Session session = sessionFactory.getCurrentSession();
+		// Create a Hibernate query (HQL)
+		Query query = session.createQuery("FROM MessageResource mens where mens.isCat ='0'" +
+				" and mens.catRoot =:catalogo and mens.catKey is not null order by mens.order");
+		query.setParameter("catalogo", catalogo);
+		// Retrieve all
+		return  query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<MessageResource> getCatalogo(String catalogo) {
 		// Retrieve session from Hibernate
 		Session session = sessionFactory.getCurrentSession();
