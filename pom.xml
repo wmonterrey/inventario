@@ -9,7 +9,7 @@
 	<name>inventario</name>
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>3.2.10.RELEASE</org.springframework-version>
+		<org.springframework-version>4.0.0.RELEASE</org.springframework-version>
 		<org.springframework.security-version>3.2.4.RELEASE</org.springframework.security-version>
 		<org.aspectj-version>1.8.9</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
@@ -18,7 +18,7 @@
 		<log4j-version>1.2.16</log4j-version>
 		<javax.xml.bind-version>2.2.2</javax.xml.bind-version>
 		<javax.inject-version>1</javax.inject-version>
-		<javax.servlet-api-version>2.5</javax.servlet-api-version>
+		<javax.servlet-api-version>3.0.1</javax.servlet-api-version>
 		<javax.servlet.jsp-version>2.1</javax.servlet.jsp-version>
 		<javax.servlet-jstl-version>1.2</javax.servlet-jstl-version>
 		<commons-fileupload-version>1.2.2</commons-fileupload-version>
@@ -136,7 +136,7 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 			<version>${javax.servlet-api-version}</version>
 			<scope>provided</scope>
 		</dependency>
@@ -375,7 +375,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.4</version>
+				<version>1.11</version>
 				<dependencies>
 					<!-- You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
 					<dependency>
